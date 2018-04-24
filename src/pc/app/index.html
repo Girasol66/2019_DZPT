@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="format-detection" content="telephone=no">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--<meta name="viewport"-->
+   <!--content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+   <title>青岛银行</title>
+   <link rel="stylesheet" type="text/css" href="../libs/bootstrap/bootstrap.css" />
+   <link rel="stylesheet" type="text/css" href="../libs/bootstrap-datepicker/bootstrap-datepicker3.css" />
+   <link rel="stylesheet" type="text/css" href="../css/common.css" />
+   <link rel="stylesheet" type="text/css" href="../css/index.css" />
+   <link rel="stylesheet" type="text/css" href="../css/calculator.css" />
+   <!--[if lt IE 9]>
+   <script src="../libs/polyfills/es5-shim.min.js"></script>
+   <script src="../libs/polyfills/es5-sham.min.js"></script>
+   <script src="../libs/polyfills/json3.min.js"></script>
+   <script src="../libs/polyfills/respond.min.js"></script>
+   <![endif]-->
+</head>
+
+<body>
+<div id="main">
+   <div id="header">
+      <div class="top">
+         <div class="context">
+            <div class="pull-right">
+               <a href="javascript:void(0);">人才招聘</a>|<!---- 华丽的分割线
+               ----><a href="javascript:void(0);">关于我行</a>
+            </div>
+            <div class="clear"></div>
+         </div>
+      </div>
+      <div class="btm">
+         <div class="context">
+            <a href="./index.html" target="_blank">
+               <h1 class="pull-left title">BOD&青岛银行</h1>
+               <div class="clear"></div>
+            </a>
+         </div>
+      </div>
+   </div>
+   <div id="body">
+      <div class="banner">
+         <div class="slider-item">
+            <img src="../images/banner.png" alt="BANNER_01" />
+         </div>
+      </div>
+      <div class="content">
+         <div class="module-1">
+            <div class="pull-left">
+               <div class="group">
+                  <div class="group-head"></div>
+                  <div class="group-body">
+                     <div class="col-xs-6">
+                        <a href="./list.html?type=xblc" target="_blank">
+                           <div class="item row">
+                              <div class="item-info">
+                                 <h2 class="item-title">小白理财</h2>
+                                 <p class="item-desc">只需一分钟轻松买基金</p>
+                              </div>
+                              <div class="item-img">
+                                 <img src="../images/fund_1.png" alt="小白理财" />
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                     <div class="col-xs-6">
+                        <a href="./list.html?type=lqlc" target="_blank">
+                           <div class="item row">
+                              <div class="item-info">
+                                 <h2 class="item-title">零钱理财</h2>
+                                 <p class="item-desc">天天计息 秒级到账</p>
+                              </div>
+                              <div class="item-img">
+                                 <img src="../images/fund_2.png" alt="零钱理财" />
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                     <div class="col-xs-6">
+                        <a href="./list.html?type=dtlc" target="_blank">
+                           <div class="item row">
+                              <div class="item-info">
+                                 <h2 class="item-title">定投理财</h2>
+                                 <p class="item-desc">专家管理 收益稳健</p>
+                              </div>
+                              <div class="item-img">
+                                 <img src="../images/fund_3.png" alt="定投理财" />
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                     <div class="col-xs-6">
+                        <a href="./list.html?type=bwlc" target="_blank">
+                           <div class="item row">
+                              <div class="item-info">
+                                 <h2 class="item-title">百万理财</h2>
+                                 <p class="item-desc">品类丰富 收益优秀</p>
+                              </div>
+                              <div class="item-img">
+                                 <img src="../images/fund_4.png" alt="百万理财" />
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+                  <div class="group-foot"></div>
+               </div>
+            </div>
+            <div class="pull-right">
+               <div class="group">
+                  <div class="group-head">
+                     <h3 class="group-title">基金搜索</h3>
+                  </div>
+                  <div class="group-body">
+                     <div class="form-group">
+                        <label class="form-label" for="searchInput">
+                           <i class="glyphicon glyphicon-search"></i>
+                        </label>
+                        <input class="form-input" id="searchInput" type="text"
+                               placeholder="输入基金代码 / 名称" />
+                        <a href="javascript:void(0);" id="searchBtn" class="btn btn-search">搜索</a>
+                        <div id="searchList" class="searchList">
+                           <ul>
+                           
+                           </ul>
+                           <a class="closeBtn" href="javascript:void(0);">关闭</a>
+                        </div>
+                     </div>
+                     <div class="list-group">
+                        <h3 class="list-title">大家都在看</h3>
+                        <div id="hotSearch" class="list-block">
+                        
+                        </div>
+                     </div>
+                  </div>
+                  <div class="group-foot"></div>
+               </div>
+            </div>
+            <div class="clear"></div>
+         </div>
+         <div class="module-2">
+            <div class="pull-left">
+               <div class="group">
+                  <div class="group-head">
+                     <h2 class="group-title">热门推荐</h2>
+                  </div>
+                  <div id="fundRecommend" class="group-body">
+                  
+                  </div>
+               </div>
+            </div>
+            <div class="pull-right">
+               <div class="group">
+                  <div class="group-head">
+                     <h3 class="group-title">公告</h3>
+                  </div>
+                  <div class="group-body">
+                     <div class="list-group">
+                        <div id="announce_content" class="list-block">
+                           <!--<div class="list-item">销售网点及人员资质信息表</div>-->
+                           <!--<div class="list-item">销售网点及人员资质信息表</div>-->
+                           <!--<div class="list-item">销售网点及人员资质信息表</div>-->
+                           <!--<div class="list-item active">销售网点及人员资质信息表</div>-->
+                        </div>
+                     </div>
+                  </div>
+                  <div class="group-foot"></div>
+               </div>
+               <div class="group">
+                  <div class="group-head">
+                     <h3 class="group-title">基金工具</h3>
+                  </div>
+                  <div class="group-body">
+                     <div class="list-group">
+                        <div class="tools row" id="calcTools">
+                           <div class="col-xs-4 item" data-type="buy">
+                              <div class="item-img">
+                                 <img src="../images/fund_tool_01.png" alt="基金申（认）购费用计算器" />
+                              </div>
+                              <div class="item-info">
+                                 <p class="item-desc">基金申（认）购费用计算器</p>
+                              </div>
+                           </div>
+                           <!--<div class="col-xs-4 item" data-type="sell">-->
+                           <!--<div class="item-img">-->
+                           <!--<img src="../images/fund_tool_02.png" alt="基金赎回费用计算器" />-->
+                           <!--</div>-->
+                           <!--<div class="item-info">-->
+                           <!--<p class="item-desc">基金赎回费用计算器</p>-->
+                           <!--</div>-->
+                           <!--</div>-->
+                           <!--<div class="col-xs-4 item" data-type="income">-->
+                           <!--<div class="item-img">-->
+                           <!--<img src="../images/fund_tool_03.png" alt="基金收益计算器" />-->
+                           <!--</div>-->
+                           <!--<div class="item-info">-->
+                           <!--<p class="item-desc">基金收益计算器</p>-->
+                           <!--</div>-->
+                           <!--</div>-->
+                           <div class="col-xs-4 item" data-type="AIP">
+                              <div class="item-img">
+                                 <img src="../images/fund_tool_02.png" alt="基金定投收益计算器" />
+                              </div>
+                              <div class="item-info">
+                                 <p class="item-desc">基金定投收益计算器</p>
+                              </div>
+                           </div>
+                           <div class="col-xs-4 item" data-type="openend">
+                              <div class="item-img">
+                                 <img src="../images/fund_tool_03.png" alt="开放式基金收益计算器" />
+                              </div>
+                              <div class="item-info">
+                                 <p class="item-desc">开放式基金收益计算器</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="group-foot"></div>
+               </div>
+            </div>
+            <div class="clear"></div>
+         </div>
+         <div class="module-3">
+            <div class="group">
+               <div class="group-head">
+                  <h2 class="group-title">基金列表</h2>
+                  <div class="tab-bar">
+                     <div class="tab-item active">基金超市</div>
+                     <div class="tab-item">全市场</div>
+                  </div>
+               </div>
+               <div class="group-body">
+                  <div class="group-filter">
+                     <div class="filter-row">
+                        <label class="filter-label">基金类型</label>
+                        <ul class="filter-block" id="fundType">
+                           <li class="filter-item active">全部</li>
+                           <li class="filter-item">股票型</li>
+                           <li class="filter-item">债券型</li>
+                           <li class="filter-item">混合型</li>
+                           <li class="filter-item">指数型</li>
+                           <li class="filter-item">货币型</li>
+                           <li class="filter-item">理财型</li>
+                           <li class="filter-item">封闭型</li>
+                        </ul>
+                        <div class="clear"></div>
+                     </div>
+                     <div class="filter-row">
+                        <label class="filter-label">风险程度</label>
+                        <ul class="filter-block" id="riskDeg">
+                           <li class="filter-item active">全部</li>
+                           <li class="filter-item">低风险</li>
+                           <li class="filter-item">中风险</li>
+                           <li class="filter-item">高风险</li>
+                        </ul>
+                        <div class="clear"></div>
+                     </div>
+                     <div class="filter-row">
+                        <label class="filter-label">基金状态</label>
+                        <ul class="filter-block" id="fundStatus">
+                           <li class="filter-item active">全部</li>
+                           <li class="filter-item">可申购</li>
+                           <li class="filter-item">不可申购</li>
+                        </ul>
+                        <div class="clear"></div>
+                     </div>
+                     <!--<div class="filter-row">-->
+                     <!--<label class="filter-label">基金评级</label>-->
+                     <!--<ul class="filter-block" id="fundRate">-->
+                     <!--<li class="filter-star">-->
+                     <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                     <!--</li>-->
+                     <!--<li class="filter-star">-->
+                     <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                     <!--</li>-->
+                     <!--<li class="filter-star">-->
+                     <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                     <!--</li>-->
+                     <!--<li class="filter-star">-->
+                     <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                     <!--</li>-->
+                     <!--<li class="filter-star">-->
+                     <!--<i class="glyphicon glyphicon-star-empty"></i>-->
+                     <!--</li>-->
+                     <!--</ul>-->
+                     <!--<div class="clear"></div>-->
+                     <!--</div>-->
+                     <div class="filter-row last">
+                        <label class="filter-label">基金公司</label>
+                        <ul class="filter-block hide" id="fundComCode"></ul>
+                        <a href="javascript:void(0);" class="btn btn-more">更多</a>
+                        <div class="clear"></div>
+                     </div>
+                     <div class="filter-row result">
+                        <label class="filter-label">已选条件</label>
+                        <ul class="filter-block"></ul>
+                        <a href="javascript:void(0);"
+                           class="btn btn-clean">全部清除</a>
+                        <div class="clear"></div>
+                     </div>
+                  </div>
+                  <div class="group-sort">
+                     <div class="pull-left">
+                        <label class="sort-label">排序</label>
+                        <div class="sort-items">
+                           <div class="sort-item active" data-sort="1">当日收益率</div>
+                           <div class="sort-item" data-sort="3">七日收益率</div>
+                           <div class="sort-item" data-sort="4">月收益率</div>
+                           <div class="sort-item" data-sort="6">半年收益率</div>
+                           <div class="sort-item" data-sort="7">1年收益率</div>
+                           <div class="sort-item" data-sort="2">今年以来</div>
+                           <div class="clear"></div>
+                        </div>
+                     </div>
+                     <div class="pull-right">
+                        <div class="pagination">
+                           <div class="page-btn home disable">首页</div>
+                           <div class="page-btn prev disable">上一页</div>
+                           <div class="page-btn next disable">下一页</div>
+                        </div>
+                     </div>
+                     <div class="clear"></div>
+                  </div>
+                  <div class="group-result">
+                     <div class="table-header">
+                        <div class="row margin-clear table-th">
+                           <div class="col-xs-3">产品简称／代码</div>
+                           <div class="col-xs-9">
+                              <div class="col-xs-2">类型</div>
+                              <div class="col-xs-2">风险等级</div>
+                              <div class="col-xs-2">单位净值</div>
+                              <div class="col-xs-2">累计净值</div>
+                              <div class="col-xs-2">收益率(%)</div>
+                              <div class="col-xs-2">起始金额</div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="table-body" id="CONTENT_INFO"></div>
+                     <div class="table-footer"></div>
+                  </div>
+               </div>
+               <div class="group-foot"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="footer">
+      <div class="ft-top">
+         <dl class="ft-dl">
+            <dt>零售银行</dt>
+            <dd>-个人储蓄业务</dd>
+            <dd>-个人贷款业务</dd>
+            <dd>-投资理财</dd>
+         </dl>
+         <dl class="ft-dl">
+            <dt>财富管理与私人银行</dt>
+            <dd>-金融服务</dd>
+            <dd>-非金融服务</dd>
+            <dd>-关于我们</dd>
+         </dl>
+         <dl class="ft-dl">
+            <dt>公司银行</dt>
+            <dd>-公司存款</dd>
+            <dd>-公司贷款</dd>
+            <dd>-结算业务</dd>
+         </dl>
+         <dl class="ft-dl">
+            <dt>贸易金融</dt>
+            <dd>-业务简介</dd>
+            <dd>-贸易融资产品</dd>
+            <dd>-国际结算产品</dd>
+         </dl>
+         <dl class="ft-dl">
+            <dt>电子银行</dt>
+            <dd>-网上银行</dd>
+            <dd>-电话银行</dd>
+            <dd>-自助银行</dd>
+         </dl>
+         <dl class="ft-dl">
+            <dt>小微金融</dt>
+            <dd>-服务简介</dd>
+            <dd>-服务产品</dd>
+            <dd>-成功案例</dd>
+         </dl>
+         <dl class="ft-dl">
+            <dt>电子银行</dt>
+            <dd>-网上银行</dd>
+            <dd>-电话银行</dd>
+            <dd>-自助银行</dd>
+         </dl>
+      </div>
+      <div class="ft-btm">
+         <div class="pull-left">
+            <p>
+               <a href="javascript:void(0);">联系我们</a>&nbsp;|&nbsp;<!---
+            ---><a href="javascript:void(0);">网站声明</a>
+            </p>
+            <p>青岛银行版权所有Copyright 2006-2007</p>
+            <p>鲁ICP备06013167 鲁公网安备37020202000316号</p>
+         </div>
+         <div class="pull-right">
+            <p>青岛银行客户投诉受理渠道:</p>
+            <p>电话渠道96588(青岛)、400-66-96588(全国) 网络渠道：96588@qdbankchina.com</p>
+            <p>信函渠道：青岛市香港中路68号华普大厦 青岛银行法律合规部 邮编266071</p>
+         </div>
+         <div class="clearfix"></div>
+      </div>
+   </div>
+</div>
+
+<!-- 基金工具计算器弹框 -->
+<div id="calculator" class="calculatorModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="calcWrap" id="calcWrap"></div>
+</div>
+
+<!-- 基金定投计算器弹框 -->
+<div id="AIPCalculator" class="calculatorModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="calcWrap" id="AIPCalcWrap">
+      <div class="calc_title">
+         基金定投收益计算器<img class="calc_close" src="../images/icon_close.png" />
+      </div>
+      <div class="calcContent">
+         <form class="calc_input" id="AIPCalculator_form">
+            <div class="calc_partName">请在下列输入框中填写数字</div>
+            <div class="calcItem searchFund">
+               <div class="calc_label">定投基金：</div>
+               <input class="calc_value" type="text" name="fundCode" id="AIPCalculator_searchFundInput">
+               <div id="AIPCalculator_searchFundContent" class="searchFundContent">
+                  <ul></ul>
+               </div>
+               <div class="calc_tips calc_tips1">（请输入正确的基金代码）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">定投开始日：</div>
+               <input class="calc_value startDay" type="text" name="startDay">
+               <div class="calc_tips calc_tips2">（请选择定投开始日）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">定投结束日：</div>
+               <input class="calc_value endDay" type="text" name="endDay">
+               <div class="calc_tips calc_tips3">(定投结束日要大于定投开始日）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">定投赎回日：</div>
+               <input class="calc_value redemDay" type="text" name="redemDay">
+               <div class="calc_tips calc_tips4"></div>
+            </div>
+            <div class="calcItem select cycle">
+               <div class="calc_label">定投周期：</div>
+               每
+               <input class="calc_value" type="text" name="cycle">
+               <select id="AIPCalculator_cycleSelect" name="type">
+                  <option value="0">周</option>
+                  <option value="1">月</option>
+               </select>
+               <div class="calc_tips calc_tips5">(请输入定投周期）</div>
+            </div>
+            <div class="calcItem select">
+               <div class="calc_label">定投日：</div>
+               <select id="AIPCalculator_fixDaySelect" name="fixDay">
+                  <option value="2">星期一</option>
+                  <option value="3">星期二</option>
+                  <option value="4">星期三</option>
+                  <option value="5">星期四</option>
+                  <option value="6">星期五</option>
+               </select>
+               <div class="calc_tips calc_tips6">(定投日1~28或周一~周五）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">申购费率：</div>
+               <input class="calc_value" type="text" name="rates">
+               <div class="calc_unit">%</div>
+               <div class="calc_tips calc_tips7">(请正确填写费率, 例如1.5）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">每期定投金额：</div>
+               <input class="calc_value" type="text" name="fixAmount">
+               <div class="calc_unit">元</div>
+               <div class="calc_tips calc_tips8">(请正确填写金额, 例如500）</div>
+            </div>
+            <div class="calcItem fenhong">
+               <div class="calc_label">分红方式：</div>
+               <div class="calc_value">
+                  <div>
+                     <input type="radio"
+                            id="AIPBonus_0"
+                            name="bonus"
+                            value='0'
+                            checked="checked"><label for="AIPBonus_0">现金分红</label>
+                     <input type="radio" id="AIPBonus_1" name="bonus" value='1'><label for="AIPBonus_1">红利再投</label>
+                  </div>
+                  <div><input type="checkbox" id="Debit" name="Debit"><label for="Debit">开始日为首次扣款日</label></div>
+               </div>
+            </div>
+            <div class="calc_btnWrap">
+               <div class="calc_sure">计算</div>
+               <div class="calc_clear">清除</div>
+            </div>
+         </form>
+         <div class="calc_result">
+            <div class="calc_partName">计算结果</div>
+            <div class="resultItem">
+               <div class="header">
+                  截止定投赎回日的收益
+                  <span class="hint">期末总资产包括红利再投或现金分红方式取得的收益</span>
+               </div>
+               <table>
+                  <thead>
+                  <tr>
+                     <th>定投总期数</th>
+                     <th>投入总本金（元）</th>
+                     <th>分红方式</th>
+                     <th>期末总资产（元）</th>
+                     <th>定投收益率</th>
+                  </tr>
+                  </thead>
+                  <tbody id="AIPCalculator__resultTable1">
+                  <tr>
+                     <td>--</td>
+                     <td>--</td>
+                     <td>--</td>
+                     <td>--</td>
+                     <td>--</td>
+                  </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div class="resultItem">
+               <div class="header">
+                  定投记录
+               </div>
+               <table>
+                  <thead>
+                  <tr>
+                     <th>定投日期</th>
+                     <th>单位净值</th>
+                     <th>定投金额</th>
+                     <th>购买份额</th>
+                  </tr>
+                  </thead>
+                  <tbody id="AIPCalculator__resultTable2">
+                  <tr>
+                     <td>--</td>
+                     <td>--</td>
+                     <td>--</td>
+                     <td>--</td>
+                  </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- 开放式基金计算器弹框 -->
+<div id="openendCalculator"
+     class="calculatorModal modal fade"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel">
+   <div class="calcWrap" id="openendCalcWrap">
+      <div class="calc_title">
+         开放式基金收益计算器<img class="calc_close" src="../images/icon_close.png" />
+      </div>
+      <div class="calcContent">
+         <form class="calc_input" id="openendCalculator_form">
+            <div class="calc_partName">请在下列输入框中填写数字</div>
+            <div class="calcItem searchFund">
+               <div class="calc_label">选择开放式基金：</div>
+               <input class="calc_value" type="text" name="fundCode" id="openendCalculator_searchFundInput">
+               <div id="openendCalculator_searchFundContent" class="searchFundContent">
+                  <ul></ul>
+               </div>
+               <div class="calc_tips calc_tips1">（请输入正确的基金代码）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">开始持有日期：</div>
+               <input class="calc_value startDay" type="text" name="startDay">
+               <div class="calc_tips calc_tips2">（请选择开始持有日期）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">结束持有日期：</div>
+               <input class="calc_value endDay" type="text" name="endDay">
+               <div class="calc_tips calc_tips3">(结束持有日要大于开始持有日）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">申购金额：</div>
+               <input class="calc_value fixAmount" type="text" name="fixAmount">
+               <div class="calc_unit">元</div>
+               <div class="calc_tips calc_tips4">(请正确填写金额, 例如500）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">申购费率：</div>
+               <input class="calc_value" type="text" name="rates">
+               <div class="calc_unit">%</div>
+               <div class="calc_tips calc_tips5">(请正确填写费率, 例如1.5）</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">赎回费率：</div>
+               <input class="calc_value" type="text" name="reRdates">
+               <div class="calc_unit">%</div>
+               <div class="calc_tips calc_tips6">(请正确填写费率, 例如1.5）</div>
+            </div>
+            <div class="calcItem fenhong">
+               <div class="calc_label">分红方式：</div>
+               <div class="calc_value">
+                  <div>
+                     <input type="radio"
+                            id="openendBonus_0"
+                            name="bonus"
+                            value='0'
+                            checked="checked"><label for="openendBonus_0">现金分红</label>
+                     <input type="radio"
+                            id="openendBonus_1"
+                            name="bonus"
+                            value='1'><label for="openendBonus_1">红利再投</label>
+                  </div>
+               </div>
+            </div>
+            <div class="calc_btnWrap">
+               <div class="calc_sure">计算</div>
+               <div class="calc_clear">清除</div>
+            </div>
+         </form>
+         <div class="calc_result">
+            <div class="calc_partName">计算结果</div>
+            <div class="calcItem">
+               <div class="calc_label">持有天数：</div>
+               <input class="calc_value" type="text" name="" value="" readonly="readonly">
+               <div class="calc_unit">天</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">赎回总金额：</div>
+               <input class="calc_value" type="text" name="" value="" readonly="readonly">
+               <div class="calc_unit">元</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">期间总收益金额：</div>
+               <input class="calc_value" type="text" name="" value="" readonly="readonly">
+               <div class="calc_unit">元</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">期间收益率：</div>
+               <input class="calc_value" type="text" name="" value="" readonly="readonly">
+               <div class="calc_unit">%</div>
+            </div>
+            <div class="calcItem">
+               <div class="calc_label">年化收益率：</div>
+               <input class="calc_value" type="text" name="" value="" readonly="readonly">
+               <div class="calc_unit">%</div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/html" id="tpl-CONTENT_INFO">
+   {{each data}}
+   <div class="row margin-clear table-tr">
+      <div class="col-xs-3">
+         <p class="fund-text">
+            <a href="./detail.html?fundCode={{$value.fundCode}}"
+               target="_blank">{{$value.fundAbbr||'--'}}</a>
+         </p>
+         <span class="fund-code">{{$value.fundCode||'--'}}</span>
+      </div>
+      <div class="col-xs-9">
+         <div class="col-xs-2">
+            <span class="fund-type">{{$value.fundType||'--'}}</span>
+         </div>
+         <div class="col-xs-2">
+            <span class="fund-level ellipsis">{{$value.riskLevel||'--'}}</span>
+         </div>
+         <div class="col-xs-2">
+            <span class="fund-unit">{{$value.fundIopv||'--'}}</span>
+         </div>
+         <div class="col-xs-2">
+            <span class="fund-total">{{$value.fundCnv||'--'}}</span>
+         </div>
+         <div class="col-xs-2">
+            <span class="fund-rate {{$value.rate < 0 ? 'down' : $value.rate > 0 ? 'up' : ''}}">
+               {{$value.rate > 0 ? '+' : ''}}{{$value.rate||'--'}}
+            </span>
+         </div>
+         <div class="col-xs-2">
+            <span class="fund-price">{{$value.initialAmount||'--'}}元</span>
+         </div>
+      </div>
+   </div>
+   {{/each}}
+</script>
+
+<script type="text/html" id="tpl-fundComCode">
+   <li class="filter-item active" data-companyCode="0">全部</li>
+   {{each data}}
+   <li
+         class="filter-item"
+         data-companyCode="{{$value.companyCode}}">{{$value.companyName}}
+   </li>
+   {{/each}}
+</script>
+
+<!-- 基金计算器弹框内容模板 -->
+<script type="text/html" id="tpl-calcWrap">
+   <div class="calc_title">{{title}}<img class="calc_close" src="../images/icon_close.png"></img></div>
+   <div class="calcContent">
+      <div class="calc_input">
+         <div class="calc_partName">{{partName}}</div>
+         <div class="calcItem">
+            <div class="calc_label">{{label1}}：</div>
+            <input class="calc_value" type="text" name="" id="calc_value1">
+            <div class="calc_unit">{{unit1}}</div>
+            <div class="calc_tips calc_tips1">（请填写{{label1}}）</div>
+         </div>
+         <div class="calcItem">
+            <div class="calc_label">{{label2}}：</div>
+            <input class="calc_value" type="text" name="" id="calc_value2">
+            <div class="calc_unit">{{unit2}}</div>
+            <div class="calc_tips calc_tips2">（请填写{{label2}}）</div>
+         </div>
+         <div class="calcItem">
+            <div class="calc_label">{{label3}}：</div>
+            <input class="calc_value" type="text" name="" id="calc_value3">
+            <div class="calc_unit">{{unit3}}</div>
+            <div class="calc_tips calc_tips3">(请填写{{label3}}）</div>
+         </div>
+         <div class="calc_btnWrap">
+            <div class="calc_sure">计算</div>
+            <div class="calc_clear">清除</div>
+         </div>
+      </div>
+      <div class="calc_result">
+         <div class="calc_partName">计算结果</div>
+         <div class="calcItem">
+            <div class="calc_label">{{label4}}：</div>
+            <input class="calc_value" type="text" name="" id="calc_value4" readonly="readonly">
+            <div class="calc_unit">{{unit4}}</div>
+         </div>
+         <div class="calcItem">
+            <div class="calc_label">{{label5}}：</div>
+            <input class="calc_value" type="text" name="" id="calc_value5" readonly="readonly">
+            <div class="calc_unit">{{unit5}}</div>
+         </div>
+      </div>
+   </div>
+</script>
+
+<!--公告列表的模板-->
+<script type="text/html" id="tpl-announce_content">
+   {{each list}}
+   <a href="./announce.html?id={{$value.id}}" class="list-item">
+      {{$value.title}}
+   </a>
+   {{/each}}
+</script>
+
+<!--热门推荐-->
+<!--<label class="item-label">推荐指数 :{{$value.recommendIndex}}</label>-->
+<!--<i class="glyphicon glyphicon-star"></i>-->
+<script type="text/html" id="tpl-fundRecommend">
+   {{each list}}
+   <div class="col-xs-4">
+      <div class="item">
+         <div class="item-group">
+            <h3 class="item-title">{{$value.name||'--'}}</h3>
+            <div class="item-fund">基金代码：{{$value.fundCode||'--'}}</div>
+            <div class="item-rate">{{$value.annualEarningRatio||'--'}}%</div>
+            <div class="item-split">历史年化收益</div>
+         </div>
+         <div class="item-group">
+            <div class="item-stars">
+               <label class="item-label">推荐指数 :
+                                         <% for(var i = 0; i < $value.recommendIndex; i++){ %>
+                  <i class="glyphicon glyphicon-star"></i>
+                                         <% } %>
+               </label>
+            </div>
+         </div>
+         <div class="item-group">
+            <div class="item-desc">推荐理由 :{{$value.recommendReasons||'--'}}</div>
+            <div class="item-desc">预计购买时间 :{{$value.buyTime||'--'}}</div>
+         </div>
+         <div class="item-group">
+            <a href="javascript:void(0);" class="btn btn-buy">立即购买</a>
+         </div>
+      </div>
+   </div>
+   {{/each}}
+</script>
+
+<!--搜索结果-->
+<script type="text/html" id="tpl-searchList">
+   {{each $data}}
+   <li class='clearfix'>
+      <a href="./detail.html?fundCode={{$value.fundCode}}">
+         <div class="pull-left ellipsis">{{$value.fundAbbr||'--'}}</div>
+         <div class="pull-right ellipsis">{{$value.fundCode||'--'}}</div>
+      </a>
+   </li>
+   {{/each}}
+</script>
+
+<!--计算机基金的搜索结果-->
+<script type="text/html" id="tpl-searchList-calculator">
+   {{each $data}}
+   <li class='clearfix' data-code={{$value.fundCode}}>
+      <a href="javascript:void(0);">
+         <div class="pull-left">{{$value.fundAbbr||'--'}}</div>
+         <div class="pull-right">{{$value.fundCode||'--'}}</div>
+      </a>
+   </li>
+   {{/each}}
+</script>
+
+<!--热搜-->
+<script type="text/html" id="tpl-hotSearch">
+   {{each $data}}
+   <a href="./detail.html?fundCode={{$value.fundCode}}" class="list-item">
+      <label class="list-label">{{$value.fundAbbr||'--'}}</label>
+      <span class="list-value">
+         <em class="list-rate">{{$value.income||'--'}}%</em>
+         <span>{{$value.incomeDesc}}</span>
+      </span>
+   </a>
+   {{/each}}
+</script>
+
+<!--AIP计算器计算结果-->
+<script type="text/html" id="tpl-AIPCalculator_result1">
+   {{each $data}}
+   <tr>
+      <td>{{$value.fixSum||'--'}}</td>
+      <td>{{$value.finalSum||'--'}}</td>
+      <td>{{$value.bonus||'--'}}</td>
+      <td>{{$value.total||'--'}}</td>
+      <td>{{$value.Rate||'--'}}</td>
+   </tr>
+   {{/each}}
+</script>
+<script type="text/html" id="tpl-AIPCalculator_result2">
+   {{each $data}}
+   <tr>
+      <td>{{$value.fixDate||'--'}}</td>
+      <td>{{$value.netValue||'--'}}</td>
+      <td>{{$value.share||'--'}}</td>
+      <td>{{$value.fixAmount||'--'}}</td>
+   </tr>
+   {{/each}}
+</script>
+
+<!--开放式基金计算器计算结果-->
+<script type="text/html" id="tpl-openendCalculator_result">
+   <div class="calc_partName">计算结果</div>
+   <div class="calcItem">
+      <div class="calc_label">持有天数：</div>
+      <input class="calc_value" type="text" name="" value="{{days || '--'}}" readonly="readonly">
+      <div class="calc_unit">天</div>
+   </div>
+   <div class="calcItem">
+      <div class="calc_label">赎回总金额：</div>
+      <input class="calc_value" type="text" name="" value="{{reRAmout || '--'}}" readonly="readonly">
+      <div class="calc_unit">元</div>
+   </div>
+   <div class="calcItem">
+      <div class="calc_label">期间总收益金额：</div>
+      <input class="calc_value" type="text" name="" value="{{totalAmout || '--'}}" readonly="readonly">
+      <div class="calc_unit">元</div>
+   </div>
+   <div class="calcItem">
+      <div class="calc_label">期间收益率：</div>
+      <input class="calc_value" type="text" name="" value="{{totalRate || '--'}}" readonly="readonly">
+      <div class="calc_unit">%</div>
+   </div>
+   <div class="calcItem">
+      <div class="calc_label">年化收益率：</div>
+      <input class="calc_value" type="text" name="" value="{{yearRate || '--'}}" readonly="readonly">
+      <div class="calc_unit">%</div>
+   </div>
+</script>
+
+<script type="text/javascript" src="../libs/require/require.js"></script>
+<script type="text/javascript" src="../js/require-config.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
+<script type="text/javascript" src="../js/calculator.js"></script>
+</body>
+</html>

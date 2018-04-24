@@ -1,0 +1,475 @@
+@import "variable";
+
+#main {
+  #header {
+  }
+  #body {
+    .tab-bar {
+      height: 0.44rem;
+      position: relative;
+      white-space: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      text-align: center;
+      border-bottom: 1px solid @borderColor;
+      background-color: @white;
+      line-height: 0.44rem;
+      font-size: 0rem;
+      -webkit-overflow-scrolling: touch;
+      .tab-item {
+        min-width: 20%;
+        padding: 0rem 0.08rem;
+        display: inline-block;
+        text-align: center;
+        font-size: 0.14rem;
+        &.active {
+          color: @blue;
+        }
+      }
+      .border {
+        position: absolute;
+        bottom: 0;
+        height: 0.02rem;
+        background-color: @blue;
+        transition: all 300ms ease;
+      }
+    }
+    .tab-content {
+      .swiper-container {
+        min-height: (100vh - 0.44rem);
+        .swiper-slide {
+          .slider-content {
+            background-color: @white;
+          }
+        }
+      }
+      #JZZS {
+        .slider-content {
+          .slider-header {
+            .slider-title {
+              padding: 0.16rem 0rem;
+              letter-spacing: 1px;
+              text-align: center;
+              line-height: 0.17rem;
+              color: rgb(153, 153, 153);
+            }
+          }
+          .slider-body {
+            padding: 0rem 0.12rem;
+            .slider-chart {
+              height: 2.4rem;
+              background-color: rgb(248, 248, 250) !important;
+              .tooltip {
+                padding: 0 0 0.1rem 0;
+                background-color: @white;
+                font-size: 0rem;
+                i {
+                  display: inline-block;
+                  width: 0.1rem;
+                  height: 0px;
+                  vertical-align: middle;
+                  border-bottom: 0.02rem solid transparent;
+                }
+                span {
+                  padding-left: 0.06rem;
+                  display: inline-block;
+                  vertical-align: middle;
+                  font-size: 0.1rem;
+                }
+              }
+            }
+          }
+          .slider-footer {
+            padding: 0.15rem 0rem;
+            .slider-bar {
+              text-align: center;
+              .btn-bar {
+                float: left;
+                height: 0.3rem;
+                line-height: 0.28rem;
+                color: rgb(153, 153, 153);
+                transition: all 300ms ease;
+                border: 1px solid rgb(192, 192, 192);
+                border-right: none;
+                &:last-child {
+                  border-right: 1px solid rgb(192, 192, 192);
+                }
+                &.active {
+                  color: @white;
+                  border-color: rgb(65, 154, 255);
+                  background-color: rgb(65, 154, 255);
+                }
+              }
+            }
+          }
+        }
+      }
+      #JJGK {
+        .slider-content {
+          margin-bottom: 0.1rem;
+          padding: 0.18rem 0rem;
+          .slider-header {
+            .slider-title {
+              padding: 0rem 0.14rem;
+              font-weight: normal;
+              line-height: 0.17rem;
+              font-size: 0.14rem;
+            }
+          }
+          .slider-body {
+            font-size: 0.12rem;
+            color: rgb(153, 153, 153);
+            .slider-group {
+              position: relative;
+              margin-top: 0.12rem;
+              padding: 0rem 0.19rem 0rem 1.4rem;
+              line-height: 0.14rem;
+              .slider-label {
+                position: absolute;
+                top: 0px;
+                left: 0.19rem;
+                width: 1.4rem;
+                color: #999999;
+                &.saleOrg {
+                  line-height: 0.3rem;
+                }
+              }
+              .slider-value {
+                display: block;
+                width: 100%;
+                text-align: justify;
+                color: #666666;
+                &.right {
+                  text-align: right;
+                }
+                &.saleOrg {
+                  height: 0.3rem;
+                  overflow: hidden;
+                  position: relative;
+                  transition: all 300ms ease;
+                }
+                .item-saleOrg {
+                  display: block;
+                  line-height: 0.3rem;
+                  text-align: left;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  white-space: nowrap;
+                }
+                .btn-more {
+                  position: absolute;
+                  top: 0px;
+                  right: 0px;
+                  display: inline-block;
+                  line-height: 0.3rem;
+                  color: @blue;
+                  text-decoration: underline;
+                }
+              }
+            }
+            .slider-master {
+              padding: 0rem 0.2rem;
+              margin-bottom: 0.15rem;
+              .master-item {
+                padding: 0.2rem 0rem;
+                border-bottom: 1px solid @borderColor;
+                .slider-img {
+                  float: left;
+                  width: 0.64rem;
+                  height: 0.64rem;
+                  border-radius: 100%;
+                  margin-right: 0.19rem;
+                  font-size: 0px;
+                  background-color: #dedede;
+                  box-shadow: 1px 1px 1px rgba(0, 0, 0, .15);
+                }
+                .slider-name {
+                  margin-bottom: 0.06rem;
+                  font-size: 0.14rem;
+                  line-height: 0.17rem;
+                  color: rgb(65, 154, 255);
+                }
+                .slider-time {
+                  margin-bottom: 0.1rem;
+                  font-size: 0.12rem;
+                  color: rgb(153, 153, 153);
+                }
+                .slider-desc {
+                  line-height: 0.16rem;
+                  font-size: 0.12rem;
+                  text-align: justify;
+                  letter-spacing: 1px;
+                  color: rgb(102, 102, 102)
+                }
+              }
+            }
+            .slider-info {
+              padding: 0.1rem 0.2rem 0rem;
+              text-align: justify;
+              text-indent: 2em;
+              line-height: 0.16rem;
+              font-size: 0.12rem;
+              color: rgb(102, 102, 102);
+            }
+          }
+          .slider-footer {
+
+          }
+        }
+      }
+      #FLJG {
+        .slider-content {
+          padding-bottom: 0.15rem;
+          .slider-header {
+            .slider-title {
+              padding: 0rem 0.15rem;
+              font-weight: normal;
+              font-size: 0.14rem;
+              line-height: 0.37rem;
+              color: rgb(102, 102, 102);
+            }
+          }
+          .slider-body {
+            .slider-table {
+              .table-header {
+                .table-column {
+                  background-color: rgb(245, 245, 245);
+                  color: rgb(102, 102, 102);
+                }
+              }
+              .table-column {
+                height: 0.40rem;
+                font-size: 0rem;
+                text-align: center;
+                padding: 0rem 0.15rem;
+                color: rgb(153, 153, 153);
+                border-bottom: 1px solid @borderColor;
+                &:not(:nth-of-type(2n)) {
+                  border-right: 1px solid @borderColor;
+                }
+                &:before {
+                  content: '';
+                  width: 0px;
+                  height: 100%;
+                  display: inline-block;
+                  vertical-align: middle;
+                }
+                span {
+                  display: inline-block;
+                  vertical-align: middle;
+                  font-size: 0.12rem;
+                }
+              }
+            }
+            .slider-group {
+              position: relative;
+              font-size: 0.12rem;
+              padding: 0.09rem 0rem 0.09rem 0.9rem;
+              border-top: 1px solid @borderColor;
+              &:last-child {
+                border-bottom: 1px solid @borderColor;
+              }
+              .slider-label {
+                display: block;
+                width: 0.9rem;
+                position: absolute;
+                left: 0px;
+                color: rgb(102, 102, 102);
+              }
+              .slider-value {
+                display: block;
+                color: rgb(153, 153, 153);
+              }
+            }
+          }
+          .slider-footer {
+
+          }
+        }
+      }
+      #TZZH {
+        min-height: 2rem;
+        .slider-content {
+          .slider-header {
+            .slider-title {
+              padding: 0rem 0.15rem;
+              font-weight: normal;
+              font-size: 0.14rem;
+              line-height: 0.37rem;
+              color: rgb(102, 102, 102);
+            }
+          }
+          .slider-body {
+            .slider-table {
+              .table-header {
+                .table-column {
+                  background-color: rgb(245, 245, 245);
+                  color: rgb(102, 102, 102);
+                }
+              }
+              .table-column {
+                height: 0.40rem;
+                font-size: 0rem;
+                text-align: center;
+                padding: 0rem 0.15rem;
+                color: rgb(153, 153, 153);
+                border-bottom: 1px solid @borderColor;
+                &:not(:nth-of-type(3n)) {
+                  border-right: 1px solid @borderColor;
+                }
+                &:before {
+                  content: '';
+                  width: 0px;
+                  height: 100%;
+                  display: inline-block;
+                  vertical-align: middle;
+                }
+                span {
+                  display: inline-block;
+                  vertical-align: middle;
+                  font-size: 0.12rem;
+                }
+              }
+            }
+            .slider-group {
+              position: relative;
+              font-size: 0.12rem;
+              padding: 0.09rem 0rem 0.09rem 0.9rem;
+              .slider-label {
+                display: block;
+                width: 0.9rem;
+                position: absolute;
+                left: 0px;
+                color: rgb(102, 102, 102);
+              }
+              .slider-value {
+                display: block;
+                color: rgb(153, 153, 153);
+                &.right {
+                  text-align: right;
+                }
+              }
+            }
+            .slider-chart {
+              height: 3rem;
+              padding: 0.1rem;
+            }
+          }
+          .slider-footer {
+
+          }
+        }
+      }
+      #JYGZ {
+        .slider-content {
+          padding-bottom: 0.15rem;
+          .slider-header {
+            .slider-title {
+              padding: 0rem 0.15rem;
+              font-weight: normal;
+              font-size: 0.14rem;
+              line-height: 0.37rem;
+              color: rgb(102, 102, 102);
+            }
+          }
+          .slider-body {
+            .slider-table {
+              .table-header {
+                .table-column {
+                  background-color: rgb(245, 245, 245);
+                  color: rgb(102, 102, 102);
+                }
+              }
+              .table-column {
+                height: 0.40rem;
+                font-size: 0rem;
+                text-align: center;
+                color: rgb(153, 153, 153);
+                border-bottom: 1px solid @borderColor;
+                &:not(:nth-of-type(2n)) {
+                  border-right: 1px solid @borderColor;
+                }
+                &:before {
+                  content: '';
+                  width: 0px;
+                  height: 100%;
+                  display: inline-block;
+                  vertical-align: middle;
+                }
+                span {
+                  display: inline-block;
+                  vertical-align: middle;
+                  font-size: 0.12rem;
+                }
+              }
+            }
+            .slider-group {
+              position: relative;
+              font-size: 0.12rem;
+              padding: 0.09rem 0rem 0.09rem 0.9rem;
+              border-top: 1px solid @borderColor;
+              &:last-child {
+                border-bottom: 1px solid @borderColor;
+              }
+              .slider-label {
+                display: block;
+                width: 0.9rem;
+                position: absolute;
+                left: 0px;
+                color: rgb(102, 102, 102);
+              }
+              .slider-value {
+                display: block;
+                color: rgb(153, 153, 153);
+              }
+            }
+            .slider-status {
+              padding-top: 0.32rem;
+              position: relative;
+              .slider-item {
+                p {
+                  width: 0.4rem;
+                  height: 0.4rem;
+                  margin: 0px auto;
+                  position: relative;
+                  border-radius: 100%;
+                  text-align: center;
+                  line-height: 0.4rem;
+                  font-size: 0.15rem;
+                  color: rgb(65, 154, 255);
+                  background-color: rgb(245, 245, 245);
+                }
+                span {
+                  display: block;
+                  margin-top: 0.1rem;
+                  text-align: center;
+                  font-size: 0.14rem;
+                }
+              }
+              &:before {
+                content: '';
+                display: block;
+                width: 60%;
+                height: 0px;
+                top: 0.52rem;
+                left: 0.6rem;
+                position: absolute;
+                border-bottom: 2px dashed @borderColor;
+              }
+            }
+          }
+          .slider-footer {
+            p {
+              margin-top: 0.1rem;
+              padding: 0rem 0.15rem;
+              font-size: 0.12rem;
+              color: rgb(102, 102, 102);
+            }
+          }
+        }
+      }
+    }
+  }
+  #footer {
+  }
+}
