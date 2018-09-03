@@ -11,7 +11,7 @@ npm install
 
 开发
 ``
-gulp dev --target pc    (默认)
+gulp dev --target pc    (默认or npm start)
 ``
 
 构建
