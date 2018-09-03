@@ -24,12 +24,20 @@
 <div id="main">
     <div id="header">
         <h1 class="title">FK</h1>
+        <div class="user">
+            <img src="../images/user.png" class="image" alt="User">
+            <span class="name">当前用户：【张三】</span>
+        </div>
     </div>
     <div id="body">
         <div class="sidebar">
             <ul class="nav-bar">
                 <li class="nav-item">
-                    <h3 class="nav-title">用户管理</h3>
+                    <h3 class="nav-title">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>用户管理</span>
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </h3>
                     <ul class="nav-bar">
                         <li class="nav-item">
                             <h4 class="nav-title">用户查询</h4>
@@ -40,7 +48,11 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <h3 class="nav-title">商户管理</h3>
+                    <h3 class="nav-title">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>商户管理</span>
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </h3>
                     <ul class="nav-bar">
                         <li class="nav-item">
                             <h4 class="nav-title">用户查询</h4>
@@ -51,7 +63,11 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <h3 class="nav-title">账单管理</h3>
+                    <h3 class="nav-title">
+                        <i class="glyphicon glyphicon-credit-card"></i>
+                        <span>账单管理</span>
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </h3>
                     <ul class="nav-bar">
                         <li class="nav-item">
                             <h4 class="nav-title">用户查询</h4>
@@ -61,8 +77,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-title">
-                    <h3 class="nav-item">日志管理</h3>
+                <li class="nav-item">
+                    <h3 class="nav-title">
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                        <span>日志管理</span>
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </h3>
                     <ul class="nav-bar">
                         <li class="nav-item">
                             <h4 class="nav-title">用户查询</h4>
@@ -74,7 +94,151 @@
                 </li>
             </ul>
         </div>
-        <div class="content"></div>
+        <div class="content">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">商户名:</label>
+                            <input class="form-control" name="search" type="text"/>
+                            <button type="button" class="btn btn-primary">搜索</button>
+                            <button type="button" class="btn btn-danger">删除</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>
+                                    <input type="checkbox"/>
+                                </th>
+                                <th>商户编号</th>
+                                <th>商户名称</th>
+                                <th>状态</th>
+                                <th>编辑</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td><input type="checkbox"/></td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="footer"></div>
 </div>
