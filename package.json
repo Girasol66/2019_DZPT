@@ -1,11 +1,11 @@
 {
-  "name": "hkf10",
+  "name": "dzpt",
   "version": "1.0.1",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp dev --target mobile"
+    "start": "gulp dev --target pc"
   },
   "author": "Penglunjian",
   "license": "ISC",
