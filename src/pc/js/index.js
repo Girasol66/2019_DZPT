@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, waves, bootstrapDateTimePicker, bootstrapDateTimePickerLocal_zh_CN) {
+require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, waves) {
     /**
      *
      * @constructor
@@ -8,10 +8,11 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
         this.ACTIVE = args['ACTIVE'] ? args['ACTIVE'] : 'active';
         this.NAV_BAR = args['NAV_BAR'] ? args['NAV_BAR'] : '.nav-bar';
         this.NAV_ITEM = args['NAV_ITEM'] ? args['NAV_ITEM'] : '.nav-item';
+        this.TEMPLATE = args['TEMPLATE'] ? args['TEMPLATE'] : '.template';
+        this.DATE_SEL = args['DATE_SEL'] ? args['DATE_SEL'] : '.form-date';
 
         this.init();
     };
-
     /**
      *
      * @returns {HomePage}
@@ -20,12 +21,6 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
         this.wavesInit();
         this.showSubNavigation();
 
-        $('.form-date').datetimepicker({
-            language: 'zh-CN',
-            format: 'yyyy-mm-dd',
-            minView: 'month',
-            autoclose: true,
-        });
         return this;
     };
     /**
@@ -43,6 +38,12 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
      * @returns {HomePage}
      */
     HomePage.prototype.dateTimePickerInit = function () {
+        $(this.DATE_SEL).datetimepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true
+        });
         return this;
     };
 
@@ -65,6 +66,11 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
                     subNavigation.slideDown('fast');
                     $(this).addClass(_this.ACTIVE);
                 }
+            } else {
+                var templateId = $(this).attr('data-template').trim();
+                var templateHtml = template(templateId, {a: ''});
+                $(_this.TEMPLATE).html(templateHtml);
+                _this.dateTimePickerInit();
             }
         });
         return this;
