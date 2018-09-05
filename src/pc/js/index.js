@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'waves'], function ($, common, template, waves) {
+require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, waves, bootstrapDateTimePicker, bootstrapDateTimePickerLocal_zh_CN) {
     /**
      *
      * @constructor
@@ -19,13 +19,30 @@ require(['jquery', 'common', 'template', 'waves'], function ($, common, template
     HomePage.prototype.init = function () {
         this.wavesInit();
         this.showSubNavigation();
+
+        $('.form-date').datetimepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true,
+        });
         return this;
     };
-
+    /**
+     *
+     * @returns {HomePage}
+     */
     HomePage.prototype.wavesInit = function () {
         //Set Waves
         waves.attach('h3.nav-title,h4.nav-title', ['waves-block']);
         waves.init();
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.dateTimePickerInit = function () {
         return this;
     };
 

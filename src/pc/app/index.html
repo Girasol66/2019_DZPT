@@ -9,7 +9,7 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>对账平台--首页</title>
     <link rel="stylesheet" type="text/css" href="../libs/bootstrap/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../libs/bootstrap-datepicker/bootstrap-datepicker3.css"/>
+    <link rel="stylesheet" type="text/css" href="../libs/bootstrap-dateTimePicker/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" type="text/css" href="../libs/waves/waves.css"/>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/index.css"/>
@@ -33,7 +33,7 @@
     <div id="body">
         <div class="sidebar">
             <ul class="nav-bar">
-                <li class="nav-item waves-effect">
+                <li class="nav-item">
                     <h3 class="nav-title">
                         <i class="glyphicon glyphicon-user"></i>
                         <span>用户管理</span>
@@ -61,12 +61,12 @@
                     <ul class="nav-bar">
                         <li class="nav-item">
                             <h4 class="nav-title">
-                                <span>用户查询</span>
+                                <span>商户查询</span>
                             </h4>
                         </li>
                         <li class="nav-item">
                             <h4 class="nav-title">
-                                <span>添加用户</span>
+                                <span>添加商户</span>
                             </h4>
                         </li>
                     </ul>
@@ -80,12 +80,27 @@
                     <ul class="nav-bar">
                         <li class="nav-item">
                             <h4 class="nav-title">
-                                <span>用户查询</span>
+                                <span>商户交易明细查询</span>
                             </h4>
                         </li>
                         <li class="nav-item">
                             <h4 class="nav-title">
-                                <span>添加用户</span>
+                                <span>渠道交易明细查询</span>
+                            </h4>
+                        </li>
+                        <li class="nav-item">
+                            <h4 class="nav-title">
+                                <span>对账批次查询</span>
+                            </h4>
+                        </li>
+                        <li class="nav-item">
+                            <h4 class="nav-title">
+                                <span>差错查询</span>
+                            </h4>
+                        </li>
+                        <li class="nav-item">
+                            <h4 class="nav-title">
+                                <span>缓冲池查询</span>
                             </h4>
                         </li>
                     </ul>
@@ -99,25 +114,32 @@
                     <ul class="nav-bar">
                         <li class="nav-item">
                             <h4 class="nav-title">
-                                <span>用户查询</span>
+                                <span>文件状态查询</span>
                             </h4>
                         </li>
                         <li class="nav-item">
                             <h4 class="nav-title">
-                                <span>添加用户</span>
+                                <span>文件处理查询</span>
                             </h4>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <div class="content">
+
+        <div class="content none" data-template-name="用户查询">
             <div class="table row">
                 <div class="col-xs-12 table-content">
                     <div class="table-header">
                         <div class="form-group">
-                            <label class="form-label">商户名:</label>
+                            <label class="form-label">用户名：</label>
                             <input class="form-control" name="search" type="text"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">用户状态：</label>
+                            <input class="form-control" name="status" type="text"/>
+                        </div>
+                        <div class="form-group">
                             <button type="button" class="btn btn-primary">搜索</button>
                             <button type="button" class="btn btn-danger">删除</button>
                         </div>
@@ -127,17 +149,19 @@
                             <thead>
                             <tr role="row">
                                 <th>
-                                    <input type="checkbox"/>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
                                 </th>
-                                <th>商户编号</th>
-                                <th>商户名称</th>
-                                <th>状态</th>
-                                <th>编辑</th>
+                                <th>用户名</th>
+                                <th>联系方式</th>
+                                <th>登录名</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr role="row" class="odd">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -146,7 +170,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="even">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -155,7 +181,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="odd">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -164,7 +192,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="even">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -173,7 +203,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="odd">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -182,7 +214,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="even">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -191,7 +225,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="odd">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -200,7 +236,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="even">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -209,7 +247,9 @@
                                 </td>
                             </tr>
                             <tr role="row" class="odd">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
@@ -218,13 +258,1512 @@
                                 </td>
                             </tr>
                             <tr role="row" class="even">
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
                                 <td>000001</td>
                                 <td>纷翔</td>
                                 <td>无效</td>
                                 <td>
                                     <button class="btn btn-edit"></button>
                                 </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="添加用户">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header none"></div>
+                    <div class="table-body">
+                        <div class="form-group">
+                            <label class="form-label">姓名：</label>
+                            <input class="form-control" name="name" type="text"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">电话：</label>
+                            <input class="form-control" name="phone" type="tel"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">登录名：</label>
+                            <input class="form-control" name="username" type="text"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">密码：</label>
+                            <input class="form-control" name="password" type="password"/>
+                        </div>
+                    </div>
+                    <div class="table-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary">添加</button>
+                            <button class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="商户查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">商户名：</label>
+                            <input class="form-control" name="search" type="text"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">搜索</button>
+                            <button type="button" class="btn btn-danger">删除</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </th>
+                                <th>商户编号</th>
+                                <th>商户名称</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>000001</td>
+                                <td>纷翔</td>
+                                <td>无效</td>
+                                <td>
+                                    <button class="btn btn-edit"></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="添加商户">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header none"></div>
+                    <div class="table-body">
+                        <div class="form-group">
+                            <label class="form-label">商户编号：</label>
+                            <input class="form-control" name="name" type="text"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">商户名称：</label>
+                            <input class="form-control" name="phone" type="tel"/>
+                        </div>
+                    </div>
+                    <div class="table-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary">添加</button>
+                            <button class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="商户交易明细查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">账单日期-起始时间：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">账单日期-结束时间：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Dropdown
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>商户编号</th>
+                                <th>支付方式名称</th>
+                                <th>账单日期</th>
+                                <th>订单金额</th>
+                                <th>手续费</th>
+                                <th>完成时间</th>
+                                <th>成功退款总金额</th>
+                                <th>交易业务类型</th>
+                                <th>订单类型</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="渠道交易明细查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">账单日期-起始时间：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">账单日期-结束时间：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Dropdown
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>商户名称</th>
+                                <th>支付方式名称</th>
+                                <th>账单日期</th>
+                                <th>订单金额</th>
+                                <th>手续费</th>
+                                <th>完成时间</th>
+                                <th>成功退款总金额</th>
+                                <th>交易业务类型</th>
+                                <th>订单类型</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>000001</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="对账批次查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">对账日期-开始日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">结束日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Dropdown
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </th>
+                                <th>账单批次号</th>
+                                <th>备注</th>
+                                <th>日期</th>
+                                <th>支付方式</th>
+                                <th>渠道批次号</th>
+                                <th>渠道交易金额</th>
+                                <th>退款金额</th>
+                                <th>交易金额</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="差错查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">对账日期-开始日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">结束日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Dropdown
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </th>
+                                <th>账单批次号</th>
+                                <th>备注</th>
+                                <th>日期</th>
+                                <th>支付方式</th>
+                                <th>错误类型</th>
+                                <th>处理状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="缓冲池查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">账单日期-起始时间：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">账单日期-截止时间：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Dropdown
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>商户名称</th>
+                                <th>支付方式名称</th>
+                                <th>对账批次号</th>
+                                <th>账单日期</th>
+                                <th>账单来源</th>
+                                <th>订单金额</th>
+                                <th>手续费</th>
+                                <th>完成时间</th>
+                                <th>成功退款总金额</th>
+                                <th>交易业务类型</th>
+                                <th>订单类型</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>1</td>
+                                <td>支付宝</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>20180905</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                                <td>54646</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content none" data-template-name="文件状态查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">账单日期-开始日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">结束日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </th>
+                                <th>账单批次号</th>
+                                <th>备注</th>
+                                <th>日期</th>
+                                <th>支付方式</th>
+                                <th>错误类型</th>
+                                <th>处理状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                                <td>渠道文件状态</td>
+                                <td>对账状态</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content" data-template-name="文件处理查询">
+            <div class="table row">
+                <div class="col-xs-12 table-content">
+                    <div class="table-header">
+                        <div class="form-group">
+                            <label class="form-label">对账日期-开始日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">结束日期：</label>
+                            <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                    <div class="table-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr role="row">
+                                <th>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </th>
+                                <th>账单日期</th>
+                                <th>日志类型</th>
+                                <th>日志等级</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
+                            </tr>
+                            <tr role="row" class="even">
+                                <td>
+                                    <input class="form-checkbox" type="checkbox" name="checkbox"/>
+                                </td>
+                                <td>账单日期</td>
+                                <td>商户文件名</td>
+                                <td>商户文件状态</td>
+                                <td>渠道文件名</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -263,5 +1802,6 @@
 <script type="text/javascript" src="../libs/require/require.js"></script>
 <script type="text/javascript" src="../js/require-config.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
+
 </body>
 </html>

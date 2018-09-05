@@ -147,17 +147,19 @@
         }
         .table-header {
           height: auto;
+          font-size: 0;
+          padding: 15px 20px;
           border-bottom: 1px solid rgba(204, 204, 204, 0.35);
           .form-group {
-            margin: 0;
-            padding: 13px 15px;
-            font-size: 0;
-          }
-          .form-label {
-            margin: 0 5px 0 0;
+            margin: 0 10px 0;
             display: inline-block;
             vertical-align: middle;
-            font-weight: bold;
+          }
+          .form-label {
+            margin: 0;
+            display: inline-block;
+            vertical-align: middle;
+            font-weight: bold !important;
             font-size: 14px;
           }
           .form-control {
@@ -184,6 +186,11 @@
             background-image: url('../images/update.gif');
             background-color: transparent;
           }
+          .form-group {
+            .form-label {
+              font-weight: bold;
+            }
+          }
         }
         .table-footer {
           padding-bottom: 20px;
@@ -193,8 +200,18 @@
             display: inline-block;
             font-size: 14px;
           }
+          .form-group {
+            padding: 0 20px;
+            text-align: right;
+            .btn {
+              margin-left: 15px;
+            }
+          }
         }
       }
     }
+  }
+  #footer {
+
   }
 }
