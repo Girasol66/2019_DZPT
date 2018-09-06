@@ -1,11 +1,18 @@
 define(['jquery'], function ($) {
-    var apiConfig = {
+    var AJAX_CONFIG = {
         login: '/CheckBill/login',
-        queryParams: {
-            loginname: 'admin',
+        params: {
+            username: 'admin',
             password: '123456'
+        },
+        getParams: function () {
+            var data = '';
+            for (var key in this.params) {
+                data += key + '=' + this.params[key] + '&';
+            }
+            return data.substring(0, data.length - 1);
         }
     };
 
-    return apiConfig;
+    return AJAX_CONFIG;
 });

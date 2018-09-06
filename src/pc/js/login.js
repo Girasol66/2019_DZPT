@@ -7,6 +7,8 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
         var args = arguments.length ? arguments.length[0] : arguments;
         this.username = args['username'] ? args['username'] : '#username';
         this.password = args['password'] ? args['password'] : '#password';
+        this.container = args['container'] ? args['container'] : '.login';
+        this.btnLogin = args['btnLogin'] ? args['btnLogin'] : '.btn-login';
 
         this.init();
     }
@@ -16,10 +18,8 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
      * @returns {LoginPage}
      */
     LoginPage.prototype.init = function () {
-        this.ajaxRequestCheck();
-        if (this.notNullCheck()) {
-            this.ajaxRequestCheck();
-        }
+        this.submit();
+
         return this;
     };
     /**
@@ -42,17 +42,32 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
      * @returns {LoginPage}
      */
     LoginPage.prototype.ajaxRequestCheck = function () {
+        var _this = this;
         $.ajax({
             url: apiMain.login,
-            data: 'loginname=admin&password=123456',
+            data: apiMain.getParams(),
             type: 'POST',
             processData: false,
+            $renderContainer: $(_this.container),
             contentType: 'application/x-www-form-urlencoded',
             success: function () {
                 window.location.href = 'index.html';
             },
             error: function (msg) {
                 console.log(msg);
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {LoginPage}
+     */
+    LoginPage.prototype.submit = function () {
+        var _this = this;
+        $(document).on('click', this.btnLogin, function () {
+            if (!_this.notNullCheck()) {
+                _this.ajaxRequestCheck();
             }
         });
         return this;
