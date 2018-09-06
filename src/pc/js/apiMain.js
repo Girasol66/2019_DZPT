@@ -1,9 +1,9 @@
 define(['jquery'], function ($) {
     var apiConfig = {
-        login: '/login',
+        login: '/CheckBill/login',
         queryParams: {
-            username: '',
-            password: ''
+            loginname: 'admin',
+            password: '123456'
         }
     };
 

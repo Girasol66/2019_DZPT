@@ -9,7 +9,9 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
         this.NAV_BAR = args['NAV_BAR'] ? args['NAV_BAR'] : '.nav-bar';
         this.NAV_ITEM = args['NAV_ITEM'] ? args['NAV_ITEM'] : '.nav-item';
         this.TEMPLATE = args['TEMPLATE'] ? args['TEMPLATE'] : '.template';
+        this.CHECKBOX = args['CHECKBOX'] ? args['CHECKBOX'] : '.checkbox';
         this.DATE_SEL = args['DATE_SEL'] ? args['DATE_SEL'] : '.form-date';
+        this.DROP_ITEM = args['DROP_ITEM'] ? args['DROP_ITEM'] : '.dropdown li';
 
         this.init();
     };
@@ -18,9 +20,24 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
      * @returns {HomePage}
      */
     HomePage.prototype.init = function () {
+        this.dropMenuInit();
         this.wavesInit();
+        this.selectCheckBox();
         this.showSubNavigation();
-
+        $(this.NAV_ITEM + '[data-template="tpl-NAV01-SELECT"]').click();
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.dropMenuInit = function () {
+        $('.dropdown-toggle').dropdown();
+        $(document).on('click', this.DROP_ITEM, function () {
+            var txt = $(this).text().trim() + ' ';
+            var innerHtml = txt + '<span class="caret"></span>';
+            $('.dropdown-toggle').html(innerHtml);
+        });
         return this;
     };
     /**
@@ -46,7 +63,6 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
         });
         return this;
     };
-
     /**
      *
      * @returns {HomePage}
@@ -75,7 +91,31 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
         });
         return this;
     };
-
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectCheckBox = function () {
+        var _this = this;
+        $(document).on('click', this.CHECKBOX, function () {
+            if ($(this).hasClass('all')) {
+                if ($(this).prop('checked')) {
+                    $(_this.CHECKBOX).prop('checked', true);
+                } else {
+                    $(_this.CHECKBOX).prop('checked', false);
+                }
+            } else {
+                var offsetLength = $(_this.CHECKBOX).length
+                    - $(_this.CHECKBOX + ':checked').length;
+                if ($(this).prop('checked') && offsetLength <= 1) {
+                    $(_this.CHECKBOX).eq(0).prop('checked', true);
+                } else {
+                    $(_this.CHECKBOX).eq(0).prop('checked', false);
+                }
+            }
+        });
+        return this;
+    };
     /**
      *
      * @type {HomePage}

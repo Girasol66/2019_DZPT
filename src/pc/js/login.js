@@ -16,12 +16,12 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
      * @returns {LoginPage}
      */
     LoginPage.prototype.init = function () {
+        this.ajaxRequestCheck();
         if (this.notNullCheck()) {
             this.ajaxRequestCheck();
         }
         return this;
     };
-
     /**
      *
      * @returns {boolean}
@@ -37,7 +37,6 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
         }
         return result;
     };
-
     /**
      *
      * @returns {LoginPage}
@@ -45,11 +44,12 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
     LoginPage.prototype.ajaxRequestCheck = function () {
         $.ajax({
             url: apiMain.login,
-            data: apiMain.queryParams,
+            data: 'loginname=admin&password=123456',
             type: 'POST',
-            dataType: 'JSON',
+            processData: false,
+            contentType: 'application/x-www-form-urlencoded',
             success: function () {
-                window.location.href = 'main.html';
+                window.location.href = 'index.html';
             },
             error: function (msg) {
                 console.log(msg);
@@ -57,7 +57,6 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
         });
         return this;
     };
-
     /**
      *
      * @type {LoginPage}

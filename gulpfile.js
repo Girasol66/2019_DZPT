@@ -148,8 +148,8 @@ gulp.task('server', function () {
         livereload: true,
         middleware: function (connect, opt) {
             return [
-                proxy('/api/', {
-                    target: 'http://172.16.10.53:8103',
+                proxy('/CheckBill/', {
+                    target: 'http://192.168.3.135:8080',
                     changeOrigin: true
                 })
             ];
