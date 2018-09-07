@@ -46,41 +46,134 @@ input[type="checkbox"]:focus {
   margin: 0 !important;
 }
 
-.message-box {
-  float: right;
-  z-index: 1001;
-  min-width: 280px;
-  position: relative;
-  margin: 15px 15px 0 0;
-  background-color: @white;
-  background-clip: padding-box;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
-  &:before {
-    content: '';
-    display: block;
-    width: 0;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-left: 6px solid #ce4844;
-  }
-  .message-header {
-    padding: 10px 25px;
-    border-bottom: 1px solid #e5e5e5;
-    .message-title {
-      font-size: 16px;
-      color: #ce4844;
-    }
-  }
-  .message-body {
-    padding: 10px 25px;
-    .message {
-      letter-spacing: 1px;
-    }
-  }
-  .message-footer {
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, .6);
+}
 
+.modal#msgModal {
+  color: #333333;
+}
+
+#msgModal {
+  &.in {
+    .modal-dialog {
+      animation: animate 300ms;
+    }
+  }
+}
+
+#msgModal .modal-dialog {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 360px !important;
+  height: 180px !important;
+  margin-top: -90px !important;
+  margin-left: -180px !important;
+}
+
+#msgModal .modal-header {
+  padding: 9px 15px;
+}
+
+#msgModal .close {
+  opacity: 1;
+  font-size: 0px;
+  margin: 0px !important;
+}
+
+#msgModal .close > span {
+  color: #333333;
+  font-size: 30px;
+  line-height: 22px;
+  font-weight: normal;
+  display: inline-block;
+}
+
+#msgModal .modal-content {
+  height: 100%;
+  border: none;
+  border-radius: 0px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  &.info {
+    border-top: 4px solid @info;
+  }
+  &.error {
+    border-top: 4px solid @error;
+  }
+  &.warn {
+    border-top: 4px solid @warn;
+  }
+  &.question {
+    border-top: 4px solid @question;
+  }
+}
+
+#msgModal .modal-body {
+  min-height: 88px;
+}
+
+#msgModal .modal-title {
+  font-size: 16px;
+}
+
+#msgModal .modal-info {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+#msgModal .modal-info .modal-column {
+  line-height: 15px;
+}
+
+#msgModal .modal-info .modal-column.col-xs-10 {
+  min-height: 30px;
+  font-size: 0px;
+  padding: 0px 15px 0px 0px;
+}
+
+#msgModal .modal-info .modal-column.col-xs-10:before {
+  content: '';
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#msgModal .modal-info .modal-column .modal-text {
+  margin: 0px;
+  display: inline-block;
+  vertical-align: middle;
+  word-break: break-all;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+#msgModal .modal-footer {
+  border: none;
+  min-height: 45px;
+  padding: 0px 15px 15px;
+}
+
+#msgModal .modal-footer button {
+  height: 30px;
+  min-width: 60px;
+  line-height: 28px;
+  padding: 0px 10px;
+  margin-left: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+@keyframes animate {
+  0% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.0);
   }
 }
 

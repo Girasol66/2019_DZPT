@@ -1,6 +1,6 @@
 define(['jquery'], function ($) {
     var AJAX_CONFIG = {
-        login: '/CheckBill/login',
+        login: '/CheckBill/api/login',
         params: {
             username: 'admin',
             password: '123456'
