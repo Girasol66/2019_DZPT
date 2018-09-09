@@ -11,8 +11,8 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
         this.btnLogin = args['btnLogin'] ? args['btnLogin'] : '.btn-login';
 
         this.STATUS = {
-            ERROR: 0,
-            SUCCESS: 200
+            ERROR_NO: 0,
+            SUCCESS_NO: 200
         };
 
         this.init();
@@ -36,10 +36,8 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
         var MessageBoxIcons = MessageBox.MessageBoxIcons;
         var MessageBoxButtons = MessageBox.MessageBoxButtons;
         if (!$(this.username).val().trim()) {
-            $(this.username).focus();
             MessageBox.show('提示', '用户名不能为空 !', MessageBoxButtons.OK, MessageBoxIcons.INFORMATION);
         } else if (!$(this.password).val().trim()) {
-            $(this.password).focus();
             MessageBox.show('提示', '密码不能为空 !', MessageBoxButtons.OK, MessageBoxIcons.INFORMATION);
         } else {
             result = true;
@@ -53,21 +51,28 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
      */
     LoginPage.prototype.ajaxRequestCheck = function () {
         var _this = this;
+        var data = 'username=' + $(_this.username).val()
+            + '&password=' + $(_this.password).val();
+        var MessageBox = common.MessageBox;
+        var MessageBoxIcons = MessageBox.MessageBoxIcons;
+        var MessageBoxButtons = MessageBox.MessageBoxButtons;
         $.ajax({
-            url: apiMain.login,
-            data: apiMain.getParams(),
+            url: apiMain.login.url,
+            data: data,
             type: 'POST',
             processData: false,
             $renderContainer: $(_this.container),
             contentType: 'application/x-www-form-urlencoded',
             success: function (data) {
-                if (data.status === 200) {
+                if (data.status === this.SUCCESS_NO) {
                     window.location.href = 'index.html';
+                } else {
+                    MessageBox.show('错误', '用户名或密码错误 !', MessageBoxButtons.OK, MessageBoxIcons.ERROR);
                 }
-                console.log(data);
             },
             error: function (msg) {
-                console.log(msg);
+                console.log(this.ERROR_NO);
+                MessageBox.show('错误', '请求失败了 !', MessageBoxButtons.OK, MessageBoxIcons.ERROR);
             }
         });
         return this;

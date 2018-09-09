@@ -16,17 +16,26 @@ define(['jquery', 'bootstrap'], function ($) {
         + '<div class="circle2"></div>'
         + '<div class="circle3"></div>'
         + '<div class="circle4"></div></div></div>';
+    var NO_DATA = '<div class="noData">暂无数据 ！</div>';
 
     $.ajaxSetup({
         $renderContainer: '{}',
         $comNode: $(COM_NODE),
         $loadNode: $(LOAD_NODE),
+        timeout: 20000,
+        ERROR_NO: 0,
+        SUCCESS_NO: 200,
+        dataType: 'JSON',
         beforeSend: function () {
             this.$comNode.html(this.$loadNode);
             this.$renderContainer.append(this.$comNode);
         }
     });
 
+    /**
+     *
+     * @constructor
+     */
     function MessageBox() {
         var arguments = arguments.length ? arguments[0] : arguments;
         this.iSwitch = arguments['iSwitch'] ? arguments['iSwitch'] : true;

@@ -24,6 +24,7 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
         this.wavesInit();
         this.selectCheckBox();
         this.showSubNavigation();
+        this.dataDelete();
         $(this.NAV_ITEM + '[data-template="tpl-NAV01-SELECT"]').click();
         return this;
     };
@@ -113,6 +114,22 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
                     $(_this.CHECKBOX).eq(0).prop('checked', false);
                 }
             }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.dataDelete = function () {
+        var MessageBox = common.MessageBox;
+        var MessageBoxIcons = MessageBox.MessageBoxIcons;
+        var MessageBoxButtons = MessageBox.MessageBoxButtons;
+        $(document).on('click', '.btn-danger', function () {
+            MessageBox.show('确认', '确认删除当前数据吗 ?', MessageBoxButtons.OK_CANCEL, MessageBoxIcons.QUESTION);
+            MessageBox.confirm(function () {
+                console.log("CONFIRM");
+            })
         });
         return this;
     };
