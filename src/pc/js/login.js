@@ -10,11 +10,6 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
         this.container = args['container'] ? args['container'] : '.login';
         this.btnLogin = args['btnLogin'] ? args['btnLogin'] : '.btn-login';
 
-        this.STATUS = {
-            ERROR_NO: 0,
-            SUCCESS_NO: 200
-        };
-
         this.init();
     }
 
