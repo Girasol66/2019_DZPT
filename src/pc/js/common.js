@@ -34,20 +34,23 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
             : '<div class="common__ajaxBox noData">暂无数据 ！</div>';
 
         this.init();
-    }
+    };
     /**
      *
      * @returns {Common}
      */
     Common.prototype.init = function () {
+        this.checkUser();
+        this.ajaxInitDefault();
+        this.ajaxExtend();
+        return this;
+    };
+    /**
+     *
+     * @returns {Common}
+     */
+    Common.prototype.ajaxExtend = function () {
         var _this = this;
-        $.ajaxSetup({
-            ERR_NO: 0,
-            SUCCESS_NO: 200,
-            timeout: 3000,
-            dataType: 'JSON'
-        });
-
         $(document)
             .ajaxSend(function (event, xhr, options) {
                 var ajaxBox = options.$renderContainer;
@@ -76,6 +79,31 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
 
                 console.log("AJAX_COMPLETE");
             });
+        return this;
+    };
+    /**
+     *
+     * @returns {Common}
+     */
+    Common.prototype.ajaxInitDefault = function () {
+        $.ajaxSetup({
+            ERR_NO: 0,
+            SUCCESS_NO: 200,
+            timeout: 3000,
+            dataType: 'JSON'
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {Common}
+     */
+    Common.prototype.checkUser = function () {
+        var store = localStorage.getItem('store');
+        var href = window.location.href;
+        if (-1 === href.indexOf('login') && !store) {
+            window.location.href = 'login.html';
+        }
         return this;
     };
     /**

@@ -25,6 +25,16 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTi
         this.selectCheckBox();
         this.showSubNavigation();
         this.dataDelete();
+        this.dataRender();
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.dataRender = function () {
+        var store = JSON.parse(localStorage.getItem('store'));
+        $('.name').text('当前用户：【' + store.username + '】');
         $(this.NAV_ITEM + '[data-template="tpl-NAV01-SELECT"]').click();
         return this;
     };

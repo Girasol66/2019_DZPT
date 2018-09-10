@@ -11,7 +11,7 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
         this.btnLogin = args['btnLogin'] ? args['btnLogin'] : '.btn-login';
 
         this.init();
-    }
+    };
     /**
      *
      * @returns {LoginPage}
@@ -19,6 +19,7 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
     LoginPage.prototype.init = function () {
         this.submit();
         this.keyDownSubmit();
+        this.dataSave();
         return this;
     };
     /**
@@ -52,12 +53,28 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
             contentType: 'application/x-www-form-urlencoded',
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    _this.dataSave(data.data.username);
                     window.location.href = 'index.html';
                 } else {
                     MessageBox.show('错误', '用户名或密码错误 !', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
                 }
             }
         });
+        return this;
+    };
+    /**
+     *
+     * @param params
+     * @returns {LoginPage}
+     */
+    LoginPage.prototype.dataSave = function (params) {
+        params = 'admin';
+        var store = {
+            requestKey: '',
+            username: params
+        };
+
+        localStorage.setItem('store', JSON.stringify(store));
         return this;
     };
     /**
@@ -93,5 +110,4 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
      * @type {LoginPage}
      */
     var login = new LoginPage();
-
 });
