@@ -1,9 +1,18 @@
 define(['jquery'], function ($) {
     var AJAX_CONFIG = {
+        root: '/CheckBill',
         login: {
-            url: '/CheckBill/login',
-            params: 'username=' + $('#username').val()
-            + '&password=' + $('#password').val()
+            url: '/login',
+            params: {
+                username: '',
+                password: ''
+            }
+        },
+        selectUser: {
+            url: '/selectUser'
+        },
+        getUrl: function (prop) {
+            return this.root + this[prop].url;
         },
         getParams: function (api) {
             var data = '';

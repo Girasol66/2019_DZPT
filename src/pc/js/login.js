@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'apiMain'], function ($, common, template, apiMain) {
+require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, common, template, apiMain, MessageBox) {
     /**
      *
      * @constructor
@@ -12,13 +12,13 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
 
         this.init();
     }
-
     /**
      *
      * @returns {LoginPage}
      */
     LoginPage.prototype.init = function () {
         this.submit();
+        this.keyDownSubmit();
         return this;
     };
     /**
@@ -27,17 +27,13 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
      */
     LoginPage.prototype.notNullCheck = function () {
         var result = false;
-        var MessageBox = common.MessageBox;
-        var MessageBoxIcons = MessageBox.MessageBoxIcons;
-        var MessageBoxButtons = MessageBox.MessageBoxButtons;
         if (!$(this.username).val().trim()) {
-            MessageBox.show('提示', '用户名不能为空 !', MessageBoxButtons.OK, MessageBoxIcons.INFORMATION);
+            MessageBox.show('提示', '用户名不能为空 !', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
         } else if (!$(this.password).val().trim()) {
-            MessageBox.show('提示', '密码不能为空 !', MessageBoxButtons.OK, MessageBoxIcons.INFORMATION);
+            MessageBox.show('提示', '密码不能为空 !', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
         } else {
             result = true;
         }
-        MessageBox = null;
         return result;
     };
     /**
@@ -46,28 +42,20 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
      */
     LoginPage.prototype.ajaxRequestCheck = function () {
         var _this = this;
-        var data = 'username=' + $(_this.username).val()
-            + '&password=' + $(_this.password).val();
-        var MessageBox = common.MessageBox;
-        var MessageBoxIcons = MessageBox.MessageBoxIcons;
-        var MessageBoxButtons = MessageBox.MessageBoxButtons;
+        var data = $(this.username + ',' + this.password).serialize();
         $.ajax({
-            url: apiMain.login.url,
+            url: apiMain.getUrl('login'),
             data: data,
             type: 'POST',
             processData: false,
             $renderContainer: $(_this.container),
             contentType: 'application/x-www-form-urlencoded',
             success: function (data) {
-                if (data.status === this.SUCCESS_NO) {
+                if (data.code !== this.ERR_NO) {
                     window.location.href = 'index.html';
                 } else {
-                    MessageBox.show('错误', '用户名或密码错误 !', MessageBoxButtons.OK, MessageBoxIcons.ERROR);
+                    MessageBox.show('错误', '用户名或密码错误 !', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
                 }
-            },
-            error: function (msg) {
-                console.log(this.ERROR_NO);
-                MessageBox.show('错误', '请求失败了 !', MessageBoxButtons.OK, MessageBoxIcons.ERROR);
             }
         });
         return this;
@@ -81,6 +69,21 @@ require(['jquery', 'common', 'template', 'apiMain'], function ($, common, templa
         $(document).on('click', this.btnLogin, function () {
             if (_this.notNullCheck()) {
                 _this.ajaxRequestCheck();
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {LoginPage}
+     */
+    LoginPage.prototype.keyDownSubmit = function () {
+        var _this = this;
+        $(document).keydown(function (e) {
+            if (e.keyCode === 13) {
+                if (_this.notNullCheck()) {
+                    _this.ajaxRequestCheck();
+                }
             }
         });
         return this;

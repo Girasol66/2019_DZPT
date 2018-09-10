@@ -9,17 +9,18 @@ require.config({
         echarts: 'libs/echarts/echarts.min',
         template: 'libs/template/template.min',
         waves: 'libs/waves/waves',
-        apiMain: 'js/apiMain'
+        apiMain: 'js/apiMain',
+        MessageBox: 'js/messageBox'
     },
     shim: {
         bootstrap: {
             deps: ['jquery']
         },
         bootstrapDateTimePicker: {
-            deps: ['jquery','bootstrap']
+            deps: ['jquery', 'bootstrap']
         },
         bootstrapDateTimePickerLocal_zh_CN: {
-            deps: ['jquery','bootstrap','bootstrapDateTimePicker']
+            deps: ['jquery', 'bootstrap', 'bootstrapDateTimePicker']
         }
     },
     waitSeconds: 10,

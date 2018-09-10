@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, waves) {
+require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, MessageBox, waves) {
     /**
      *
      * @constructor
@@ -122,11 +122,8 @@ require(['jquery', 'common', 'template', 'waves', 'bootstrapDateTimePicker', 'bo
      * @returns {HomePage}
      */
     HomePage.prototype.dataDelete = function () {
-        var MessageBox = common.MessageBox;
-        var MessageBoxIcons = MessageBox.MessageBoxIcons;
-        var MessageBoxButtons = MessageBox.MessageBoxButtons;
         $(document).on('click', '.btn-danger', function () {
-            MessageBox.show('确认', '确认删除当前数据吗 ?', MessageBoxButtons.OK_CANCEL, MessageBoxIcons.QUESTION);
+            MessageBox.show('确认', '确认删除当前数据吗 ?', MessageBox.Buttons.OK_CANCEL, MessageBox.Icons.QUESTION);
             MessageBox.confirm(function () {
                 console.log("CONFIRM");
             })
