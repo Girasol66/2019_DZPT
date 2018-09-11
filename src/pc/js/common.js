@@ -23,6 +23,7 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
     function Common() {
         var arguments = arguments.length !== 0 ? arguments[0] : arguments;
 
+        this.timer = arguments['timer'] ? arguments['timer'] : null;
         this.WRAPPER_SELECTOR = arguments['WRAPPER_SELECTOR'] ?
             arguments['WRAPPER_SELECTOR'] : '.common__ajaxBox__wrapper';
 
@@ -60,7 +61,6 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
                 console.log('AJAX_SEND');
             })
             .ajaxSuccess(function (event, xhr, options, data) {
-                console.log(data);
                 var ajaxBox = options.ajaxBox;
                 _this.hideLoading(ajaxBox);
 
@@ -69,7 +69,7 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
             .ajaxError(function (event, xhr, options) {
                 var ajaxBox = options.ajaxBox;
                 _this.hideLoading(ajaxBox);
-                MessageBox.show('错误', '啊哦~请求失败了！', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
+                MessageBox.show('错误', '娘席逼~请求失败了！', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
 
                 console.log('AJAX_ERROR');
             })
@@ -89,8 +89,11 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
         $.ajaxSetup({
             ERR_NO: 0,
             SUCCESS_NO: 200,
-            timeout: 3000,
-            dataType: 'JSON'
+            timeout: 5000,
+            type: 'POST',
+            dataType: 'JSON',
+            processData: false,
+            contentType: 'application/x-www-form-urlencoded'
         });
         return this;
     };
@@ -99,6 +102,12 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
      * @returns {Common}
      */
     Common.prototype.checkUser = function () {
+        var time = 20 * 60 * 1000;
+        if (this.timer) clearInterval(this.timer);
+        this.timer = setTimeout(function () {
+            localStorage.removeItem('store');
+            window.location.href = 'login.html';
+        }, time);
         var store = localStorage.getItem('store');
         var href = window.location.href;
         if (-1 === href.indexOf('login') && !store) {

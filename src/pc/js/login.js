@@ -43,14 +43,13 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
      */
     LoginPage.prototype.ajaxRequestCheck = function () {
         var _this = this;
-        var data = $(this.username + ',' + this.password).serialize();
         $.ajax({
             url: apiMain.getUrl('login'),
-            data: data,
-            type: 'POST',
-            processData: false,
+            data: apiMain.getParams({
+                username: $(this.username).val(),
+                password: $(this.password).val()
+            }),
             $renderContainer: $(_this.container),
-            contentType: 'application/x-www-form-urlencoded',
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
                     _this.dataSave(data.data.username);
@@ -68,7 +67,6 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
      * @returns {LoginPage}
      */
     LoginPage.prototype.dataSave = function (params) {
-        params = 'admin';
         var store = {
             requestKey: '',
             username: params

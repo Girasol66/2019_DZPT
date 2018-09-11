@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, MessageBox, waves) {
+require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, MessageBox, waves, apiMain) {
     /**
      *
      * @constructor
@@ -10,6 +10,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTi
         this.NAV_ITEM = args['NAV_ITEM'] ? args['NAV_ITEM'] : '.nav-item';
         this.TEMPLATE = args['TEMPLATE'] ? args['TEMPLATE'] : '.template';
         this.CHECKBOX = args['CHECKBOX'] ? args['CHECKBOX'] : '.checkbox';
+        this.BTN_EDIT = args['BTN_EDIT'] ? args['BTN_EDIT'] : '.btn-edit';
         this.DATE_SEL = args['DATE_SEL'] ? args['DATE_SEL'] : '.form-date';
         this.DROP_ITEM = args['DROP_ITEM'] ? args['DROP_ITEM'] : '.dropdown li';
 
@@ -26,6 +27,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTi
         this.showSubNavigation();
         this.dataDelete();
         this.dataRender();
+        this.selectUsers('tpl-NAV01-SELECT');
+        this.updateUser();
         return this;
     };
     /**
@@ -35,7 +38,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTi
     HomePage.prototype.dataRender = function () {
         var store = JSON.parse(localStorage.getItem('store'));
         $('.name').text('当前用户：【' + store.username + '】');
-        $(this.NAV_ITEM + '[data-template="tpl-NAV01-SELECT"]').click();
+        // $(this.NAV_ITEM + '[data-template="tpl-NAV01-SELECT"]').click();
         return this;
     };
     /**
@@ -78,6 +81,39 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTi
      *
      * @returns {HomePage}
      */
+    HomePage.prototype.selectUsers = function (templateId) {
+        var _this = this;
+        $.ajax({
+            url: apiMain.getUrl('selectUser'),
+            data: apiMain.getParams({
+                pageIndex: 1,
+                pageSize: 10
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.updateUser = function () {
+        $(document).on('click', this.BTN_EDIT, function () {
+            var itemId = $(this).attr('data-itemId').trim();
+            MessageBox.show('提示', '当前点击的选项ID是:' + itemId, MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
     HomePage.prototype.showSubNavigation = function () {
         var _this = this;
         $(document).on('click', this.NAV_ITEM, function (e) {
@@ -95,8 +131,51 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'bootstrapDateTi
                 }
             } else {
                 var templateId = $(this).attr('data-template').trim();
-                var templateHtml = template(templateId, {a: ''});
-                $(_this.TEMPLATE).html(templateHtml);
+                switch (templateId) {
+                    case 'tpl-NAV01-SELECT':
+                        _this.selectUsers(templateId);
+                        break;
+                    case 'tpl-NAV02-INSERT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV03-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV04-INSERT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV05-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV06-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV07-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV08-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV09-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV10-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                    case 'tpl-NAV11-SELECT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
+                }
                 _this.dateTimePickerInit();
             }
         });
