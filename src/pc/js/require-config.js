@@ -10,7 +10,8 @@ require.config({
         template: 'libs/template/template.min',
         waves: 'libs/waves/waves',
         apiMain: 'js/apiMain',
-        MessageBox: 'js/messageBox'
+        MessageBox: 'js/messageBox',
+        bootstrapValidator: 'libs/bootstrapValidator/bootstrapValidator.min'
     },
     shim: {
         bootstrap: {
@@ -18,6 +19,9 @@ require.config({
         },
         bootstrapDateTimePicker: {
             deps: ['jquery', 'bootstrap']
+        },
+        bootstrapValidator: {
+            deps: ['jquery']
         },
         bootstrapDateTimePickerLocal_zh_CN: {
             deps: ['jquery', 'bootstrap', 'bootstrapDateTimePicker']

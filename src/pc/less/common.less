@@ -334,3 +334,21 @@ input[type="checkbox"]:focus {
     -webkit-transform: scale(1.0);
   }
 }
+
+.pagination {
+  li {
+    a {
+      cursor: pointer;
+    }
+    &.active {
+      a {
+        color: @white;
+        background-color: #337ab7 !important;
+        border-color: #337ab7 !important;
+        &:hover {
+          color: @white !important;
+        }
+      }
+    }
+  }
+}

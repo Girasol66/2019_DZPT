@@ -25,12 +25,17 @@ define(['jquery'], function ($) {
         deleteUser: {
             url: '/user/removeUser',
             params: {
-                id: 100
+                ids: 1000
             }
         },
         insertUser: {
             url: '/user/addUser',
-            params: {}
+            params: {
+                real_name: '',
+                mobile_no: '',
+                login_name: '',
+                login_pwd: ''
+            }
         },
         selectBankRecord: {
             url: '/bankRecord/selectBankRecord',
@@ -96,12 +101,12 @@ define(['jquery'], function ($) {
                 pageSize: 10
             }
         },
-        selectScratchPool:{
-            url:'/scratchPool/selectScratchPool',
-            params:{
-                beginDate:"20010909",
-                endDate:"20180909",
-                searchPay:"支付宝"
+        selectScratchPool: {
+            url: '/scratchPool/selectScratchPool',
+            params: {
+                beginDate: "20010909",
+                endDate: "20180909",
+                searchPay: "支付宝"
             }
         },
         getUrl: function (api) {

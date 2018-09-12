@@ -89,7 +89,7 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
         $.ajaxSetup({
             ERR_NO: 0,
             SUCCESS_NO: 200,
-            timeout: 5000,
+            timeout: 20000,
             type: 'POST',
             dataType: 'JSON',
             processData: false,

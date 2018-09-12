@@ -1,10 +1,11 @@
-require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, MessageBox, waves, apiMain) {
+require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'bootstrapValidator', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, MessageBox, waves, apiMain) {
     /**
      *
      * @constructor
      */
     function HomePage() {
         var args = arguments.length ? arguments.length[0] : arguments;
+        this.pageCode = args['pageCode'] ? args['pageCode'] : 1;
         this.ACTIVE = args['ACTIVE'] ? args['ACTIVE'] : 'active';
         this.NAV_BAR = args['NAV_BAR'] ? args['NAV_BAR'] : '.nav-bar';
         this.NAV_ITEM = args['NAV_ITEM'] ? args['NAV_ITEM'] : '.nav-item';
@@ -12,7 +13,10 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
         this.CHECKBOX = args['CHECKBOX'] ? args['CHECKBOX'] : '.checkbox';
         this.BTN_EDIT = args['BTN_EDIT'] ? args['BTN_EDIT'] : '.btn-edit';
         this.DATE_SEL = args['DATE_SEL'] ? args['DATE_SEL'] : '.form-date';
+        this.BTN_RESET = args['BTN_RESET'] ? args['BTN_RESET'] : '.btn-reset';
         this.DROP_ITEM = args['DROP_ITEM'] ? args['DROP_ITEM'] : '.dropdown li';
+        this.BTN_INSERT = args['BTN_INSERT'] ? args['BTN_INSERT'] : '.btn-insert';
+        this.BTN_DELETE = args['BTN_DELETE'] ? args['BTN_DELETE'] : '.btn-delete';
 
         this.init();
     };
@@ -29,6 +33,79 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
         this.dataRender();
         this.selectUsers('tpl-NAV01-SELECT');
         this.updateUser();
+        this.pagination();
+        this.btnReset();
+        this.bootstrapValidatorInit();
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.bootstrapValidatorInit = function () {
+        var _this = this;
+        $(function () {
+            $('form').bootstrapValidator({
+                live: 'disabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+                excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+                submitButtons: _this.BTN_INSERT,//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+                message: '通用的验证失败消息',//好像从来没出现过
+                feedbackIcons: {//根据验证结果显示的各种图标
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {//检测非空,radio也可用
+                                message: '文本框必须输入'
+                            },
+                            stringLength: {//检测长度
+                                min: 6,
+                                max: 30,
+                                message: '长度必须在6-30之间'
+                            },
+                            regexp: {//正则验证
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '所输入的字符不符要求'
+                            },
+                            remote: {//将内容发送至指定页面验证，返回验证结果，比如查询用户名是否存在
+                                url: '指定页面',
+                                message: 'The username is not available'
+                            },
+                            different: {//与指定文本框比较内容相同
+                                field: '指定文本框name',
+                                message: '不能与指定文本框内容相同'
+                            },
+                            emailAddress: {//验证email地址
+                                message: '不是正确的email地址'
+                            },
+                            identical: {//与指定控件内容比较是否相同，比如两次密码不一致
+                                field: 'confirmPassword',//指定控件name
+                                message: '输入的内容不一致'
+                            },
+                            date: {//验证指定的日期格式
+                                format: 'YYYY/MM/DD',
+                                message: '日期格式不正确'
+                            },
+                            choice: {//check控件选择的数量
+                                min: 2,
+                                max: 4,
+                                message: '必须选择2-4个选项'
+                            }
+                        }
+                    }
+                }
+            });
+            $(".btn-insert").click(function () {//非submit按钮点击后进行验证，如果是submit则无需此句直接验证
+                $("#form-test").bootstrapValidator('validate');//提交验证
+                if ($("#form-test").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+                    alert("yes");//验证成功后的操作，如ajax
+                }
+            });
+        });
+
         return this;
     };
     /**
@@ -81,19 +158,42 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
      *
      * @returns {HomePage}
      */
-    HomePage.prototype.selectUsers = function (templateId) {
+    HomePage.prototype.insertUser = function () {
         var _this = this;
         $.ajax({
-            url: apiMain.getUrl('selectUser'),
+            url: apiMain.getUrl('insertUser'),
             data: apiMain.getParams({
-                pageIndex: 1,
-                pageSize: 10
+                real_name: $('input[name="name"]').val(),
+                mobile_no: $('input[name="phone"]').val(),
+                login_name: $('input[name="username"]').val(),
+                login_pwd: $('input[name="password"]').val(),
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    var templateHtml = template(templateId, data);
-                    $(_this.TEMPLATE).html(templateHtml);
+                    MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    _this.selectUsers('tpl-NAV01-SELECT');
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.deleteUsers = function () {
+        var _this = this;
+        $.ajax({
+            url: apiMain.getUrl('deleteUser'),
+            data: apiMain.getParams({
+                ids: _this.getItemIds()
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    MessageBox.show('提示', '删除成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    _this.selectUsers('tpl-NAV01-SELECT');
                 }
             }
         });
@@ -114,10 +214,48 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
      *
      * @returns {HomePage}
      */
+    HomePage.prototype.selectUsers = function (templateId) {
+        var _this = this;
+        var pageSize = apiMain.selectUser.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectUser'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.getItemIds = function () {
+        var ids = '';
+        var $checkbox = $('tbody ' + this.CHECKBOX + ':checked');
+        for (var i = 0; i < $checkbox.length; i++) {
+            ids += $checkbox.eq(i).parents('tr').attr('data-itemId') + ',';
+        }
+        return ids;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
     HomePage.prototype.showSubNavigation = function () {
         var _this = this;
         $(document).on('click', this.NAV_ITEM, function (e) {
             e.stopPropagation();
+            _this.pageCode = 1;
             var subNavigation = $(this).find(_this.NAV_BAR);
             if (subNavigation[0]) {
                 $(_this.NAV_ITEM).not(this).removeClass(_this.ACTIVE);
@@ -211,11 +349,50 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
      * @returns {HomePage}
      */
     HomePage.prototype.dataDelete = function () {
-        $(document).on('click', '.btn-danger', function () {
-            MessageBox.show('确认', '确认删除当前数据吗 ?', MessageBox.Buttons.OK_CANCEL, MessageBox.Icons.QUESTION);
-            MessageBox.confirm(function () {
-                console.log("CONFIRM");
-            })
+        var _this = this;
+        $(document).on('click', this.BTN_DELETE, function () {
+            var length = $(_this.CHECKBOX + ':checked').length;
+            if (length) {
+                MessageBox.show('确认', '确认删除当前数据吗 ?', MessageBox.Buttons.OK_CANCEL, MessageBox.Icons.QUESTION);
+                MessageBox.confirm(function () {
+                    _this.deleteUsers();
+                });
+            } else {
+                MessageBox.show('提示', '请选择需要删除的选项！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.btnReset = function () {
+        $(document).on('click', this.BTN_RESET, function () {
+            $('input').val('');
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.pagination = function () {
+        var _this = this;
+        $(document).on('click', '.pagination li', function () {
+            if (!$(this).hasClass('disabled')) {
+                var attr = $(this).find('a').attr('aria-label');
+                if (undefined === attr) {
+                    _this.pageCode = parseInt($(this).find('a').text());
+                } else if ('Previous' === attr) {
+                    _this.pageCode--;
+                    _this.pageCode = _this.pageCode <= 1 ? 1 : _this.pageCode;
+                } else if ('Next' === attr) {
+                    _this.pageCode++;
+                }
+                _this.selectUsers('tpl-NAV01-SELECT');
+
+            }
         });
         return this;
     };

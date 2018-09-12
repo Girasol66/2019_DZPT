@@ -19,7 +19,6 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
     LoginPage.prototype.init = function () {
         this.submit();
         this.keyDownSubmit();
-        this.dataSave();
         return this;
     };
     /**
@@ -52,7 +51,7 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
             $renderContainer: $(_this.container),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    _this.dataSave(data.data.username);
+                    _this.dataSave(data.data);
                     window.location.href = 'index.html';
                 } else {
                     MessageBox.show('错误', '用户名或密码错误 !', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
