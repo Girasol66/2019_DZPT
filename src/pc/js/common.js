@@ -105,10 +105,10 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
         var time = 20 * 60 * 1000;
         if (this.timer) clearInterval(this.timer);
         this.timer = setTimeout(function () {
-            localStorage.removeItem('store');
+            sessionStorage.removeItem('store');
             window.location.href = 'login.html';
         }, time);
-        var store = localStorage.getItem('store');
+        var store = sessionStorage.getItem('store');
         var href = window.location.href;
         if (-1 === href.indexOf('login') && !store) {
             window.location.href = 'login.html';
@@ -155,6 +155,16 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
                 $(_this.WRAPPER_SELECTOR).remove();
             }, 300);
         }
+        return this;
+    };
+    /**
+     *
+     * @returns {Common}
+     */
+    Common.prototype.handleSVG = function () {
+        var obj = $("path")[0];
+        var length = obj.getTotalLength();
+        console.log(length);
         return this;
     };
     /**

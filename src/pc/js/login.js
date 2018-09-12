@@ -18,6 +18,7 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
      */
     LoginPage.prototype.init = function () {
         this.submit();
+        this.dataSave();
         this.keyDownSubmit();
         return this;
     };
@@ -71,7 +72,7 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
             username: params
         };
 
-        localStorage.setItem('store', JSON.stringify(store));
+        sessionStorage.setItem('store', JSON.stringify(store));
         return this;
     };
     /**

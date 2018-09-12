@@ -11,7 +11,6 @@ require.config({
         waves: 'libs/waves/waves',
         apiMain: 'js/apiMain',
         MessageBox: 'js/messageBox',
-        bootstrapValidator: 'libs/bootstrapValidator/bootstrapValidator.min'
     },
     shim: {
         bootstrap: {
