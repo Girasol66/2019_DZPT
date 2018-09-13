@@ -133,7 +133,7 @@
 </div>
 
 <script id="tpl-NAV01-SELECT" type="text/html">
-    <div class="content" data-template-name="用户查询">
+    <div class="content" data-template="tpl-NAV01-SELECT" data-template-name="用户查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
@@ -161,7 +161,7 @@
                         </thead>
                         <tbody>
                         {{each data}}
-                        <tr role="row" class="odd" data-itemId="{{$value.id}}">
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}" data-itemId="{{$value.id}}">
                             <td>
                                 <input class="checkbox" type="checkbox" name="checkbox"/>
                             </td>
@@ -206,19 +206,18 @@
 </script>
 
 <script id="tpl-NAV02-INSERT" type="text/html">
-    <div class="content" data-template-name="添加用户">
+    <div class="content" data-template="tpl-NAV02-INSERT" data-template-name="添加用户">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header none"></div>
                 <div class="table-body">
                     <div class="form-group">
                         <label class="form-label">姓名：</label>
-                        <input class="form-control" autocomplete="off" name="name" type="text" placeholder="不能为空"/>
+                        <input class="form-control" autocomplete="off" name="name" type="text"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">电话：</label>
-                        <input class="form-control" autocomplete="off" name="phone" type="tel"
-                               placeholder="不能为空 / 手机号码长度必须为11位"/>
+                        <input class="form-control" autocomplete="off" name="phone" type="tel"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">登录名：</label>
@@ -226,8 +225,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">密码：</label>
-                        <input class="form-control" autocomplete="off" name="password" type="password"
-                               placeholder="不能为空 / 密码长度不能少于6位"/>
+                        <input class="form-control" autocomplete="off" name="password" type="password"/>
                     </div>
                 </div>
                 <div class="table-footer">
@@ -242,7 +240,7 @@
 </script>
 
 <script id="tpl-NAV03-SELECT" type="text/html">
-    <div class="content" data-template-name="商户查询">
+    <div class="content" data-template="tpl-NAV03-SELECT" data-template-name="商户查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
@@ -251,8 +249,8 @@
                         <input class="form-control" autocomplete="off" name="search" type="text"/>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">搜索</button>
-                        <button type="button" class="btn btn-danger">删除</button>
+                        <button type="button" class="btn btn-primary btn-select">搜索</button>
+                        <button type="button" class="btn btn-danger btn-delete">删除</button>
                     </div>
                 </div>
                 <div class="table-body">
@@ -269,116 +267,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}" data-itemId="{{$value.id}}">
                             <td>
                                 <input class="checkbox" type="checkbox" name="checkbox"/>
                             </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
+                            <td>{{$value.merchant_no||'--'}}</td>
+                            <td>{{$value.merchant_name||'--'}}</td>
+                            <td>{{$value.status||'--'}}</td>
                             <td>
-                                <button class="btn btn-edit"></button>
+                                <button class="btn btn-edit" data-itemId="{{$value.id}}"></button>
                             </td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>000001</td>
-                            <td>纷翔</td>
-                            <td>无效</td>
-                            <td>
-                                <button class="btn btn-edit"></button>
-                            </td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -388,18 +289,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -412,18 +313,18 @@
 </script>
 
 <script id="tpl-NAV04-INSERT" type="text/html">
-    <div class="content" data-template-name="添加商户">
+    <div class="content" data-template="tpl-NAV04-INSERT" data-template-name="添加商户">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header none"></div>
                 <div class="table-body">
                     <div class="form-group">
                         <label class="form-label">商户编号：</label>
-                        <input class="form-control" autocomplete="off" name="name" type="text"/>
+                        <input class="form-control" autocomplete="off" name="merchantNo" type="text"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">商户名称：</label>
-                        <input class="form-control" autocomplete="off" name="phone" type="tel"/>
+                        <input class="form-control" autocomplete="off" name="merchantName" type="text"/>
                     </div>
                 </div>
                 <div class="table-footer">
@@ -438,23 +339,25 @@
 </script>
 
 <script id="tpl-NAV05-SELECT" type="text/html">
-    <div class="content" data-template-name="商户交易明细查询">
+    <div class="content" data-template="tpl-NAV05-SELECT" data-template-name="商户交易明细查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
                     <div class="form-group">
                         <label class="form-label">账单日期-起始时间：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">账单日期-结束时间：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                全部
+                                {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -467,7 +370,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">查询</button>
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
                 </div>
                 <div class="table-body">
@@ -486,116 +389,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td>{{$value.merchant_no}}</td>
+                            <td>{{$value.pay_way_name}}</td>
+                            <td>{{$value.bill_date}}</td>
+                            <td>{{$value.order_amount}}</td>
+                            <td>{{$value.fee}}</td>
+                            <td>{{$value.complete_time}}</td>
+                            <td>{{$value.success_refund_amount}}</td>
+                            <td>{{$value.trx_type}}</td>
+                            <td>{{$value.order_type}}</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -605,18 +411,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -629,23 +435,25 @@
 </script>
 
 <script id="tpl-NAV06-SELECT" type="text/html">
-    <div class="content" data-template-name="渠道交易明细查询">
+    <div class="content" data-template="tpl-NAV06-SELECT" data-template-name="渠道交易明细查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
                     <div class="form-group">
                         <label class="form-label">账单日期-起始时间：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">账单日期-结束时间：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                全部
+                                {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -658,7 +466,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">查询</button>
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
                 </div>
                 <div class="table-body">
@@ -677,116 +485,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td>{{$value.merchant_name}}</td>
+                            <td>{{$value.pay_way_name}}</td>
+                            <td>{{$value.bill_date}}</td>
+                            <td>{{$value.order_amount}}</td>
+                            <td>{{$value.fee}}</td>
+                            <td>{{$value.complete_time}}</td>
+                            <td>{{$value.success_refund_amount}}</td>
+                            <td>{{$value.trx_type}}</td>
+                            <td>{{$value.order_type}}</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>000001</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -796,18 +507,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -820,23 +531,25 @@
 </script>
 
 <script id="tpl-NAV07-SELECT" type="text/html">
-    <div class="content" data-template-name="对账批次查询">
+    <div class="content" data-template="tpl-NAV07-SELECT" data-template-name="对账批次查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
                     <div class="form-group">
                         <label class="form-label">对账日期-开始日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">结束日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                全部
+                                {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -849,16 +562,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">查询</button>
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
                 </div>
                 <div class="table-body">
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr role="row">
-                            <th>
-                                <input class="checkbox all" type="checkbox" name="checkbox"/>
-                            </th>
                             <th>账单批次号</th>
                             <th>备注</th>
                             <th>日期</th>
@@ -870,136 +580,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td>{{$value.bank_type}}</td>
+                            <td>{{$value.remark}}</td>
+                            <td>{{$value.bill_date}}</td>
+                            <td>{{$value.bank_type}}</td>
+                            <td>{{$value.bank_type}}</td>
+                            <td>{{$value.bank_trade_amount}}</td>
+                            <td>{{$value.refund_amount}}</td>
+                            <td>{{$value.trade_count}}</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -1009,18 +601,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -1033,23 +625,25 @@
 </script>
 
 <script id="tpl-NAV08-SELECT" type="text/html">
-    <div class="content" data-template-name="差错查询">
+    <div class="content" data-template="tpl-NAV08-SELECT" data-template-name="差错查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
                     <div class="form-group">
                         <label class="form-label">对账日期-开始日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">结束日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                全部
+                                {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -1062,16 +656,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">查询</button>
+                        <button type="button" class="btn btn-primary btn-select btn-select">查询</button>
                     </div>
                 </div>
                 <div class="table-body">
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr role="row">
-                            <th>
-                                <input class="checkbox all" type="checkbox" name="checkbox"/>
-                            </th>
                             <th>账单批次号</th>
                             <th>备注</th>
                             <th>日期</th>
@@ -1081,116 +672,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td>{{$value.accountCheckBatchNo}}</td>
+                            <td>{{$value.remark}}</td>
+                            <td>{{$value.billDate}}</td>
+                            <td>{{$value.bankType}}</td>
+                            <td>{{$value.errType}}</td>
+                            <td>{{$value.handleStatus}}</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -1200,18 +691,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -1224,23 +715,25 @@
 </script>
 
 <script id="tpl-NAV09-SELECT" type="text/html">
-    <div class="content" data-template-name="缓冲池查询">
+    <div class="content" data-template="tpl-NAV09-SELECT" data-template-name="缓冲池查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
                     <div class="form-group">
                         <label class="form-label">账单日期-起始时间：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">账单日期-截止时间：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                全部
+                                {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -1253,7 +746,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">查询</button>
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
                 </div>
                 <div class="table-body">
@@ -1274,136 +767,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td>{{$value.merchant_name}}</td>
+                            <td>{{$value.pay_way_name}}</td>
+                            <td>{{$value.account_check_batch_no}}</td>
+                            <td>{{$value.bill_date}}</td>
+                            <td>{{$value.bank_src}}</td>
+                            <td>{{$value.order_amount}}</td>
+                            <td>{{$value.fee}}</td>
+                            <td>{{$value.complete_time}}</td>
+                            <td>{{$value.success_refund_amount}}</td>
+                            <td>{{$value.trx_type}}</td>
+                            <td>{{$value.order_type}}</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>1</td>
-                            <td>支付宝</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>20180905</td>
-                            <td>10.0</td>
-                            <td>10.0</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                            <td>54646</td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -1413,18 +791,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -1437,126 +815,47 @@
 </script>
 
 <script id="tpl-NAV10-SELECT" type="text/html">
-    <div class="content" data-template-name="文件状态查询">
+    <div class="content" data-template="tpl-NAV10-SELECT" data-template-name="文件状态查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
                     <div class="form-group">
                         <label class="form-label">账单日期-开始日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">结束日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">查询</button>
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
                 </div>
                 <div class="table-body">
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr role="row">
-                            <th>
-                                <input class="checkbox all" type="checkbox" name="checkbox"/>
-                            </th>
-                            <th>账单批次号</th>
-                            <th>备注</th>
-                            <th>日期</th>
-                            <th>支付方式</th>
-                            <th>错误类型</th>
-                            <th>处理状态</th>
+                            <th>账单日期</th>
+                            <th>商户文件名</th>
+                            <th>商户文件状态</th>
+                            <th>渠道文件名</th>
+                            <th>渠道文件状态</th>
+                            <th>对账状态</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td>{{$value.bill_date}}</td>
+                            <td>{{$value.mer_file_name}}</td>
+                            <td>{{$value.mer_bill_status}}</td>
+                            <td>{{$value.bank_file_name}}</td>
+                            <td>{{$value.bank_bill_status}}</td>
+                            <td>{{$value.check_status}}</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                            <td>渠道文件状态</td>
-                            <td>对账状态</td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -1566,18 +865,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -1590,29 +889,28 @@
 </script>
 
 <script id="tpl-NAV11-SELECT" type="text/html">
-    <div class="content" data-template-name="文件处理查询">
+    <div class="content" data-template="tpl-NAV11-SELECT" data-template-name="文件处理查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
                     <div class="form-group">
                         <label class="form-label">对账日期-开始日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
                         <label class="form-label">结束日期：</label>
-                        <input class="form-control form-date" name="search" type="text" readonly="readonly"/>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary">查询</button>
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
                 </div>
                 <div class="table-body">
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr role="row">
-                            <th>
-                                <input class="checkbox all" type="checkbox" name="checkbox"/>
-                            </th>
                             <th>账单日期</th>
                             <th>日志类型</th>
                             <th>日志等级</th>
@@ -1620,78 +918,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td>{{$value.bill_date}}</td>
+                            <td>{{$value.type}}</td>
+                            <td>{{$value.grade}}</td>
+                            <td>{{$value.remark}}</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td>
-                                <input class="checkbox" type="checkbox" name="checkbox"/>
-                            </td>
-                            <td>账单日期</td>
-                            <td>商户文件名</td>
-                            <td>商户文件状态</td>
-                            <td>渠道文件名</td>
-                        </tr>
+                        {{/each}}
                         </tbody>
                         <tfoot>
                         <tr></tr>
@@ -1701,18 +935,18 @@
                 <div class="table-footer">
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>

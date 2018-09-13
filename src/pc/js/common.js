@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox) {
+define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, bootstrap, MessageBox) {
     var LOAD_NODE = '<div class="spinner">'
         + '<div class="spinner-container container1">'
         + '<div class="circle1"></div>'
@@ -27,6 +27,8 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
         this.WRAPPER_SELECTOR = arguments['WRAPPER_SELECTOR'] ?
             arguments['WRAPPER_SELECTOR'] : '.common__ajaxBox__wrapper';
 
+        this.DATE_SEL = arguments['DATE_SEL'] ? arguments['DATE_SEL'] : '.form-date';
+
         this.wrapper = arguments['wrapper'] ? arguments['wrapper'] :
             '<div class="common__ajaxBox__wrapper"></div>';
         this.LOADING_HTML = arguments['LOADING_HTML'] ? arguments['LOADING_HTML']
@@ -54,6 +56,7 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
         var _this = this;
         $(document)
             .ajaxSend(function (event, xhr, options) {
+
                 var ajaxBox = options.$renderContainer;
                 options.ajaxBox = ajaxBox;
                 _this.showLoading(ajaxBox);
@@ -61,20 +64,23 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
                 console.log('AJAX_SEND');
             })
             .ajaxSuccess(function (event, xhr, options, data) {
-                var ajaxBox = options.ajaxBox;
-                _this.hideLoading(ajaxBox);
+                if (!_this.ajaxDataIsExist(data.data)) {
+                    var ajaxBox = options.ajaxBox;
+                    _this.showNoData(ajaxBox);
+                }
 
                 console.log('AJAX_SUCCESS');
             })
             .ajaxError(function (event, xhr, options) {
                 var ajaxBox = options.ajaxBox;
                 _this.hideLoading(ajaxBox);
-                MessageBox.show('错误', '娘席逼~请求失败了！', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
+                MessageBox.show('错误', '娘席逼~请求又失败了！', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
 
                 console.log('AJAX_ERROR');
             })
             .ajaxComplete(function (event, xhr, options) {
                 var ajaxBox = options.ajaxBox;
+                _this.dateTimePickerInit();
                 _this.hideLoading(ajaxBox);
 
                 console.log("AJAX_COMPLETE");
@@ -140,8 +146,17 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
      */
     Common.prototype.showNoData = function (ajaxBox) {
         this.removeWrapper();
+        console.log(ajaxBox[0]);
         ajaxBox.append($(this.wrapper).html(this.NO_DATA_HTML));
         return this;
+    };
+    /**
+     *
+     * @param data
+     * @returns {boolean|Number}
+     */
+    Common.prototype.ajaxDataIsExist = function (data) {
+        return (data instanceof Array && data.length);
     };
     /**
      *
@@ -159,12 +174,50 @@ define(['jquery', 'bootstrap', 'MessageBox'], function ($, bootstrap, MessageBox
     };
     /**
      *
+     * @param offsetTime
+     * @returns {string}
+     */
+    Common.prototype.parseDate = function (offsetTime) {
+        var date = new Date(offsetTime);
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+
+        year = year > 9 ? year : '0' + year;
+        month = month > 9 ? month : '0' + month;
+        day = day > 9 ? day : '0' + day;
+
+        return year + '-' + month + '-' + day;
+    };
+    /**
+     *
+     * @param dateStr
+     * @param format
+     * @returns {string}
+     */
+    Common.prototype.dateFormat = function (dateStr, format) {
+        if ('yyyyMMdd' === format && dateStr) {
+            var arr = dateStr.split('-');
+            dateStr = arr.join('');
+        } else if ('yyyy-mm-dd' === format && dateStr) {
+            var year = dateStr.substring(0, 4);
+            var month = dateStr.substring(4, 6)
+            var day = dateStr.substring(6, 8);
+            dateStr = year + '-' + month + '-' + day;
+        }
+        return dateStr || '';
+    };
+    /**
+     *
      * @returns {Common}
      */
-    Common.prototype.handleSVG = function () {
-        var obj = $("path")[0];
-        var length = obj.getTotalLength();
-        console.log(length);
+    Common.prototype.dateTimePickerInit = function () {
+        $(this.DATE_SEL).datetimepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true
+        });
         return this;
     };
     /**

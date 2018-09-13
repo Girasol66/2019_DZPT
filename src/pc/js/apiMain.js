@@ -12,14 +12,17 @@ define(['jquery'], function ($) {
             url: '/user/selectUser',
             params: {
                 pageIndex: 1,
-                pageSize: 10
+                pageSize: 10,
+                realName: ''
             }
         },
-        selectFileHandler: {
+        selectCheckBillLog: {
             url: '/checkBillLog/selectCheckBillLog',
             params: {
                 pageIndex: 1,
-                pageSize: 4
+                pageSize: 10,
+                beginDate: '',
+                endDate: ''
             }
         },
         deleteUser: {
@@ -40,21 +43,28 @@ define(['jquery'], function ($) {
         selectBankRecord: {
             url: '/bankRecord/selectBankRecord',
             params: {
+                pageIndex: 1,
+                pageSize: 10,
                 beginDate: "20010909",
                 endDate: "20180909",
-                searchPay: "支付宝"
+                payName: "支付宝"
             }
         },
         selectCheckBase: {
             url: '/checkBase/selectCheckBase',
             params: {
                 pageIndex: 1,
-                pageSize: 10
+                pageSize: 10,
+                payName: '',
+                beginDate: '',
+                endDate: ''
             }
         },
         selectFileStatus: {
             url: '/fileStatus/selectFileStatus',
             params: {
+                beginDate: '',
+                endDate: '',
                 pageIndex: 1,
                 pageSize: 10
             }
@@ -63,14 +73,14 @@ define(['jquery'], function ($) {
             url: '/merchant/selectMerchant',
             params: {
                 pageIndex: 1,
-                pageSize: 10
+                pageSize: 10,
+                merchantName: "上海人民医院"
             }
         },
         deleteMerchant: {
             url: '/merchant/removeMerchant',
             params: {
-                pageIndex: 1,
-                pageSize: 10
+                ids: '2'
             }
         },
         updateMerchant: {
@@ -91,22 +101,30 @@ define(['jquery'], function ($) {
             url: '/merchantRecord/selectMerchantRecord',
             params: {
                 pageIndex: 1,
-                pageSize: 10
+                pageSize: 10,
+                beginDate: '20010909',
+                endDate: '20180909',
+                payName: '支付宝'
             }
         },
-        selectErrors: {
+        selectMisTake: {
             url: '/misTake/selectMisTake',
             params: {
                 pageIndex: 1,
-                pageSize: 10
+                pageSize: 10,
+                beginDate: '',
+                endDate: '',
+                payName: ''
             }
         },
         selectScratchPool: {
             url: '/scratchPool/selectScratchPool',
             params: {
+                pageIndex: 1,
+                pageSize: 10,
                 beginDate: "20010909",
                 endDate: "20180909",
-                searchPay: "支付宝"
+                payName: "支付宝"
             }
         },
         getUrl: function (api) {

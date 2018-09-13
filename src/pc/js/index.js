@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, common, template, MessageBox, waves, apiMain) {
+require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], function ($, common, template, MessageBox, waves, apiMain) {
     /**
      *
      * @constructor
@@ -13,9 +13,9 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
         this.TEMPLATE = args['TEMPLATE'] ? args['TEMPLATE'] : '.template';
         this.CHECKBOX = args['CHECKBOX'] ? args['CHECKBOX'] : '.checkbox';
         this.BTN_EDIT = args['BTN_EDIT'] ? args['BTN_EDIT'] : '.btn-edit';
-        this.DATE_SEL = args['DATE_SEL'] ? args['DATE_SEL'] : '.form-date';
         this.BTN_RESET = args['BTN_RESET'] ? args['BTN_RESET'] : '.btn-reset';
         this.DROP_ITEM = args['DROP_ITEM'] ? args['DROP_ITEM'] : '.dropdown li';
+        this.BTN_SELECT = args['BTN_SELECT'] ? args['BTN_SELECT'] : '.btn-select';
         this.BTN_INSERT = args['BTN_INSERT'] ? args['BTN_INSERT'] : '.btn-insert';
         this.BTN_DELETE = args['BTN_DELETE'] ? args['BTN_DELETE'] : '.btn-delete';
 
@@ -36,6 +36,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
         this.updateUser();
         this.pagination();
         this.btnReset();
+        this.dataInsert();
+        this.dataSelect();
         return this;
     };
     /**
@@ -43,7 +45,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
      * @returns {HomePage}
      */
     HomePage.prototype.dataRender = function () {
-        var store = JSON.parse(localStorage.getItem('store'));
+        var store = JSON.parse(sessionStorage.getItem('store'));
         $('.name').text('当前用户：【' + store.username + '】');
         return this;
     };
@@ -74,12 +76,15 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
      *
      * @returns {HomePage}
      */
-    HomePage.prototype.dateTimePickerInit = function () {
-        $(this.DATE_SEL).datetimepicker({
-            language: 'zh-CN',
-            format: 'yyyy-mm-dd',
-            minView: 'month',
-            autoclose: true
+    HomePage.prototype.dataInsert = function () {
+        var _this = this;
+        $(document).on('click', this.BTN_INSERT, function () {
+            var templateId = $(this).parents('.content').attr('data-template');
+            if ('tpl-NAV02-INSERT' === templateId) {
+                _this.insertUser();
+            } else if ('tpl-NAV04-INSERT' === templateId) {
+                _this.insertMerchant();
+            }
         });
         return this;
     };
@@ -95,7 +100,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
                 real_name: $('input[name="name"]').val(),
                 mobile_no: $('input[name="phone"]').val(),
                 login_name: $('input[name="username"]').val(),
-                login_pwd: $('input[name="password"]').val(),
+                login_pwd: $('input[name="password"]').val()
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
@@ -150,7 +155,78 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
             url: apiMain.getUrl('selectUser'),
             data: apiMain.getParams({
                 pageIndex: _this.pageCode,
-                pageSize: pageSize
+                pageSize: pageSize,
+                realName: $('input[name="search"]').val() || ''
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.insertMerchant = function () {
+        var _this = this;
+        $.ajax({
+            url: apiMain.getUrl('insertMerchant'),
+            data: apiMain.getParams({
+                merchant_no: $('input[name="merchantNo"]').val(),
+                merchant_name: $('input[name="merchantName"]').val()
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    _this.selectMerchant('tpl-NAV03-SELECT');
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.deleteMerchants = function () {
+        var _this = this;
+        $.ajax({
+            url: apiMain.getUrl('deleteMerchant'),
+            data: apiMain.getParams({
+                ids: _this.getItemIds()
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    MessageBox.show('提示', '删除成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    _this.selectMerchant('tpl-NAV03-SELECT');
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectMerchant = function (templateId) {
+        var _this = this;
+        var pageSize = apiMain.selectMerchant.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectMerchant'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                realName: $('input[name="search"]').val() || ''
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
@@ -207,43 +283,34 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
                         $(_this.TEMPLATE).html(templateHtml);
                         break;
                     case 'tpl-NAV03-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectMerchant(templateId);
                         break;
                     case 'tpl-NAV04-INSERT':
                         var templateHtml = template(templateId, {});
                         $(_this.TEMPLATE).html(templateHtml);
                         break;
                     case 'tpl-NAV05-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectMerchantRecord(templateId);
                         break;
                     case 'tpl-NAV06-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectBankRecord(templateId);
                         break;
                     case 'tpl-NAV07-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectCheckBase(templateId);
                         break;
                     case 'tpl-NAV08-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectMisTake(templateId);
                         break;
                     case 'tpl-NAV09-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectScratchPool(templateId);
                         break;
                     case 'tpl-NAV10-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectFileStatus(templateId);
                         break;
                     case 'tpl-NAV11-SELECT':
-                        var templateHtml = template(templateId, {});
-                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.selectCheckBillLog(templateId);
                         break;
                 }
-                _this.dateTimePickerInit();
             }
         });
         return this;
@@ -280,11 +347,16 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
     HomePage.prototype.dataDelete = function () {
         var _this = this;
         $(document).on('click', this.BTN_DELETE, function () {
+            var templateId = $(this).parents('.content').attr('data-template');
             var length = $(_this.CHECKBOX + ':checked').length;
             if (length) {
                 MessageBox.show('确认', '确认删除当前数据吗 ?', MessageBox.Buttons.OK_CANCEL, MessageBox.Icons.QUESTION);
                 MessageBox.confirm(function () {
-                    _this.deleteUsers();
+                    if ('tpl-NAV01-SELECT' === templateId) {
+                        _this.deleteUsers();
+                    } else if ('tpl-NAV03-SELECT' === templateId) {
+                        _this.deleteMerchants();
+                    }
                 });
             } else {
                 MessageBox.show('提示', '请选择需要删除的选项！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
@@ -309,6 +381,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
     HomePage.prototype.pagination = function () {
         var _this = this;
         $(document).on('click', '.pagination li', function () {
+            var templateId = $(this).parents('.content').attr('data-template');
             if (!$(this).hasClass('disabled')) {
                 var attr = $(this).find('a').attr('aria-label');
                 if (undefined === attr) {
@@ -319,8 +392,371 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain', 'boot
                 } else if ('Next' === attr) {
                     _this.pageCode++;
                 }
-                _this.selectUsers('tpl-NAV01-SELECT');
-
+                switch (templateId) {
+                    case 'tpl-NAV01-SELECT':
+                        _this.selectUsers(templateId);
+                        break;
+                    case 'tpl-NAV03-SELECT':
+                        _this.selectMerchant(templateId);
+                        break;
+                    case 'tpl-NAV05-SELECT':
+                        _this.selectMerchantRecord(templateId);
+                        break;
+                    case 'tpl-NAV06-SELECT':
+                        _this.selectBankRecord(templateId);
+                        break;
+                    case 'tpl-NAV07-SELECT':
+                        _this.selectCheckBase(templateId);
+                        break;
+                    case 'tpl-NAV08-SELECT':
+                        _this.selectMisTake(templateId);
+                        break;
+                    case 'tpl-NAV09-SELECT':
+                        _this.selectScratchPool(templateId);
+                        break;
+                    case 'tpl-NAV10-SELECT':
+                        _this.selectFileStatus(templateId);
+                        break;
+                    case 'tpl-NAV11-SELECT':
+                        _this.selectCheckBillLog(templateId);
+                        break;
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectMerchantRecord = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var payMethod = $('.dropdown>button').text().trim();
+        var payName = '全部' === payMethod ? '' : payMethod;
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectMerchantRecord.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectMerchantRecord'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                beginDate: beginDate,
+                endDate: endDate,
+                payName: payName
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                    }
+                    data.payMethod = payMethod;
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectBankRecord = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var payMethod = $('.dropdown>button').text().trim();
+        var payName = '全部' === payMethod ? '' : payMethod;
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectBankRecord.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectBankRecord'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                beginDate: beginDate,
+                endDate: endDate,
+                payName: payName
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                    }
+                    data.payMethod = payMethod;
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectCheckBase = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var payMethod = $('.dropdown>button').text().trim();
+        var payName = '全部' === payMethod ? '' : payMethod;
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectCheckBase.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectCheckBase'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                beginDate: beginDate,
+                endDate: endDate,
+                payName: payName
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                    }
+                    data.payMethod = payMethod;
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectMisTake = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var payMethod = $('.dropdown>button').text().trim();
+        var payName = '全部' === payMethod ? '' : payMethod;
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectMisTake.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectMisTake'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                beginDate: beginDate,
+                endDate: endDate,
+                payName: payName
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['billDate'];
+                        data.data[i]['billDate'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                    }
+                    data.payMethod = payMethod;
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectScratchPool = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var payMethod = $('.dropdown>button').text().trim();
+        var payName = '全部' === payMethod ? '' : payMethod;
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectScratchPool.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectScratchPool'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                beginDate: beginDate,
+                endDate: endDate,
+                payName: payName
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                    }
+                    data.payMethod = payMethod;
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectFileStatus = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectFileStatus.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectFileStatus'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                beginDate: beginDate,
+                endDate: endDate
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                    }
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectCheckBillLog = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectCheckBillLog.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectCheckBillLog'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                beginDate: beginDate,
+                endDate: endDate
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                    }
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.dataSelect = function () {
+        var _this = this;
+        $(document).on('click', this.BTN_SELECT, function () {
+            _this.pageCode = 1;
+            var templateId = $(this).parents('.content').attr('data-template');
+            switch (templateId) {
+                case 'tpl-NAV05-SELECT':
+                    _this.selectMerchantRecord(templateId);
+                    break;
+                case 'tpl-NAV06-SELECT':
+                    _this.selectBankRecord(templateId);
+                    break;
+                case 'tpl-NAV07-SELECT':
+                    _this.selectCheckBase(templateId);
+                    break;
+                case 'tpl-NAV08-SELECT':
+                    _this.selectMisTake(templateId);
+                    break;
+                case 'tpl-NAV09-SELECT':
+                    _this.selectScratchPool(templateId);
+                    break;
+                case 'tpl-NAV10-SELECT':
+                    _this.selectFileStatus(templateId);
+                    break;
+                case 'tpl-NAV11-SELECT':
+                    _this.selectCheckBillLog(templateId);
+                    break;
             }
         });
         return this;
