@@ -32,9 +32,9 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
         this.wrapper = arguments['wrapper'] ? arguments['wrapper'] :
             '<div class="common__ajaxBox__wrapper"></div>';
         this.LOADING_HTML = arguments['LOADING_HTML'] ? arguments['LOADING_HTML']
-            : '<div class="common__ajaxBox loading">加载中...</div>';
+            : '<div class="common__ajaxBox loading">' + LOAD_NODE + '</div>';
         this.NO_DATA_HTML = arguments['NO_DATA_HTML'] ? arguments['NO_DATA_HTML']
-            : '<div class="common__ajaxBox noData">暂无数据 ！</div>';
+            : '<div class="common__ajaxBox noData"><img src="../images/noData.png"/></div>';
 
         this.init();
     };
@@ -68,13 +68,12 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
                     var ajaxBox = options.ajaxBox;
                     _this.showNoData(ajaxBox);
                 }
-
                 console.log('AJAX_SUCCESS');
             })
             .ajaxError(function (event, xhr, options) {
                 var ajaxBox = options.ajaxBox;
                 _this.hideLoading(ajaxBox);
-                MessageBox.show('错误', '娘席逼~请求又失败了！', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
+                MessageBox.show('错误', '服务器连接异常！', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
 
                 console.log('AJAX_ERROR');
             })
@@ -82,7 +81,6 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
                 var ajaxBox = options.ajaxBox;
                 _this.dateTimePickerInit();
                 _this.hideLoading(ajaxBox);
-
                 console.log("AJAX_COMPLETE");
             });
         return this;
@@ -136,7 +134,9 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
      * @returns {Common}
      */
     Common.prototype.hideLoading = function () {
-        this.removeWrapper();
+        if ($('.loading')[0]) {
+            $(this.WRAPPER_SELECTOR).remove();
+        }
         return this;
     };
     /**
@@ -146,8 +146,7 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
      */
     Common.prototype.showNoData = function (ajaxBox) {
         this.removeWrapper();
-        console.log(ajaxBox[0]);
-        ajaxBox.append($(this.wrapper).html(this.NO_DATA_HTML));
+        ajaxBox.html($(this.wrapper).html(this.NO_DATA_HTML));
         return this;
     };
     /**
@@ -156,7 +155,9 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
      * @returns {boolean|Number}
      */
     Common.prototype.ajaxDataIsExist = function (data) {
-        return (data instanceof Array && data.length);
+        return ((typeof data === 'string'
+        || data instanceof Array && data.length
+        || !(data instanceof Array) && data));
     };
     /**
      *
@@ -165,10 +166,7 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
     Common.prototype.removeWrapper = function () {
         var _this = this;
         if ($(this.WRAPPER_SELECTOR)[0]) {
-            $(_this.WRAPPER_SELECTOR).addClass('hide');
-            setTimeout(function () {
-                $(_this.WRAPPER_SELECTOR).remove();
-            }, 300);
+            $(_this.WRAPPER_SELECTOR).remove();
         }
         return this;
     };
@@ -223,7 +221,5 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
     /**
      * 实例化匿名对象
      */
-    return new Common({
-        LOADING_HTML: LOAD_NODE
-    });
+    return new Common();
 });

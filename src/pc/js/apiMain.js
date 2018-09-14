@@ -8,12 +8,66 @@ define(['jquery'], function ($) {
                 password: ''
             }
         },
+        insertUser: {
+            url: '/user/addUser',
+            params: {
+                real_name: '',
+                mobile_no: '',
+                login_name: '',
+                login_pwd: ''
+            }
+        },
+        deleteUser: {
+            url: '/user/removeUser',
+            params: {
+                ids: 1000
+            }
+        },
+        updateUser: {
+            url: '/user/updateUser',
+            params: {
+                id: '1001',
+                real_name: '',
+                mobile_no: '',
+                login_name: '',
+                login_pwd: ''
+            }
+        },
         selectUser: {
             url: '/user/selectUser',
             params: {
                 pageIndex: 1,
                 pageSize: 10,
                 realName: ''
+            }
+        },
+        insertMerchant: {
+            url: '/merchant/addMerchant',
+            params: {
+                merchant_no: '1552451',
+                merchant_name: '上海市人民中心医院'
+            }
+        },
+        deleteMerchant: {
+            url: '/merchant/removeMerchant',
+            params: {
+                ids: '2'
+            }
+        },
+        updateMerchant: {
+            url: '/merchant/updateMerchant',
+            params: {
+                id: 4,
+                merchant_no: '',
+                merchant_name: ''
+            }
+        },
+        selectMerchant: {
+            url: '/merchant/selectMerchant',
+            params: {
+                pageIndex: 1,
+                pageSize: 10,
+                merchantName: "上海人民医院"
             }
         },
         selectCheckBillLog: {
@@ -23,21 +77,6 @@ define(['jquery'], function ($) {
                 pageSize: 10,
                 beginDate: '',
                 endDate: ''
-            }
-        },
-        deleteUser: {
-            url: '/user/removeUser',
-            params: {
-                ids: 1000
-            }
-        },
-        insertUser: {
-            url: '/user/addUser',
-            params: {
-                real_name: '',
-                mobile_no: '',
-                login_name: '',
-                login_pwd: ''
             }
         },
         selectBankRecord: {
@@ -67,34 +106,6 @@ define(['jquery'], function ($) {
                 endDate: '',
                 pageIndex: 1,
                 pageSize: 10
-            }
-        },
-        selectMerchant: {
-            url: '/merchant/selectMerchant',
-            params: {
-                pageIndex: 1,
-                pageSize: 10,
-                merchantName: "上海人民医院"
-            }
-        },
-        deleteMerchant: {
-            url: '/merchant/removeMerchant',
-            params: {
-                ids: '2'
-            }
-        },
-        updateMerchant: {
-            url: '/merchant/updateMerchant',
-            params: {
-                id: 4,
-                group_corp_no: "123"
-            }
-        },
-        insertMerchant: {
-            url: '/merchant/addMerchant',
-            params: {
-                merchant_no: '1552451',
-                merchant_name: '上海市人民中心医院'
             }
         },
         selectMerchantRecord: {

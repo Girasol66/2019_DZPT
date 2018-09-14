@@ -12,12 +12,12 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
         this.NAV_ITEM = args['NAV_ITEM'] ? args['NAV_ITEM'] : '.nav-item';
         this.TEMPLATE = args['TEMPLATE'] ? args['TEMPLATE'] : '.template';
         this.CHECKBOX = args['CHECKBOX'] ? args['CHECKBOX'] : '.checkbox';
-        this.BTN_EDIT = args['BTN_EDIT'] ? args['BTN_EDIT'] : '.btn-edit';
         this.BTN_RESET = args['BTN_RESET'] ? args['BTN_RESET'] : '.btn-reset';
         this.DROP_ITEM = args['DROP_ITEM'] ? args['DROP_ITEM'] : '.dropdown li';
-        this.BTN_SELECT = args['BTN_SELECT'] ? args['BTN_SELECT'] : '.btn-select';
         this.BTN_INSERT = args['BTN_INSERT'] ? args['BTN_INSERT'] : '.btn-insert';
         this.BTN_DELETE = args['BTN_DELETE'] ? args['BTN_DELETE'] : '.btn-delete';
+        this.BTN_UPDATE = args['BTN_UPDATE'] ? args['BTN_UPDATE'] : '.btn-update';
+        this.BTN_SELECT = args['BTN_SELECT'] ? args['BTN_SELECT'] : '.btn-select';
 
         this.init();
     };
@@ -30,14 +30,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
         this.wavesInit();
         this.selectCheckBox();
         this.showSubNavigation();
-        this.dataDelete();
         this.dataRender();
-        this.selectUsers('tpl-NAV01-SELECT');
-        this.updateUser();
         this.pagination();
         this.btnReset();
         this.dataInsert();
+        this.dataDelete();
+        this.dataUpdate();
         this.dataSelect();
+        this.selectUsers('tpl-NAV01-SELECT');
         return this;
     };
     /**
@@ -79,11 +79,24 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
     HomePage.prototype.dataInsert = function () {
         var _this = this;
         $(document).on('click', this.BTN_INSERT, function () {
+            var btnText = $(this).text().trim();
+            var updateId = $(this).attr('data-updateId').trim();
             var templateId = $(this).parents('.content').attr('data-template');
-            if ('tpl-NAV02-INSERT' === templateId) {
-                _this.insertUser();
-            } else if ('tpl-NAV04-INSERT' === templateId) {
-                _this.insertMerchant();
+            switch (templateId) {
+                case 'tpl-NAV02-INSERT':
+                    if ('添加' === btnText) {
+                        _this.insertUser();
+                    } else if ('保存' === btnText) {
+                        _this.updateUser();
+                    }
+                    break;
+                case 'tpl-NAV04-INSERT':
+                    if ('添加' === btnText) {
+                        _this.insertMerchant();
+                    } else if ('保存' === btnText) {
+                        _this.updateMerchant();
+                    }
+                    break;
             }
         });
         return this;
@@ -138,9 +151,23 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
      * @returns {HomePage}
      */
     HomePage.prototype.updateUser = function () {
-        $(document).on('click', this.BTN_EDIT, function () {
-            var itemId = $(this).attr('data-itemId').trim();
-            MessageBox.show('提示', '当前点击的选项ID是:' + itemId, MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+        var _this = this;
+        $.ajax({
+            url: apiMain.getUrl('updateUser'),
+            data: apiMain.getParams({
+                id: $(_this.BTN_INSERT).attr('data-updateId'),
+                real_name: $('input[name="name"]').val(),
+                mobile_no: $('input[name="phone"]').val(),
+                login_name: $('input[name="username"]').val(),
+                login_pwd: $('input[name="password"]').val()
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    MessageBox.show('提示', '修改成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    _this.selectUsers('tpl-NAV01-SELECT');
+                }
+            }
         });
         return this;
     };
@@ -161,11 +188,56 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
                 }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.dataUpdate = function () {
+        var _this = this;
+        var templateHtml = '';
+        $(document).on('click', this.BTN_UPDATE, function () {
+            var templateId = $(this).parents('.content').attr('data-template');
+            switch (templateId) {
+                case 'tpl-NAV01-SELECT':
+                    var itemId = $(this).attr('data-itemId').trim();
+                    var itemName = $(this).attr('data-name').trim();
+                    var itemPhone = $(this).attr('data-phone').trim();
+                    var itemUsername = $(this).attr('data-username').trim();
+                    var itemPassword = $(this).attr('data-password').trim();
+                    var data = {
+                        id: itemId,
+                        name: itemName,
+                        phone: itemPhone,
+                        username: itemUsername,
+                        password: itemPassword,
+                        btnText: '保存'
+                    };
+                    templateHtml = template('tpl-NAV02-INSERT', data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                    break;
+                case 'tpl-NAV03-SELECT':
+                    var itemId = $(this).attr('data-itemId').trim();
+                    var itemNo = $(this).attr('data-no').trim();
+                    var itemName = $(this).attr('data-name').trim();
+                    var data = {
+                        id: itemId,
+                        no: itemNo,
+                        name: itemName,
+                        btnText: '保存'
+                    };
+                    templateHtml = template('tpl-NAV04-INSERT', data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                    break;
             }
         });
         return this;
@@ -215,6 +287,29 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
     };
     /**
      *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.updateMerchant = function () {
+        var _this = this;
+        $.ajax({
+            url: apiMain.getUrl('updateMerchant'),
+            data: apiMain.getParams({
+                id: $(_this.BTN_INSERT).attr('data-updateId'),
+                merchant_no: $('input[name="merchantNo"]').val(),
+                merchant_name: $('input[name="merchantName"]').val()
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    MessageBox.show('提示', '修改成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    _this.selectMerchant('tpl-NAV03-SELECT');
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
      * @param templateId
      * @returns {HomePage}
      */
@@ -226,11 +321,12 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             data: apiMain.getParams({
                 pageIndex: _this.pageCode,
                 pageSize: pageSize,
-                realName: $('input[name="search"]').val() || ''
+                merchantName: $('input[name="search"]').val() || ''
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -496,6 +592,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -540,6 +637,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -584,6 +682,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['billDate'];
                         data.data[i]['billDate'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -628,6 +727,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -669,6 +769,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -709,6 +810,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data.data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -736,6 +838,12 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
             _this.pageCode = 1;
             var templateId = $(this).parents('.content').attr('data-template');
             switch (templateId) {
+                case 'tpl-NAV01-SELECT':
+                    _this.selectUsers(templateId);
+                    break;
+                case 'tpl-NAV03-SELECT':
+                    _this.selectMerchant(templateId);
+                    break;
                 case 'tpl-NAV05-SELECT':
                     _this.selectMerchantRecord(templateId);
                     break;

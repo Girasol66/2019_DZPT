@@ -130,7 +130,9 @@ define(['jquery', 'apisMain', 'echarts', '003_QDYH'], function ($, apisMain, ech
     },
     getApiUrl: apisMain.apis.QDYH.getURL.bind(apisMain.apis.QDYH),
     ajaxDataIsExist: function (data) {
-      return !!(typeof data === 'string' || data instanceof Array && data.length || !(data instanceof Array) && data);
+      return !!(typeof data === 'string'
+      || data instanceof Array && data.length
+      || !(data instanceof Array) && data);
     },
     renderAjaxBox: function (el) {          //  渲染loading、无数据、请求失败到dom节点上
       var $wrappers = null;                 //  存储dom节点的jquery对象，转化成一个数组，方便操作
