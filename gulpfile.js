@@ -132,8 +132,8 @@ gulp.task('build', function (callback) {
         'build:less',
         'build:js',
         'build:image',
-        'build:font',
         'build:lib',
+        'build:font',
         callback
     );
 });
@@ -163,6 +163,7 @@ gulp.task('server', function () {
     gulp.watch(srcPath + 'js/**/*.js', ['build:js']);
     gulp.watch(srcPath + 'images/**/*', ['build:image']);
     gulp.watch(srcPath + 'libs/**/*.js', ['build:lib']);
+    gulp.watch(srcPath + 'fonts/**/*', ['build:font']);
 });
 
 //  开发时命令
@@ -193,7 +194,7 @@ gulp.task('add-version', ['rev'], function () {
     var manifest = gulp.src([devPath + 'rev-manifest.json']);
 
     //  添加版本号要排除libs下的文件，避免被正则替换到第三方库的代码并且逻辑上也不需要给lib下的文件加后缀
-    var revFilter = plugins.filter(['**/*.*', '!**/libs/**/*.*', '!**/images/**/*.*'], {restore: true});
+    var revFilter = plugins.filter(['**/*.*', '!**/libs/**/*.*', '!**/images/**/*.*','!**/fonts/**/*.*'], {restore: true});
     //  替换require-config.js中的{{version}}为构建时的时间戳，解决requireJS引入文件的缓存问题
     var requireConfigFilter = plugins.filter('**/js/require-config.js', {restore: true});
     //  todo：百度查到artTemplate简洁语法会导致报错，标准语法<%  %>可能可以避免，暂未处理
