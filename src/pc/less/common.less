@@ -378,3 +378,77 @@ input[type="checkbox"]:focus {
     }
   }
 }
+
+.toast {
+  width: 250px;
+  height: auto;
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 10000;
+  opacity: 1;
+  visibility: visible;
+  padding: 15px 15px;
+  background-color: @white;
+  display: block !important;
+  transition: all 300ms ease;
+  border-left: 4px solid #000000;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, .15);
+  .toast-box {
+    font-size: 0;
+    .toast-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 100%;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #000000;
+    }
+    .toast-info {
+      margin: 0;
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 15px;
+      line-height: 30px;
+      font-size: 14px;
+    }
+  }
+  &.information {
+    border-color: rgb(69, 117, 242);
+    .toast-icon {
+      color: rgb(69, 117, 242);
+    }
+  }
+  &.error {
+    border-color: rgb(216, 30, 6);
+    .toast-icon {
+      color: rgb(216, 30, 6);
+    }
+  }
+  &.question {
+    border-color: rgb(242, 188, 24);
+    .toast-icon {
+      color: rgb(242, 188, 24);
+    }
+  }
+  &.warning {
+    border-color: rgb(221, 94, 94);
+    .toast-icon {
+      color: rgb(221, 94, 94);
+    }
+  }
+  &.success {
+    border-color: rgb(19, 206, 102);
+    .toast-icon {
+      color: rgb(19, 206, 102);
+    }
+  }
+  &.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-90px);
+  }
+}

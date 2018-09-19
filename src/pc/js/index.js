@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], function ($, common, template, MessageBox, waves, apiMain) {
+require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMain'], function ($, common, template, MessageBox, Toast, waves, apiMain) {
     /**
      *
      * @constructor
@@ -103,26 +103,57 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
     };
     /**
      *
+     * @returns {boolean}
+     */
+    HomePage.prototype.insertUserNotEmpty = function () {
+        var result = false;
+        var toast = new Toast.Toast();
+        var $name = $('input[name="name"]');
+        var $phone = $('input[name="phone"]');
+        var $username = $('input[name="username"]');
+        var $password = $('input[name="password"]');
+        if (!$name.val()) {
+            toast.show(Toast.INFORMATION, '姓名不能为空！');
+            $name.focus();
+        } else if (!$phone.val()) {
+            toast.show(Toast.INFORMATION, '电话号码不能为空！');
+            $phone.focus();
+        } else if (!$username.val()) {
+            toast.show(Toast.INFORMATION, '登录名不能为空！');
+            $username.focus();
+        } else if (!$password.val()) {
+            toast.show(Toast.INFORMATION, '密码不能为空！');
+            $password.focus();
+        } else {
+            result = true;
+        }
+        toast = null;
+        return result;
+    };
+    /**
+     *
      * @returns {HomePage}
      */
     HomePage.prototype.insertUser = function () {
         var _this = this;
-        $.ajax({
-            url: apiMain.getUrl('insertUser'),
-            data: apiMain.getParams({
-                real_name: $('input[name="name"]').val(),
-                mobile_no: $('input[name="phone"]').val(),
-                login_name: $('input[name="username"]').val(),
-                login_pwd: $('input[name="password"]').val()
-            }),
-            $renderContainer: $('.table-content'),
-            success: function (data) {
-                if (data.code !== this.ERR_NO) {
-                    MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
-                    _this.selectUsers('tpl-NAV01-SELECT');
+        if (this.insertUserNotEmpty()) {
+            $.ajax({
+                url: apiMain.getUrl('insertUser'),
+                data: apiMain.getParams({
+                    real_name: $('input[name="name"]').val(),
+                    mobile_no: $('input[name="phone"]').val(),
+                    login_name: $('input[name="username"]').val(),
+                    login_pwd: $('input[name="password"]').val()
+                }),
+                $renderContainer: $('.table-content'),
+                success: function (data) {
+                    if (data.code !== this.ERR_NO) {
+                        MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                        _this.selectUsers('tpl-NAV01-SELECT');
+                    }
                 }
-            }
-        });
+            });
+        }
         return this;
     };
     /**
@@ -244,24 +275,47 @@ require(['jquery', 'common', 'template', 'MessageBox', 'waves', 'apiMain'], func
     };
     /**
      *
+     * @returns {boolean}
+     */
+    HomePage.prototype.insertMerchantNotEmpty = function () {
+        var result = false;
+        var toast = new Toast.Toast();
+        var $merchantNo = $('input[name="merchantNo"]');
+        var $merchantName = $('input[name="merchantName"]');
+        if (!$merchantNo.val()) {
+            toast.show(Toast.INFORMATION, '商户编号不能为空！');
+            $merchantNo.focus();
+        } else if (!$merchantName.val()) {
+            toast.show(Toast.INFORMATION, '商户名称不能为空！');
+            $merchantName.focus();
+        } else {
+            result = true;
+        }
+        toast = null;
+        return result;
+    };
+    /**
+     *
      * @returns {HomePage}
      */
     HomePage.prototype.insertMerchant = function () {
         var _this = this;
-        $.ajax({
-            url: apiMain.getUrl('insertMerchant'),
-            data: apiMain.getParams({
-                merchant_no: $('input[name="merchantNo"]').val(),
-                merchant_name: $('input[name="merchantName"]').val()
-            }),
-            $renderContainer: $('.table-content'),
-            success: function (data) {
-                if (data.code !== this.ERR_NO) {
-                    MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
-                    _this.selectMerchant('tpl-NAV03-SELECT');
+        if (this.insertMerchantNotEmpty()) {
+            $.ajax({
+                url: apiMain.getUrl('insertMerchant'),
+                data: apiMain.getParams({
+                    merchant_no: $('input[name="merchantNo"]').val(),
+                    merchant_name: $('input[name="merchantName"]').val()
+                }),
+                $renderContainer: $('.table-content'),
+                success: function (data) {
+                    if (data.code !== this.ERR_NO) {
+                        MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                        _this.selectMerchant('tpl-NAV03-SELECT');
+                    }
                 }
-            }
-        });
+            });
+        }
         return this;
     };
     /**

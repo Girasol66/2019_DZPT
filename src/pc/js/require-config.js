@@ -11,6 +11,7 @@ require.config({
         waves: 'libs/waves/waves',
         apiMain: 'js/apiMain',
         MessageBox: 'js/messageBox',
+        Toast: 'js/toast',
     },
     shim: {
         bootstrap: {
@@ -18,9 +19,6 @@ require.config({
         },
         bootstrapDateTimePicker: {
             deps: ['jquery', 'bootstrap']
-        },
-        bootstrapValidator: {
-            deps: ['jquery']
         },
         bootstrapDateTimePickerLocal_zh_CN: {
             deps: ['jquery', 'bootstrap', 'bootstrapDateTimePicker']

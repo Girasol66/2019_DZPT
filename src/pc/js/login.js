@@ -1,4 +1,4 @@
-require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, common, template, apiMain, MessageBox) {
+require(['jquery', 'common', 'template', 'apiMain', 'MessageBox', 'Toast'], function ($, common, template, apiMain, MessageBox, Toast) {
     /**
      *
      * @constructor
@@ -28,13 +28,17 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox'], function ($, 
      */
     LoginPage.prototype.notNullCheck = function () {
         var result = false;
+        var toast = new Toast.Toast();
         if (!$(this.username).val().trim()) {
-            MessageBox.show('提示', '用户名不能为空 !', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+            toast.show(Toast.INFORMATION, '用户名不能为空！');
+            $(this.username).focus();
         } else if (!$(this.password).val().trim()) {
-            MessageBox.show('提示', '密码不能为空 !', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+            toast.show(Toast.INFORMATION, '密码不能为空！');
+            $(this.password).focus();
         } else {
             result = true;
         }
+        toast = null;
         return result;
     };
     /**
