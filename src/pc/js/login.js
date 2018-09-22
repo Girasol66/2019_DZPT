@@ -55,14 +55,17 @@ require(['jquery', 'common', 'template', 'apiMain', 'MessageBox', 'Toast'], func
             }),
             $renderContainer: $(_this.container),
             success: function (data) {
+                var toast = new Toast.Toast();
                 if (data.code !== this.ERR_NO) {
                     _this.dataSave(data.data);
                     window.location.href = 'index.html';
                 } else {
-                    MessageBox.show('错误', '用户名或密码错误 !', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
+                    toast.show(Toast.ERROR, '用户名或密码错误！');
                 }
+                toast = null;
             }
         });
+        toast = null;
         return this;
     };
     /**

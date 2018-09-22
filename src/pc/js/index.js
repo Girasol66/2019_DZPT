@@ -147,10 +147,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 }),
                 $renderContainer: $('.table-content'),
                 success: function (data) {
+                    var toast = new Toast.Toast();
                     if (data.code !== this.ERR_NO) {
-                        MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                        toast.show(Toast.SUCCESS, '添加成功！');
                         _this.selectUsers('tpl-NAV01-SELECT');
+                    } else {
+                        toast.show(Toast.WARNING, data.message);
                     }
+                    toast = null;
                 }
             });
         }
@@ -169,10 +173,15 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
+                var toast = new Toast.Toast();
                 if (data.code !== this.ERR_NO) {
-                    MessageBox.show('提示', '删除成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    toast.show(Toast.SUCCESS, '删除成功！');
+                    _this.pageCode = 1;
                     _this.selectUsers('tpl-NAV01-SELECT');
+                } else {
+                    toast.show(Toast.WARNING, '删除失败！');
                 }
+                toast = null;
             }
         });
         return this;
@@ -183,23 +192,29 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      */
     HomePage.prototype.updateUser = function () {
         var _this = this;
-        $.ajax({
-            url: apiMain.getUrl('updateUser'),
-            data: apiMain.getParams({
-                id: $(_this.BTN_INSERT).attr('data-updateId'),
-                real_name: $('input[name="name"]').val(),
-                mobile_no: $('input[name="phone"]').val(),
-                login_name: $('input[name="username"]').val(),
-                login_pwd: $('input[name="password"]').val()
-            }),
-            $renderContainer: $('.table-content'),
-            success: function (data) {
-                if (data.code !== this.ERR_NO) {
-                    MessageBox.show('提示', '修改成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
-                    _this.selectUsers('tpl-NAV01-SELECT');
+        if (this.insertUserNotEmpty()) {
+            $.ajax({
+                url: apiMain.getUrl('updateUser'),
+                data: apiMain.getParams({
+                    id: $(_this.BTN_INSERT).attr('data-updateId'),
+                    real_name: $('input[name="name"]').val(),
+                    mobile_no: $('input[name="phone"]').val(),
+                    login_name: $('input[name="username"]').val(),
+                    login_pwd: $('input[name="password"]').val()
+                }),
+                $renderContainer: $('.table-content'),
+                success: function (data) {
+                    var toast = new Toast.Toast();
+                    if (data.code !== this.ERR_NO) {
+                        toast.show(Toast.SUCCESS, '修改成功！');
+                        _this.selectUsers('tpl-NAV01-SELECT');
+                    } else {
+                        toast.show(Toast.WARNING, data.message);
+                    }
+                    toast = null;
                 }
-            }
-        });
+            });
+        }
         return this;
     };
     /**
@@ -219,7 +234,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -309,10 +324,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 }),
                 $renderContainer: $('.table-content'),
                 success: function (data) {
+                    var toast = new Toast.Toast();
                     if (data.code !== this.ERR_NO) {
-                        MessageBox.show('提示', '添加成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                        toast.show(Toast.SUCCESS, '添加成功！');
                         _this.selectMerchant('tpl-NAV03-SELECT');
+                    } else {
+                        toast.show(Toast.WARNING, data.message);
                     }
+                    toast = null;
                 }
             });
         }
@@ -331,10 +350,15 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
+                var toast = new Toast.Toast();
                 if (data.code !== this.ERR_NO) {
-                    MessageBox.show('提示', '删除成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                    toast.show(Toast.SUCCESS, '删除成功！');
+                    _this.pageCode = 1;
                     _this.selectMerchant('tpl-NAV03-SELECT');
+                } else {
+                    toast.show(Toast.WARNING, '删除失败！');
                 }
+                toast = null;
             }
         });
         return this;
@@ -345,21 +369,27 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      */
     HomePage.prototype.updateMerchant = function () {
         var _this = this;
-        $.ajax({
-            url: apiMain.getUrl('updateMerchant'),
-            data: apiMain.getParams({
-                id: $(_this.BTN_INSERT).attr('data-updateId'),
-                merchant_no: $('input[name="merchantNo"]').val(),
-                merchant_name: $('input[name="merchantName"]').val()
-            }),
-            $renderContainer: $('.table-content'),
-            success: function (data) {
-                if (data.code !== this.ERR_NO) {
-                    MessageBox.show('提示', '修改成功！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
-                    _this.selectMerchant('tpl-NAV03-SELECT');
+        if (this.insertMerchantNotEmpty()) {
+            $.ajax({
+                url: apiMain.getUrl('updateMerchant'),
+                data: apiMain.getParams({
+                    id: $(_this.BTN_INSERT).attr('data-updateId'),
+                    merchant_no: $('input[name="merchantNo"]').val(),
+                    merchant_name: $('input[name="merchantName"]').val()
+                }),
+                $renderContainer: $('.table-content'),
+                success: function (data) {
+                    var toast = new Toast.Toast();
+                    if (data.code !== this.ERR_NO) {
+                        toast.show(Toast.SUCCESS, '修改成功！');
+                        _this.selectMerchant('tpl-NAV03-SELECT');
+                    } else {
+                        toast.show(Toast.WARNING, data.message);
+                    }
+                    toast = null;
                 }
-            }
-        });
+            });
+        }
         return this;
     };
     /**
@@ -380,7 +410,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -497,6 +527,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
     HomePage.prototype.dataDelete = function () {
         var _this = this;
         $(document).on('click', this.BTN_DELETE, function () {
+            var toast = new Toast.Toast();
             var templateId = $(this).parents('.content').attr('data-template');
             var length = $(_this.CHECKBOX + ':checked').length;
             if (length) {
@@ -509,8 +540,9 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     }
                 });
             } else {
-                MessageBox.show('提示', '请选择需要删除的选项！', MessageBox.Buttons.OK, MessageBox.Icons.INFORMATION);
+                toast.show(Toast.INFORMATION, '请选择需要删除的选项！');
             }
+            toast = null;
         });
         return this;
     };
@@ -601,7 +633,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -646,7 +678,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -691,7 +723,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -736,7 +768,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['billDate'];
                         data.data[i]['billDate'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -781,7 +813,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -823,7 +855,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -864,7 +896,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data.data))return;
+                    if (!common.ajaxDataIsExist(data))return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');

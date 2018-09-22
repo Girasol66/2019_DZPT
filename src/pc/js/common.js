@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, bootstrap, MessageBox) {
+define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker', 'bootstrapDateTimePickerLocal_zh_CN'], function ($, bootstrap, MessageBox, Toast) {
     var LOAD_NODE = '<div class="spinner">'
         + '<div class="spinner-container container1">'
         + '<div class="circle1"></div>'
@@ -64,7 +64,7 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
                 console.log('AJAX_SEND');
             })
             .ajaxSuccess(function (event, xhr, options, data) {
-                if (!_this.ajaxDataIsExist(data.data)) {
+                if (!_this.ajaxDataIsExist(data)) {
                     var ajaxBox = options.ajaxBox;
                     _this.showNoData(ajaxBox);
                 }
@@ -73,8 +73,9 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
             .ajaxError(function (event, xhr, options) {
                 var ajaxBox = options.ajaxBox;
                 _this.hideLoading(ajaxBox);
-                MessageBox.show('错误', '服务器连接异常！', MessageBox.Buttons.OK, MessageBox.Icons.ERROR);
-
+                var toast = new Toast.Toast();
+                toast.show(Toast.ERROR, '服务器连接异常！');
+                toast = null;
                 console.log('AJAX_ERROR');
             })
             .ajaxComplete(function (event, xhr, options) {
@@ -155,6 +156,7 @@ define(['jquery', 'bootstrap', 'MessageBox', 'bootstrapDateTimePicker', 'bootstr
      * @returns {boolean|Number}
      */
     Common.prototype.ajaxDataIsExist = function (data) {
+        var data = data.data;
         return ((typeof data === 'string'
         || data instanceof Array && data.length
         || !(data instanceof Array) && data));
