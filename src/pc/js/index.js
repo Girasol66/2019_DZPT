@@ -38,6 +38,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         this.dataUpdate();
         this.dataSelect();
         this.selectUsers('tpl-NAV01-SELECT');
+
         return this;
     };
     /**
@@ -490,6 +491,15 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     case 'tpl-NAV11-SELECT':
                         _this.selectCheckBillLog(templateId);
                         break;
+                    case 'tpl-NAV12-SELECT':
+                        _this.selectCheckBaseCount(templateId);
+                        break;
+                    case 'tpl-NAV13-SELECT':
+                        _this.selectBankRecordCount(templateId);
+                        break;
+                    case 'tpl-NAV14-SELECT':
+                        _this.selectMerchantRecordCount(templateId);
+                        break;
                 }
             }
         });
@@ -916,6 +926,126 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
     };
     /**
      *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectCheckBaseCount = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        $.ajax({
+            url: apiMain.getUrl('selectCheckBaseCount'),
+            data: apiMain.getParams({
+                beginDate: beginDate,
+                endDate: endDate
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data))return;
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['bank_type'] = data.data[i]['bank_type'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['bank_type']);
+                    }
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.data.length / 10);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectBankRecordCount = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        $.ajax({
+            url: apiMain.getUrl('selectBankRecordCount'),
+            data: apiMain.getParams({
+                beginDate: beginDate,
+                endDate: endDate
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data))return;
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
+                    }
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.data.length / 10);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectMerchantRecordCount = function (templateId) {
+        var _this = this;
+        var startTime = $('input[name="startTime"]').val() || '';
+        var stopTime = $('input[name="stopTime"]').val() || '';
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        $.ajax({
+            url: apiMain.getUrl('selectMerchantRecordCount'),
+            data: apiMain.getParams({
+                beginDate: beginDate,
+                endDate: endDate
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data))return;
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        tempTime = data.data[i]['complete_time'];
+                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
+                    }
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.data.length / 10);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     *
      * @returns {HomePage}
      */
     HomePage.prototype.dataSelect = function () {
@@ -950,6 +1080,15 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     break;
                 case 'tpl-NAV11-SELECT':
                     _this.selectCheckBillLog(templateId);
+                    break;
+                case 'tpl-NAV12-SELECT':
+                    _this.selectCheckBaseCount(templateId);
+                    break;
+                case 'tpl-NAV13-SELECT':
+                    _this.selectBankRecordCount(templateId);
+                    break;
+                case 'tpl-NAV14-SELECT':
+                    _this.selectMerchantRecordCount(templateId);
                     break;
             }
         });

@@ -219,9 +219,12 @@
               font-weight: bold;
             }
           }
+          .icon {
+            font-size: 18px;
+          }
         }
         .table-footer {
-          padding-bottom: 20px;
+          padding: 0 20px 20px;
           text-align: center;
           font-size: 0;
           nav {
@@ -229,7 +232,6 @@
             font-size: 14px;
           }
           .form-group {
-            padding: 0 20px;
             text-align: right;
             .btn {
               margin-left: 15px;
@@ -242,5 +244,14 @@
   }
   #footer {
 
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .content[data-template="tpl-NAV02-INSERT"],
+  .content[data-template="tpl-NAV04-INSERT"] {
+    .form-group {
+      width: 50%;
+    }
   }
 }

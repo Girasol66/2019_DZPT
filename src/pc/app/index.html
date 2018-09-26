@@ -125,6 +125,30 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <h3 class="nav-title">
+                        <i class="icon icon-count"></i>
+                        <span>统计管理</span>
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </h3>
+                    <ul class="nav-bar">
+                        <li class="nav-item" data-template="tpl-NAV12-SELECT">
+                            <h4 class="nav-title">
+                                <span>对账批次统计</span>
+                            </h4>
+                        </li>
+                        <li class="nav-item" data-template="tpl-NAV13-SELECT">
+                            <h4 class="nav-title">
+                                <span>渠道明细统计</span>
+                            </h4>
+                        </li>
+                        <li class="nav-item" data-template="tpl-NAV14-SELECT">
+                            <h4 class="nav-title">
+                                <span>商户明细统计</span>
+                            </h4>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <div class="template"></div>
@@ -378,7 +402,7 @@
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
-                                <li><a><i class="icon-cash"></i><span>微信</span>现金</a></li>
+                                <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联</span></a></li>
                             </ul>
                         </div>
@@ -474,7 +498,7 @@
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
-                                <li><a><i class="icon-cash"></i><span>微信</span>现金</a></li>
+                                <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联</span></a></li>
                             </ul>
                         </div>
@@ -570,7 +594,7 @@
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
-                                <li><a><i class="icon-cash"></i><span>微信</span>现金</a></li>
+                                <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联</span></a></li>
                             </ul>
                         </div>
@@ -664,7 +688,7 @@
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
-                                <li><a><i class="icon-cash"></i><span>微信</span>现金</a></li>
+                                <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联</span></a></li>
                             </ul>
                         </div>
@@ -754,7 +778,7 @@
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
-                                <li><a><i class="icon-cash"></i><span>微信</span>现金</a></li>
+                                <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联</span></a></li>
                             </ul>
                         </div>
@@ -938,6 +962,232 @@
                             <td>{{$value.type}}</td>
                             <td>{{$value.grade}}</td>
                             <td>{{$value.remark}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-NAV12-SELECT" type="text/html">
+    <div class="content" data-template="tpl-NAV12-SELECT" data-template-name="商户明细统计">
+        <div class="table row">
+            <div class="col-xs-12 table-content">
+                <div class="table-header">
+                    <div class="form-group">
+                        <label class="form-label">对账日期-开始日期：</label>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">结束日期：</label>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
+                    </div>
+                </div>
+                <div class="table-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr role="row">
+                            <th>支付方式</th>
+                            <th>商户手续费汇总</th>
+                            <th>错误笔数汇总</th>
+                            <th>商户交易笔数汇总</th>
+                            <th>渠道交易笔数汇总</th>
+                            <th>商户交易金额汇总</th>
+                            <th>渠道交易金额汇总</th>
+                            <th>商户退款金额汇总</th>
+                            <th>渠道退款金额汇总</th>
+                            <th>渠道手续费汇总</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td><i title="{{$value.bank_type}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td>{{$value.fees}}</td>
+                            <td>{{$value.mistake_counts}}</td>
+                            <td>{{$value.trade_counts}}</td>
+                            <td>{{$value.bank_trade_counts}}</td>
+                            <td>{{$value.trade_amounts}}</td>
+                            <td>{{$value.bank_trade_amounts}}</td>
+                            <td>{{$value.refund_amounts}}</td>
+                            <td>{{$value.bank_refund_amounts}}</td>
+                            <td>{{$value.bank_fees}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-NAV13-SELECT" type="text/html">
+    <div class="content" data-template="tpl-NAV13-SELECT" data-template-name="渠道明细统计">
+        <div class="table row">
+            <div class="col-xs-12 table-content">
+                <div class="table-header">
+                    <div class="form-group">
+                        <label class="form-label">账单日期-开始日期：</label>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">结束日期：</label>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
+                    </div>
+                </div>
+                <div class="table-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr role="row">
+                            <th>支付方式</th>
+                            <th>手续费</th>
+                            <th>订单金额</th>
+                            <th>退款次数</th>
+                            <th>成功退款金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td>{{$value.fees}}</td>
+                            <td>{{$value.order_amounts}}</td>
+                            <td>{{$value.refund_num}}</td>
+                            <td>{{$value.success_refund_amounts}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-NAV14-SELECT" type="text/html">
+    <div class="content" data-template="tpl-NAV14-SELECT" data-template-name="对账批次统计">
+        <div class="table row">
+            <div class="col-xs-12 table-content">
+                <div class="table-header">
+                    <div class="form-group">
+                        <label class="form-label">对账日期-开始日期：</label>
+                        <input class="form-control form-date" name="startTime" value="{{startTime}}" type="text"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">结束日期：</label>
+                        <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-select">查询</button>
+                    </div>
+                </div>
+                <div class="table-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr role="row">
+                            <th>支付方式</th>
+                            <th>手续费</th>
+                            <th>订单金额</th>
+                            <th>退款次数</th>
+                            <th>成功退款金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}">
+                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td>{{$value.fees}}</td>
+                            <td>{{$value.order_amounts}}</td>
+                            <td>{{$value.refund_num}}</td>
+                            <td>{{$value.success_refund_amounts}}</td>
                         </tr>
                         {{/each}}
                         </tbody>

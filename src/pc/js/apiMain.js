@@ -138,6 +138,27 @@ define(['jquery'], function ($) {
                 payName: "支付宝"
             }
         },
+        selectCheckBaseCount: {
+            url: '/checkBase/queryCheckBatchs',
+            params: {
+                beginDate: '20180101',
+                endDate: '20180909'
+            }
+        },
+        selectBankRecordCount: {
+            url: '/bankRecord/selectQueryAll',
+            params: {
+                beginDate: '20180101',
+                endDate: '20180909'
+            }
+        },
+        selectMerchantRecordCount: {
+            url: '/merchantRecord/selectQueryAll',
+            params: {
+                beginDate: '20180101',
+                endDate: '20180909'
+            }
+        },
         getUrl: function (api) {
             return this.root + this[api].url;
         },

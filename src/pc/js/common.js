@@ -209,6 +209,42 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
     };
     /**
      *
+     * @param params
+     * @returns {string}
+     */
+    Common.prototype.getIconType = function (params) {
+        var iconType = '';
+        var icons = [
+            {
+                text: '全部',
+                icon: 'icon-all'
+            },
+            {
+                text: '支付宝',
+                icon: 'icon-aliPay'
+            },
+            {
+                text: '微信',
+                icon: 'icon-weChat'
+            },
+            {
+                text: '现金',
+                icon: 'icon-cash'
+            },
+            {
+                text: '银联',
+                icon: 'icon-unionPay'
+            }
+        ];
+        for (var icon in icons) {
+            if (icons[icon].text === params) {
+                iconType = icons[icon].icon
+            }
+        }
+        return iconType;
+    };
+    /**
+     *
      * @returns {Common}
      */
     Common.prototype.dateTimePickerInit = function () {
