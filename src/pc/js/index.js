@@ -98,6 +98,13 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         _this.updateMerchant();
                     }
                     break;
+                case 'tpl-NAV16-INSERT':
+                    if ('添加' === btnText) {
+                        _this.insertPayWay();
+                    } else if ('保存' === btnText) {
+                        _this.updatePayWay();
+                    }
+                    break;
             }
         });
         return this;
@@ -283,6 +290,23 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         btnText: '保存'
                     };
                     templateHtml = template('tpl-NAV04-INSERT', data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                    break;
+                case 'tpl-NAV15-SELECT':
+                    var itemPayWayId = $(this).attr('data-pay_way_id').trim();
+                    var itemPayWayCode = $(this).attr('data-pay_way_code').trim();
+                    var itemPayWayName = $(this).attr('data-pay_way_name').trim();
+                    var itemPayTypeCode = $(this).attr('data-pay_type_code').trim();
+                    var itemPayTypeName = $(this).attr('data-pay_type_name').trim();
+                    var data = {
+                        id: itemPayWayId,
+                        pay_way_code: itemPayWayCode,
+                        pay_way_name: itemPayWayName,
+                        pay_type_code: itemPayTypeCode,
+                        pay_type_name: itemPayTypeName,
+                        btnText: '保存'
+                    };
+                    templateHtml = template('tpl-NAV16-INSERT', data);
                     $(_this.TEMPLATE).html(templateHtml);
                     break;
             }
@@ -500,6 +524,13 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     case 'tpl-NAV14-SELECT':
                         _this.selectMerchantRecordCount(templateId);
                         break;
+                    case 'tpl-NAV15-SELECT':
+                        _this.selectPayWay(templateId);
+                        break;
+                    case 'tpl-NAV16-INSERT':
+                        var templateHtml = template(templateId, {});
+                        $(_this.TEMPLATE).html(templateHtml);
+                        break;
                 }
             }
         });
@@ -547,6 +578,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         _this.deleteUsers();
                     } else if ('tpl-NAV03-SELECT' === templateId) {
                         _this.deleteMerchants();
+                    } else if ('tpl-NAV15-SELECT' === templateId) {
+                        _this.deletePayWay();
                     }
                 });
             } else {
@@ -611,6 +644,9 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         break;
                     case 'tpl-NAV11-SELECT':
                         _this.selectCheckBillLog(templateId);
+                        break;
+                    case 'tpl-NAV15-SELECT':
+                        _this.selectPayWay(templateId);
                         break;
                 }
             }
@@ -1090,6 +1126,151 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 case 'tpl-NAV14-SELECT':
                     _this.selectMerchantRecordCount(templateId);
                     break;
+                case 'tpl-NAV15-SELECT':
+                    _this.selectPayWay(templateId);
+                    break;
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {boolean}
+     */
+    HomePage.prototype.insertPayWayNotEmpty = function () {
+        var result = false;
+        var toast = new Toast.Toast();
+        var $pay_way_code = $('input[name="pay_way_code"]');
+        var $pay_way_name = $('input[name="pay_way_name"]');
+        var $pay_type_code = $('input[name="pay_type_code"]');
+        var $pay_type_name = $('input[name="pay_type_name"]');
+        if (!$pay_way_code.val()) {
+            toast.show(Toast.INFORMATION, '支付方式编号不能为空！');
+            $pay_way_code.focus();
+        } else if (!$pay_way_name.val()) {
+            toast.show(Toast.INFORMATION, '支付方式名称不能为空！');
+            $pay_way_name.focus();
+        } else if (!$pay_type_code.val()) {
+            toast.show(Toast.INFORMATION, '支付类型编号不能为空！');
+            $pay_type_code.focus();
+        } else if (!$pay_type_name.val()) {
+            toast.show(Toast.INFORMATION, '支付类型名称不能为空！');
+            $pay_type_name.focus();
+        } else {
+            result = true;
+        }
+        toast = null;
+        return result;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.insertPayWay = function () {
+        var _this = this;
+        if (this.insertPayWayNotEmpty()) {
+            $.ajax({
+                url: apiMain.getUrl('insertPayWay'),
+                data: apiMain.getParams({
+                    pay_way_code: $('input[name="pay_way_code"]').val(),
+                    pay_way_name: $('input[name="pay_way_name"]').val(),
+                    pay_type_code: $('input[name="pay_type_code"]').val(),
+                    pay_type_name: $('input[name="pay_type_name"]').val()
+                }),
+                $renderContainer: $('.table-content'),
+                success: function (data) {
+                    var toast = new Toast.Toast();
+                    if (data.code !== this.ERR_NO) {
+                        toast.show(Toast.SUCCESS, '添加成功！');
+                        _this.selectPayWay('tpl-NAV15-SELECT');
+                    } else {
+                        toast.show(Toast.WARNING, data.message);
+                    }
+                    toast = null;
+                }
+            });
+        }
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.deletePayWay = function () {
+        var _this = this;
+        $.ajax({
+            url: apiMain.getUrl('deletePayWay'),
+            data: apiMain.getParams({
+                ids: _this.getItemIds()
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                var toast = new Toast.Toast();
+                if (data.code !== this.ERR_NO) {
+                    toast.show(Toast.SUCCESS, '删除成功！');
+                    _this.pageCode = 1;
+                    _this.selectPayWay('tpl-NAV15-SELECT');
+                } else {
+                    toast.show(Toast.WARNING, '删除失败！');
+                }
+                toast = null;
+            }
+        });
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.updatePayWay = function () {
+        var _this = this;
+        if (this.insertPayWayNotEmpty()) {
+            $.ajax({
+                url: apiMain.getUrl('updatePayWay'),
+                data: apiMain.getParams({
+                    pay_way_code: $('input[name="pay_way_code"]').val(),
+                    pay_way_name: $('input[name="pay_way_name"]').val(),
+                    pay_type_code: $('input[name="pay_type_code"]').val(),
+                    pay_type_name: $('input[name="pay_type_name"]').val()
+                }),
+                $renderContainer: $('.table-content'),
+                success: function (data) {
+                    var toast = new Toast.Toast();
+                    if (data.code !== this.ERR_NO) {
+                        toast.show(Toast.SUCCESS, '修改成功！');
+                        _this.selectPayWay('tpl-NAV15-SELECT');
+                    } else {
+                        toast.show(Toast.WARNING, data.message);
+                    }
+                    toast = null;
+                }
+            });
+        }
+        return this;
+    };
+    /**
+     *
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectPayWay = function (templateId) {
+        var _this = this;
+        var pageSize = apiMain.selectPayWay.params.pageSize;
+        $.ajax({
+            url: apiMain.getUrl('selectPayWay'),
+            data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
+                payName: $('input[name="search"]').val() || ''
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data))return;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.count / pageSize);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
             }
         });
         return this;

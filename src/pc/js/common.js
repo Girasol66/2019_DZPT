@@ -37,6 +37,8 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
             : '<div class="common__ajaxBox noData"><img src="../images/noData.png"/></div>';
 
         this.init();
+
+        console.log('对于我的颜值 只想用一句话来形容 我都想操了我自己！');
     };
     /**
      *

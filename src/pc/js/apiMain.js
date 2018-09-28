@@ -159,6 +159,38 @@ define(['jquery'], function ($) {
                 endDate: '20180909'
             }
         },
+        insertPayWay: {
+            url: '/payWay/addPayWay',
+            params: {
+                pay_way_code: "11",
+                pay_way_name: "扫码",
+                pay_type_code: "232",
+                pay_type_name: "支付宝"
+            }
+        },
+        deletePayWay: {
+            url: '/payWay/removePayWay',
+            params: {
+                ids: '1'
+            }
+        },
+        updatePayWay: {
+            url: '/payWay/updatePayWay',
+            params: {
+                pay_way_code: "11",
+                pay_way_name: "扫码",
+                pay_type_code: "232",
+                pay_type_name: "支付宝"
+            }
+        },
+        selectPayWay: {
+            url: '/payWay/selectPayWay',
+            params: {
+                pageIndex: 1,
+                pageSize: 10,
+                payName: ''
+            }
+        },
         getUrl: function (api) {
             return this.root + this[api].url;
         },

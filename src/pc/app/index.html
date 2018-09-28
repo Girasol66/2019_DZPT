@@ -74,6 +74,25 @@
                 </li>
                 <li class="nav-item">
                     <h3 class="nav-title">
+                        <i class="icon icon-payManage2"></i>
+                        <span>支付管理</span>
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </h3>
+                    <ul class="nav-bar">
+                        <li class="nav-item" data-template="tpl-NAV15-SELECT">
+                            <h4 class="nav-title">
+                                <span>支付查询</span>
+                            </h4>
+                        </li>
+                        <li class="nav-item" data-template="tpl-NAV16-INSERT">
+                            <h4 class="nav-title">
+                                <span>添加支付</span>
+                            </h4>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <h3 class="nav-title">
                         <i class="icon icon-bill"></i>
                         <span>账单管理</span>
                         <i class="glyphicon glyphicon-chevron-down"></i>
@@ -193,7 +212,8 @@
                             <td>{{$value.mobile_no}}</td>
                             <td>{{$value.login_name}}</td>
                             <td>
-                                <button class="btn btn-update"
+                                <button title="编辑"
+                                        class="btn btn-update icon-edit"
                                         data-itemId="{{$value.id}}"
                                         data-name="{{$value.real_name}}"
                                         data-phone="{{$value.mobile_no}}"
@@ -308,7 +328,8 @@
                             <td>{{$value.merchant_name||'--'}}</td>
                             <td>{{$value.status||'--'}}</td>
                             <td>
-                                <button class="btn btn-update"
+                                <button title="编辑"
+                                        class="btn btn-update icon-edit"
                                         data-itemId="{{$value.id}}"
                                         data-no="{{$value.merchant_no}}"
                                         data-name="{{$value.merchant_name}}"
@@ -1216,6 +1237,134 @@
                             </li>
                         </ul>
                     </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-NAV15-SELECT" type="text/html">
+    <div class="content" data-template="tpl-NAV15-SELECT" data-template-name="支付查询">
+        <div class="table row">
+            <div class="col-xs-12 table-content">
+                <div class="table-header">
+                    <div class="form-group">
+                        <label class="form-label">支付名称：</label>
+                        <input class="form-control" autocomplete="off" name="search" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-select">搜索</button>
+                        <button type="button" class="btn btn-danger btn-delete">删除</button>
+                    </div>
+                </div>
+                <div class="table-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr role="row">
+                            <th>
+                                <input class="checkbox all" type="checkbox" name="checkbox"/>
+                            </th>
+                            <th>支付方式编号</th>
+                            <th>支付方式名称</th>
+                            <th>支付类型编号</th>
+                            <th>支付类型名称</th>
+                            <th>状态</th>
+                            <th>版本</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each data}}
+                        <tr role="row" class="{{$index%2==0?'odd':'even'}}" data-itemId="{{$value.id}}">
+                            <td>
+                                <input class="checkbox" type="checkbox" name="checkbox"/>
+                            </td>
+                            <td>{{$value.pay_way_code}}</td>
+                            <td>{{$value.pay_way_name}}</td>
+                            <td>{{$value.pay_type_code}}</td>
+                            <td>{{$value.pay_type_name}}</td>
+                            <td>{{$value.status}}</td>
+                            <td>{{$value.version}}</td>
+                            <td>{{$value.create_time}}</td>
+                            <td>
+                                <button title="编辑"
+                                        class="btn btn-update icon-edit"
+                                        data-pay_way_id="{{$value.id}}"
+                                        data-pay_way_code="{{$value.pay_way_code}}"
+                                        data-pay_way_name="{{$value.pay_way_name}}"
+                                        data-pay_type_code="{{$value.pay_type_code}}"
+                                        data-pay_type_name="{{$value.pay_type_name}}"
+                                ></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="<%= 1===pageCode?'disabled':'' %>">
+                                <a aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <% for(var i=0; i < totalPage; i++){ %>
+                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a><%=(i+1) %></a>
+                            </li>
+                            <% } %>
+                            <li class="<%= totalPage===pageCode?'disabled':'' %>">
+                                <a aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-NAV16-INSERT" type="text/html">
+    <div class="content" data-template="tpl-NAV16-INSERT" data-template-name="添加支付">
+        <div class="table row">
+            <div class="col-xs-12 table-content">
+                <div class="table-header none"></div>
+                <div class="table-body">
+                    <div class="form-group">
+                        <label class="form-label">支付方式编码：</label>
+                        <input class="form-control" autocomplete="off" name="pay_way_code" value="{{pay_way_code||''}}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">支付方式名称：</label>
+                        <input class="form-control" autocomplete="off" name="pay_way_name" value="{{pay_way_name||''}}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">支付类型编码：</label>
+                        <input class="form-control" autocomplete="off" name="pay_type_code"
+                               value="{{pay_type_code||''}}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">支付类型编码：</label>
+                        <input class="form-control" autocomplete="off" name="pay_type_name"
+                               value="{{pay_type_name||''}}"
+                               type="text"/>
+                    </div>
+                </div>
+                <div class="table-footer">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-insert" data-updateId="{{id||''}}">{{btnText||'添加'}}</button>
+                        <button class="btn btn-default btn-reset">重置</button>
+                    </div>
                 </div>
             </div>
         </div>
