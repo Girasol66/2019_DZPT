@@ -685,6 +685,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
                         data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
                     data.payMethod = payMethod;
                     data.startTime = startTime;
@@ -730,6 +732,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
                         data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
                     data.payMethod = payMethod;
                     data.startTime = startTime;
@@ -775,6 +779,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
                         data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['bank_type'] = data.data[i]['bank_type'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['bank_type']);
                     }
                     data.payMethod = payMethod;
                     data.startTime = startTime;
@@ -820,6 +826,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['billDate'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
                         data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
                     data.payMethod = payMethod;
                     data.startTime = startTime;
@@ -865,6 +873,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
                         data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
                     data.payMethod = payMethod;
                     data.startTime = startTime;
@@ -1266,6 +1276,10 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
                     if (!common.ajaxDataIsExist(data))return;
+                    for (var i = 0; i < data.data.length; i++) {
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
+                    }
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);

@@ -234,7 +234,7 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
                 icon: 'icon-cash'
             },
             {
-                text: '银联',
+                text: '银联扫码',
                 icon: 'icon-unionPay'
             }
         ];
