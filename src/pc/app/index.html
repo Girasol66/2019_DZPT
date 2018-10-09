@@ -735,7 +735,7 @@
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.accountCheckBatchNo}}</td>
                             <td>{{$value.billDate}}</td>
-                            <td>{{$value.bankType}}</td>
+                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
                             <td>{{$value.errType}}</td>
                             <td>{{$value.handleStatus}}</td>
                             <td>{{$value.remark}}</td>
@@ -812,7 +812,7 @@
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr role="row">
-                            <th>商户名称</th>
+                            <th>商户编号</th>
                             <th>支付方式</th>
                             <th>对账批次号</th>
                             <th>账单日期</th>
@@ -828,7 +828,7 @@
                         <tbody>
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
-                            <td>{{$value.merchant_name}}</td>
+                            <td>{{$value.merchant_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
                             <td>{{$value.account_check_batch_no}}</td>
                             <td>{{$value.bill_date}}</td>
@@ -1267,7 +1267,7 @@
                             <th>支付方式编号</th>
                             <th>支付方式</th>
                             <th>支付类型编号</th>
-                            <th>支付类型名称</th>
+                            <th>支付类型</th>
                             <th>状态</th>
                             <th>版本</th>
                             <th>创建时间</th>
@@ -1354,7 +1354,7 @@
                                type="text"/>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">支付类型编码：</label>
+                        <label class="form-label">支付类型：</label>
                         <input class="form-control" autocomplete="off" name="pay_type_name"
                                value="{{pay_type_name||''}}"
                                type="text"/>
