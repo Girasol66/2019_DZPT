@@ -1281,7 +1281,12 @@
                                 <input class="checkbox" type="checkbox" name="checkbox"/>
                             </td>
                             <td>{{$value.pay_way_code}}</td>
-                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.pay_way_name}}" type="{{$value.pay_type}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-cash' || $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}
+                                 "></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.pay_type_code}}</td>
                             <td>{{$value.pay_type_name}}</td>
                             <td>{{$value.status}}</td>

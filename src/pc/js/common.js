@@ -48,6 +48,7 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         this.checkUser();
         this.ajaxInitDefault();
         this.ajaxExtend();
+        this.setStartAndEndTime();
         return this;
     };
     /**
@@ -250,6 +251,8 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
      * @returns {Common}
      */
     Common.prototype.dateTimePickerInit = function () {
+        console.log($(this.DATE_SEL));
+        debugger;
         $(this.DATE_SEL).datetimepicker({
             language: 'zh-CN',
             format: 'yyyy-mm-dd',
@@ -258,6 +261,14 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         });
         return this;
     };
+    /**
+     * 设置默认日期
+     */
+    Common.prototype.setStartAndEndTime = function () {
+        console.log('默认日期');
+        console.log($('input[name="startTime"]'));
+        $('input[name="startTime"]').datetimepicker('setDate', '2018-12-12')
+    }
     /**
      * 实例化匿名对象
      */
