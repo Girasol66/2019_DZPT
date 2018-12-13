@@ -37,7 +37,7 @@ define(['jquery'], function ($) {
             url: '/user/selectUser',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 realName: ''
             }
         },
@@ -66,7 +66,7 @@ define(['jquery'], function ($) {
             url: '/merchant/selectMerchant',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 merchantName: "上海人民医院"
             }
         },
@@ -74,7 +74,7 @@ define(['jquery'], function ($) {
             url: '/checkBillLog/selectCheckBillLog',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 beginDate: '',
                 endDate: ''
             }
@@ -83,7 +83,7 @@ define(['jquery'], function ($) {
             url: '/bankRecord/selectBankRecord',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 beginDate: "20010909",
                 endDate: "20180909",
                 payName: "支付宝"
@@ -93,7 +93,7 @@ define(['jquery'], function ($) {
             url: '/checkBase/selectCheckBase',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 payName: '',
                 beginDate: '',
                 endDate: ''
@@ -105,14 +105,14 @@ define(['jquery'], function ($) {
                 beginDate: '',
                 endDate: '',
                 pageIndex: 1,
-                pageSize: 10
+                pageSize: 20
             }
         },
         selectMerchantRecord: {
             url: '/merchantRecord/selectMerchantRecord',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 beginDate: '20010909',
                 endDate: '20180909',
                 payName: '支付宝'
@@ -122,7 +122,7 @@ define(['jquery'], function ($) {
             url: '/misTake/selectMisTake',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 beginDate: '',
                 endDate: '',
                 payName: ''
@@ -132,7 +132,7 @@ define(['jquery'], function ($) {
             url: '/scratchPool/selectScratchPool',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 beginDate: "20010909",
                 endDate: "20180909",
                 payName: "支付宝"
@@ -187,7 +187,7 @@ define(['jquery'], function ($) {
             url: '/payWay/selectPayWay',
             params: {
                 pageIndex: 1,
-                pageSize: 10,
+                pageSize: 20,
                 payName: ''
             }
         },

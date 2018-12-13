@@ -451,7 +451,11 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
-                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.pay_way_name}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
+                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.order_amount}}</td>
                             <td>{{$value.fee}}</td>
@@ -547,7 +551,11 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
-                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.pay_way_name}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
+                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.order_amount}}</td>
                             <td>{{$value.fee}}</td>
@@ -643,7 +651,11 @@
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.batch_no}}</td>
                             <td>{{$value.bill_date}}</td>
-                            <td><i title="{{$value.bank_type}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.bank_type}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
+                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.bank_type}}</td>
                             <td>{{$value.batch_no}}</td>
                             <td>{{$value.bank_trade_amount}}</td>
                             <td>{{$value.refund_amount}}</td>
@@ -735,7 +747,11 @@
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.accountCheckBatchNo}}</td>
                             <td>{{$value.billDate}}</td>
-                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.pay_way_name}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
+                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.errType}}</td>
                             <td>{{$value.handleStatus}}</td>
                             <td>{{$value.remark}}</td>
@@ -829,7 +845,11 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
-                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.pay_way_name}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
+                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.account_check_batch_no}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.bank_src}}</td>
