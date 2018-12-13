@@ -48,7 +48,6 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         this.checkUser();
         this.ajaxInitDefault();
         this.ajaxExtend();
-        this.setStartAndEndTime();
         return this;
     };
     /**
@@ -84,6 +83,8 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
             .ajaxComplete(function (event, xhr, options) {
                 var ajaxBox = options.ajaxBox;
                 _this.dateTimePickerInit();
+                _this.setDatePickerTime('startTime', -3);
+                _this.setDatePickerTime('stopTime', 0);
                 _this.hideLoading(ajaxBox);
                 console.log("AJAX_COMPLETE");
             });
@@ -251,8 +252,6 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
      * @returns {Common}
      */
     Common.prototype.dateTimePickerInit = function () {
-        console.log($(this.DATE_SEL));
-        debugger;
         $(this.DATE_SEL).datetimepicker({
             language: 'zh-CN',
             format: 'yyyy-mm-dd',
@@ -264,10 +263,12 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
     /**
      * 设置默认日期
      */
-    Common.prototype.setStartAndEndTime = function () {
-        console.log('默认日期');
-        console.log($('input[name="startTime"]'));
-        $('input[name="startTime"]').datetimepicker('setDate', '2018-12-12')
+    Common.prototype.setDatePickerTime = function (name, dayNum) {
+        name = name ? name : 'startTime';
+        dayNum = dayNum ? dayNum : 0;
+        var nowDate = new Date();
+        var newDate = new Date(nowDate.getTime() + 24*60*60*1000*dayNum);
+        $('input[name='+ name +']').datetimepicker('setDate', newDate);
     }
     /**
      * 实例化匿名对象
