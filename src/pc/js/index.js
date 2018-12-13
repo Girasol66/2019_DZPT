@@ -51,6 +51,34 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
+     * 筛选条件-支付方式
+     * @returns {HomePage}
+     */
+    HomePage.prototype.dataPaymentMethod = function () {
+        $.ajax({
+            url: apiMain.getUrl('selectPayment'),
+            data: {},
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    if (!common.ajaxDataIsExist(data)) return;
+                    var payment = [];
+                    $('.payment-methods').empty();
+                    for (var i = 0; i < data.data.length; i++) {
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
+                        if (!data.data[i]['pay_type']) {
+                            data.data[i]['pay_type'] = 'icon-all';
+                        }
+                        payment.push('<li><a><i class="'+data.data[i]["pay_type"]+'"></i><span>'+data.data[i]["pay_way_name"]+'</span></a></li>');
+                    }
+                    $('.payment-methods').html(payment.join().replace(/,/g, ''));
+                }
+            }
+        });
+        return this;
+    };
+    /**
      *
      * @returns {HomePage}
      */
@@ -697,6 +725,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
+                    _this.dataPaymentMethod();
                 }
             }
         });
@@ -744,13 +773,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
+                    _this.dataPaymentMethod();
                 }
             }
         });
         return this;
     };
     /**
-     *
+     * 对账批次查询
      * @param templateId
      * @returns {HomePage}
      */
@@ -791,6 +821,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
+                    _this.dataPaymentMethod();
                 }
             }
         });
@@ -838,6 +869,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
+                    _this.dataPaymentMethod();
                 }
             }
         });
@@ -885,6 +917,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
+                    _this.dataPaymentMethod();
                 }
             }
         });
@@ -1261,7 +1294,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 支付查询
      * @returns {HomePage}
      */
     HomePage.prototype.selectPayWay = function (templateId) {

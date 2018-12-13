@@ -191,6 +191,10 @@ define(['jquery'], function ($) {
                 payName: ''
             }
         },
+        // 获取支付所有支付方式-无需传参
+        selectPayment: {
+            url: '/payWay/selectAll'
+        },
         getUrl: function (api) {
             return this.root + this[api].url;
         },

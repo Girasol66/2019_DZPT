@@ -419,7 +419,7 @@
                                 {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <ul class="dropdown-menu payment-methods" aria-labelledby="dropdownMenu1">
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
@@ -453,8 +453,8 @@
                             <td>{{$value.merchant_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
-                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
                                 {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.order_amount}}</td>
@@ -519,7 +519,7 @@
                                 {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <ul class="dropdown-menu payment-methods" aria-labelledby="dropdownMenu1">
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
@@ -553,8 +553,8 @@
                             <td>{{$value.merchant_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
-                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
                                 {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.order_amount}}</td>
@@ -615,11 +615,11 @@
                     <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="console.log(1)">
                                 {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <ul class="dropdown-menu payment-methods" aria-labelledby="dropdownMenu1">
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
@@ -639,10 +639,10 @@
                             <th>账单批次号</th>
                             <th>日期</th>
                             <th>支付方式</th>
-                            <th>渠道批次号</th>
+                            <th>渠道交易笔数</th>
                             <th>渠道交易金额</th>
-                            <th>退款金额</th>
-                            <th>交易金额</th>
+                            <th>商户交易笔数</th>
+                            <th>商户交易金额</th>
                             <th>备注</th>
                         </tr>
                         </thead>
@@ -653,13 +653,13 @@
                             <td>{{$value.bill_date}}</td>
                             <td><i title="{{$value.bank_type}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
-                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
                                 {{else}} icon-all {{/if}}"></i>{{$value.bank_type}}</td>
-                            <td>{{$value.batch_no}}</td>
+                            <td>{{$value.bank_trade_count}}</td>
                             <td>{{$value.bank_trade_amount}}</td>
-                            <td>{{$value.refund_amount}}</td>
                             <td>{{$value.trade_count}}</td>
+                            <td>{{$value.trade_amount}}</td>
                             <td>{{$value.remark}}</td>
                         </tr>
                         {{/each}}
@@ -717,7 +717,7 @@
                                 {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <ul class="dropdown-menu payment-methods" aria-labelledby="dropdownMenu1">
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
@@ -749,8 +749,8 @@
                             <td>{{$value.billDate}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
-                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
                                 {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.errType}}</td>
                             <td>{{$value.handleStatus}}</td>
@@ -811,7 +811,7 @@
                                 {{payMethod||'全部'}}
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <ul class="dropdown-menu payment-methods" aria-labelledby="dropdownMenu1">
                                 <li><a><i class="icon-all"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-aliPay"></i><span>支付宝</span></a></li>
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
@@ -847,8 +847,8 @@
                             <td>{{$value.merchant_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-cash'
-                                    || $value.pay_type == 'icon-unionPay'}} {{$value.pay_type}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
                                 {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.account_check_batch_no}}</td>
                             <td>{{$value.bill_date}}</td>
@@ -1075,7 +1075,11 @@
                         <tbody>
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
-                            <td><i title="{{$value.bank_type}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.bank_type}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.bank_type}}</td>
                             <td>{{$value.fees}}</td>
                             <td>{{$value.mistake_counts}}</td>
                             <td>{{$value.trade_counts}}</td>
@@ -1152,7 +1156,11 @@
                         <tbody>
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
-                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.pay_way_name}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.fees}}</td>
                             <td>{{$value.order_amounts}}</td>
                             <td>{{$value.refund_num}}</td>
@@ -1224,7 +1232,11 @@
                         <tbody>
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
-                            <td><i title="{{$value.pay_way_name}}" class="icon {{$value.pay_type}}"></i></td>
+                            <td><i title="{{$value.pay_way_name}}" class="icon
+                                {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    {{$value.pay_type}}
+                                {{else}} icon-all {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.fees}}</td>
                             <td>{{$value.order_amounts}}</td>
                             <td>{{$value.refund_num}}</td>
