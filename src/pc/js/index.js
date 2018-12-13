@@ -242,7 +242,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -435,7 +435,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -478,6 +478,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     $(this).addClass(_this.ACTIVE);
                 }
             } else {
+                $(_this.NAV_ITEM).not($(this).parents(_this.NAV_ITEM)).removeClass(_this.ACTIVE);
+                $(this).addClass(_this.ACTIVE);
                 var templateId = $(this).attr('data-template').trim();
                 switch (templateId) {
                     case 'tpl-NAV01-SELECT':
@@ -679,7 +681,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -726,7 +728,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -773,7 +775,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -820,7 +822,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['billDate'];
                         data.data[i]['billDate'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -867,7 +869,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -911,7 +913,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -952,7 +954,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -990,7 +992,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -1030,7 +1032,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -1070,7 +1072,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -1275,7 +1277,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data))return;
+                    if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);

@@ -144,7 +144,7 @@ gulp.task('server', function () {
     var config = {
         root: devPath,
         host: IP,
-        port: 9000,
+        port: 9001,
         livereload: true,
         middleware: function (connect, opt) {
             return [
