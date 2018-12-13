@@ -127,8 +127,14 @@
           }
         }
         &.active {
-          h3 {
+          > h3 {
             color: #337ab7;
+          }
+          > h4 {
+            color: #337ab7;
+            &:before {
+              border-left-color: #337ab7;
+            }
           }
           .glyphicon-chevron-down {
             transform: rotate(180deg);
