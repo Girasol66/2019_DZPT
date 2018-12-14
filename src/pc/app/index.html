@@ -238,9 +238,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
-                                <a><%=(i+1) %></a>
-                            </li>
+                                {{if (i > 1 && i < 8 && pageCode <6)
+                                || i< 2 || i > totalPage-3
+                                || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                                <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                    <a><%=(i+1) %></a>
+                                </li>
+                                {{else if (i==totalPage-3 && i!=pageCode)
+                                || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                                || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                                <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                    <a>...</a>
+                                </li>
+                                {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -352,9 +362,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
-                                <a><%=(i+1) %></a>
-                            </li>
+                                {{if (i > 1 && i < 8 && pageCode <6)
+                                || i< 2 || i > totalPage-3
+                                || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                                <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                    <a><%=(i+1) %></a>
+                                </li>
+                                {{else if (i==totalPage-3 && i!=pageCode)
+                                || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                                || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                                <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                    <a>...</a>
+                                </li>
+                                {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -480,9 +500,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -580,9 +610,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -678,9 +718,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -772,9 +822,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -876,9 +936,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -950,9 +1020,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -1020,9 +1100,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -1106,9 +1196,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -1182,9 +1282,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -1258,9 +1368,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                            {{if (i > 1 && i < 8 && pageCode <6)
+                            || i< 2 || i > totalPage-3
+                            || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                            <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
                                 <a><%=(i+1) %></a>
                             </li>
+                            {{else if (i==totalPage-3 && i!=pageCode)
+                            || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                            || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                            <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                <a>...</a>
+                            </li>
+                            {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">
@@ -1351,9 +1471,19 @@
                                 </a>
                             </li>
                             <% for(var i=0; i < totalPage; i++){ %>
-                            <li class="<%= (i+1)===pageCode?'active disabled':'' %>">
-                                <a><%=(i+1) %></a>
-                            </li>
+                                {{if (i > 1 && i < 8 && pageCode <6)
+                                    || i< 2 || i > totalPage-3
+                                    || (pageCode > 5 && i< pageCode+2 && i> pageCode-4) }}
+                                    <li i="{{i}}" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                        <a><%=(i+1) %></a>
+                                    </li>
+                                {{else if (i==totalPage-3 && i!=pageCode)
+                                    || (i< pageCode-2 && i> pageCode+2 && i>2 && pageCode>6)
+                                    || (i== 2 && i< pageCode-1 && pageCode > 5) }}
+                                    <li ai="{{i}}" c="" class="<%= (i+1)===pageCode?'active disabled':'' %>">
+                                        <a>...</a>
+                                    </li>
+                                {{/if}}
                             <% } %>
                             <li class="<%= totalPage===pageCode?'disabled':'' %>">
                                 <a aria-label="Next">

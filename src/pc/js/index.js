@@ -61,7 +61,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    //if (!common.ajaxDataIsExist(data)) return;
                     var payment = [];
                     $('.payment-methods').empty();
                     for (var i = 0; i < data.data.length; i++) {
@@ -270,7 +270,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    //if (!common.ajaxDataIsExist(data)) return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -463,7 +463,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -709,7 +709,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -757,7 +757,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -805,7 +805,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -853,7 +853,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['billDate'];
                         data.data[i]['billDate'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -901,7 +901,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -946,7 +946,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -987,7 +987,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -1025,7 +1025,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -1065,7 +1065,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -1105,7 +1105,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
@@ -1299,7 +1299,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      */
     HomePage.prototype.selectPayWay = function (templateId) {
         var _this = this;
-        var pageSize = apiMain.selectPayWay.params.pageSize;
+        var pageSize = 3;//apiMain.selectPayWay.params.pageSize;
         $.ajax({
             url: apiMain.getUrl('selectPayWay'),
             data: apiMain.getParams({
@@ -1310,7 +1310,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    if (!common.ajaxDataIsExist(data)) return;
+                    //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);

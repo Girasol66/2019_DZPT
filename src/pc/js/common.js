@@ -265,8 +265,8 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         name = name ? name : 'startTime';
         dayNum = dayNum ? dayNum : 0;
         var nowDate = new Date();
-        var newDate = new Date(nowDate.getTime() + 24*60*60*1000*dayNum);
-        $('input[name='+ name +']').datetimepicker('setDate', newDate);
+        var newDate = new Date(nowDate.getTime() + 24 * 60 * 60 * 1000 * dayNum);
+        $('input[name=' + name + ']').datetimepicker('setDate', newDate);
     }
     /**
      * 实例化匿名对象
