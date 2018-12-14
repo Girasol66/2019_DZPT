@@ -457,6 +457,7 @@
                         <thead>
                         <tr role="row">
                             <th>商户编号</th>
+                            <th>交易流水号</th>
                             <th>支付方式</th>
                             <th>账单日期</th>
                             <th>订单金额</th>
@@ -471,6 +472,7 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
+                            <td>{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
                                     || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
@@ -567,6 +569,7 @@
                         <thead>
                         <tr role="row">
                             <th>商户编号</th>
+                            <th>交易流水号</th>
                             <th>支付方式</th>
                             <th>账单日期</th>
                             <th>订单金额</th>
@@ -581,6 +584,7 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
+                            <td>{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
                                     || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
@@ -785,6 +789,7 @@
                         <thead>
                         <tr role="row">
                             <th>账单批次号</th>
+                            <th>交易流水号</th>
                             <th>日期</th>
                             <th>支付方式</th>
                             <th>错误类型</th>
@@ -796,6 +801,7 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.accountCheckBatchNo}}</td>
+                            <td>{{$value.bank_trx_no}}</td>
                             <td>{{$value.billDate}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
@@ -889,6 +895,7 @@
                         <thead>
                         <tr role="row">
                             <th>商户编号</th>
+                            <th>交易流水号</th>
                             <th>支付方式</th>
                             <th>对账批次号</th>
                             <th>账单日期</th>
@@ -905,6 +912,7 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
+                            <td>{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
                                     || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}

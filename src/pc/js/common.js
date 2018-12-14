@@ -67,6 +67,17 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
                 if (!_this.ajaxDataIsExist(data)) {
                     var ajaxBox = options.ajaxBox;
                     _this.showNoData(ajaxBox);
+                } else {
+                    if (data.startTime!==undefined && !data.startTime) {
+                        setTimeout(function() {
+                            if (!data.startTime) {
+                                _this.setDatePickerTime('startTime', -3);
+                            }
+                            if(!data.stopTime){
+                                _this.setDatePickerTime('stopTime', 0);
+                            }
+                        },2000)
+                    }
                 }
                 console.log('AJAX_SUCCESS');
             })
@@ -81,8 +92,6 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
             .ajaxComplete(function (event, xhr, options) {
                 var ajaxBox = options.ajaxBox;
                 _this.dateTimePickerInit();
-                _this.setDatePickerTime('startTime', -3);
-                _this.setDatePickerTime('stopTime', 0);
                 _this.hideLoading(ajaxBox);
                 console.log("AJAX_COMPLETE");
             });
@@ -190,6 +199,27 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         day = day > 9 ? day : '0' + day;
 
         return year + '-' + month + '-' + day;
+    };
+    /**
+     * 时间戳格式化-年月日-时分秒
+     */
+    Common.prototype.parseDateTime = function (offsetTime) {
+        var date = new Date(offsetTime);
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var h = date.getHours();
+        var m =date.getMinutes();
+        var s = date.getSeconds();
+
+        year = year > 9 ? year : '0' + year;
+        month = month > 9 ? month : '0' + month;
+        day = day > 9 ? day : '0' + day;
+        h = h > 9 ? h : '0' + h;
+        m = m > 9 ? m : '0' + m;
+        s = s > 9 ? s : '0' + s;
+
+        return year + '-' + month + '-' + day + ' '+h+ ':' +m+ ':'+s;
     };
     /**
      *

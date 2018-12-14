@@ -63,6 +63,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 if (data.code !== this.ERR_NO) {
                     //if (!common.ajaxDataIsExist(data)) return;
                     var payment = [];
+                    payment.push('<li><a><i class="icon-all"></i><span>全部</span></a></li>');
                     $('.payment-methods').empty();
                     for (var i = 0; i < data.data.length; i++) {
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
@@ -708,13 +709,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
+                // debugger;
                 if (data.code !== this.ERR_NO) {
                     // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
-                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['complete_time'] = common.parseDateTime(tempTime);
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
@@ -762,7 +764,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
-                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['complete_time'] = common.parseDateTime(tempTime);
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
@@ -906,7 +908,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
-                        data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['complete_time'] = common.parseDateTime(tempTime);
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
@@ -1299,7 +1301,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      */
     HomePage.prototype.selectPayWay = function (templateId) {
         var _this = this;
-        var pageSize = 3;//apiMain.selectPayWay.params.pageSize;
+        var pageSize = apiMain.selectPayWay.params.pageSize;
         $.ajax({
             url: apiMain.getUrl('selectPayWay'),
             data: apiMain.getParams({
