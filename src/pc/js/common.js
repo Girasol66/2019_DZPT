@@ -67,17 +67,6 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
                 if (!_this.ajaxDataIsExist(data)) {
                     var ajaxBox = options.ajaxBox;
                     _this.showNoData(ajaxBox);
-                } else {
-                    if (data.startTime!==undefined && !data.startTime) {
-                        setTimeout(function() {
-                            if (!data.startTime) {
-                                _this.setDatePickerTime('startTime', -3);
-                            }
-                            if(!data.stopTime){
-                                _this.setDatePickerTime('stopTime', 0);
-                            }
-                        },2000)
-                    }
                 }
                 console.log('AJAX_SUCCESS');
             })
@@ -297,6 +286,16 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         var nowDate = new Date();
         var newDate = new Date(nowDate.getTime() + 24 * 60 * 60 * 1000 * dayNum);
         $('input[name=' + name + ']').datetimepicker('setDate', newDate);
+    }
+    // 获取日期 0：当天 ；-1：昨天；1：明天
+    Common.prototype.getCalendarDate = function (dayNum) {
+        dayNum = dayNum ? dayNum : 0;
+        var nowDate = new Date();
+        var newDate = new Date(nowDate.getTime() + 24 * 60 * 60 * 1000 * dayNum);
+        var y = newDate.getFullYear();
+        var m = newDate.getMonth() + 1;
+        var d = newDate.getDate();
+        return y + '-' + m + '-' + d;
     }
     /**
      * 实例化匿名对象

@@ -685,14 +685,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 商户交易明细查询
      * @param templateId
      * @returns {HomePage}
      */
     HomePage.prototype.selectMerchantRecord = function (templateId) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        var startTime = $('input[name="startTime"]').val() ||  common.getCalendarDate(-3);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
         var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';
         var payMethod = $('.dropdown>button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
@@ -737,14 +737,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 渠道交易明细查询
      * @param templateId
      * @returns {HomePage}
      */
     HomePage.prototype.selectBankRecord = function (templateId) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
         var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';
         var payMethod = $('.dropdown>button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
@@ -794,8 +794,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      */
     HomePage.prototype.selectCheckBase = function (templateId) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
         var payMethod = $('.dropdown>button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
@@ -836,14 +836,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 差错查询
      * @param templateId
      * @returns {HomePage}
      */
     HomePage.prototype.selectMisTake = function (templateId) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
         var payMethod = $('.dropdown>button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
@@ -884,14 +884,14 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 缓冲池查询
      * @param templateId
      * @returns {HomePage}
      */
     HomePage.prototype.selectScratchPool = function (templateId) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
         var payMethod = $('.dropdown>button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
