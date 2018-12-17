@@ -1281,6 +1281,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $.ajax({
                 url: apiMain.getUrl('updatePayWay'),
                 data: apiMain.getParams({
+                    id: $(_this.BTN_INSERT).attr('data-updateId'),
                     pay_way_code: $('input[name="pay_way_code"]').val(),
                     pay_way_name: $('input[name="pay_way_name"]').val(),
                     pay_type_code: $('input[name="pay_type_code"]').val(),
