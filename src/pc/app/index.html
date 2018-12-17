@@ -433,6 +433,10 @@
                                readonly="readonly"/>
                     </div>
                     <div class="form-group">
+                        <label class="form-label">交易流水号：</label>
+                        <input class="form-control" name="bankTrxNo" value="{{bankTrxNo}}" type="text"/>
+                    </div>
+                    <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -463,8 +467,8 @@
                             <th>订单金额</th>
                             <th>手续费</th>
                             <th>完成时间</th>
-                            <th>成功退款总金额</th>
-                            <th>交易业务类型</th>
+                            <th>成功金额</th>
+                            <th>交易类型</th>
                             <th>订单类型</th>
                         </tr>
                         </thead>
@@ -472,7 +476,7 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
-                            <td>{{$value.bank_trx_no}}</td>
+                            <td title="{{$value.bank_trx_no}}">{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
                                     || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
@@ -545,6 +549,10 @@
                                readonly="readonly"/>
                     </div>
                     <div class="form-group">
+                        <label class="form-label">交易流水号：</label>
+                        <input class="form-control" name="bankTrxNo" value="{{bankTrxNo}}" type="text"/>
+                    </div>
+                    <div class="form-group">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -575,8 +583,8 @@
                             <th>订单金额</th>
                             <th>手续费</th>
                             <th>完成时间</th>
-                            <th>成功退款总金额</th>
-                            <th>交易业务类型</th>
+                            <th>成功金额</th>
+                            <th>交易类型</th>
                             <th>订单类型</th>
                         </tr>
                         </thead>
@@ -584,7 +592,7 @@
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
-                            <td>{{$value.bank_trx_no}}</td>
+                            <td title="{{$value.bank_trx_no}}">{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
                                     || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}

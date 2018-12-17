@@ -693,6 +693,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         var _this = this;
         var startTime = $('input[name="startTime"]').val() || '';
         var stopTime = $('input[name="stopTime"]').val() || '';
+        var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';
         var payMethod = $('.dropdown>button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
@@ -705,6 +706,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 pageSize: pageSize,
                 beginDate: beginDate,
                 endDate: endDate,
+                bankTrxNo: bankTrxNo,
                 payName: payName
             }),
             $renderContainer: $('.table-content'),
@@ -723,6 +725,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.payMethod = payMethod;
                     data.startTime = startTime;
                     data.stopTime = stopTime;
+                    data.bankTrxNo = bankTrxNo;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -742,6 +745,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         var _this = this;
         var startTime = $('input[name="startTime"]').val() || '';
         var stopTime = $('input[name="stopTime"]').val() || '';
+        var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';
         var payMethod = $('.dropdown>button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
@@ -754,6 +758,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 pageSize: pageSize,
                 beginDate: beginDate,
                 endDate: endDate,
+                bankTrxNo: bankTrxNo,
                 payName: payName
             }),
             $renderContainer: $('.table-content'),
@@ -771,6 +776,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.payMethod = payMethod;
                     data.startTime = startTime;
                     data.stopTime = stopTime;
+                    data.bankTrxNo = bankTrxNo;
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
