@@ -418,7 +418,7 @@
 </script>
 
 <script id="tpl-NAV05-SELECT" type="text/html">
-    <div class="content" data-template="tpl-NAV05-SELECT" data-template-name="商户交易明细查询">
+    <div id="NAV05" class="content" data-template="tpl-NAV05-SELECT" data-template-name="商户交易明细查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
@@ -436,8 +436,9 @@
                         <label class="form-label">交易流水号：</label>
                         <input class="form-control" name="bankTrxNo" value="{{bankTrxNo}}" type="text"/>
                     </div>
-                    <div class="form-group">
-                        <div class="dropdown">
+                    <div class="form-group payment">
+                        <label class="form-label">支付方式：</label>
+                        <div class="form-control dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 {{payMethod||'全部'}}
@@ -449,6 +450,37 @@
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
                                 <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联扫码</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group trxntype">
+                        <label class="form-label">交易类型：</label>
+                        <div class="form-control dropdown">
+                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{trxnTypeName||'全部'}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu trxn-type-name" aria-labelledby="dropdownMenu2">
+                                <li><a><i class="icon-all"></i><span>全部</span></a></li>
+                                <li><a><i class="icon-consume"></i><span>消费</span></a></li>
+                                <li><a><i class="icon-recharge"></i><span>充值</span></a></li>
+                                <li><a><i class="icon-return"></i><span>退货</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group billsrctype">
+                        <label class="form-label">来源类型：</label>
+                        <div class="form-control dropdown">
+                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{billSrcTypeName||'全部'}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu bill-src-type-name" aria-labelledby="dropdownMenu3">
+                                <li><a><i class="icon-all"></i><span>全部</span></a></li>
+                                <li><a><i class="icon-HIS"></i><span>HIS</span></a></li>
+                                <li><a><i class="icon-selfSer"></i><span>自助机</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -534,7 +566,7 @@
 </script>
 
 <script id="tpl-NAV06-SELECT" type="text/html">
-    <div class="content" data-template="tpl-NAV06-SELECT" data-template-name="渠道交易明细查询">
+    <div id="NAV06" class="content" data-template="tpl-NAV06-SELECT" data-template-name="渠道交易明细查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
@@ -552,8 +584,9 @@
                         <label class="form-label">交易流水号：</label>
                         <input class="form-control" name="bankTrxNo" value="{{bankTrxNo}}" type="text"/>
                     </div>
-                    <div class="form-group">
-                        <div class="dropdown">
+                    <div class="form-group payment">
+                        <label class="form-label">支付方式：</label>
+                        <div class="form-control dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 {{payMethod||'全部'}}
@@ -565,6 +598,37 @@
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
                                 <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联扫码</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group trxntype">
+                        <label class="form-label">交易类型：</label>
+                        <div class="form-control dropdown">
+                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{trxnTypeName||'全部'}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu trxn-type-name" aria-labelledby="dropdownMenu2">
+                                <li><a><i class="icon-all"></i><span>全部</span></a></li>
+                                <li><a><i class="icon-consume"></i><span>消费</span></a></li>
+                                <li><a><i class="icon-recharge"></i><span>充值</span></a></li>
+                                <li><a><i class="icon-return"></i><span>退货</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group billsrctype">
+                        <label class="form-label">来源类型：</label>
+                        <div class="form-control dropdown">
+                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{billSrcTypeName||'全部'}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu bill-src-type-name" aria-labelledby="dropdownMenu3">
+                                <li><a><i class="icon-all"></i><span>全部</span></a></li>
+                                <li><a><i class="icon-HIS"></i><span>HIS</span></a></li>
+                                <li><a><i class="icon-selfSer"></i><span>自助机</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -650,7 +714,7 @@
 </script>
 
 <script id="tpl-NAV07-SELECT" type="text/html">
-    <div class="content" data-template="tpl-NAV07-SELECT" data-template-name="对账批次查询">
+    <div id="NAV07" class="content" data-template="tpl-NAV07-SELECT" data-template-name="对账批次查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
@@ -664,7 +728,7 @@
                         <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
                                readonly="readonly"/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group payment">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" onclick="console.log(1)">
@@ -758,7 +822,7 @@
 </script>
 
 <script id="tpl-NAV08-SELECT" type="text/html">
-    <div class="content" data-template="tpl-NAV08-SELECT" data-template-name="差错查询">
+    <div id="NAV08" class="content" data-template="tpl-NAV08-SELECT" data-template-name="差错查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
@@ -772,7 +836,7 @@
                         <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
                                readonly="readonly"/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group payment">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -864,7 +928,7 @@
 </script>
 
 <script id="tpl-NAV09-SELECT" type="text/html">
-    <div class="content" data-template="tpl-NAV09-SELECT" data-template-name="缓冲池查询">
+    <div id="NAV09" class="content" data-template="tpl-NAV09-SELECT" data-template-name="缓冲池查询">
         <div class="table row">
             <div class="col-xs-12 table-content">
                 <div class="table-header">
@@ -878,8 +942,9 @@
                         <input class="form-control form-date" name="stopTime" value="{{stopTime}}" type="text"
                                readonly="readonly"/>
                     </div>
-                    <div class="form-group">
-                        <div class="dropdown">
+                    <div class="form-group payment">
+                        <label class="form-label">支付方式：</label>
+                        <div class="form-control dropdown">
                             <button class="btn btn-default dropdown-toggle margin-clear" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 {{payMethod||'全部'}}
@@ -891,6 +956,37 @@
                                 <li><a><i class="icon-weChat"></i><span>微信</span></a></li>
                                 <li><a><i class="icon-cash"></i><span>现金</span></a></li>
                                 <li><a><i class="icon-unionPay"></i><span>银联扫码</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group trxntype">
+                        <label class="form-label">交易类型：</label>
+                        <div class="form-control dropdown">
+                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{trxnTypeName||'全部'}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu trxn-type-name" aria-labelledby="dropdownMenu2">
+                                <li><a><i class="icon-all"></i><span>全部</span></a></li>
+                                <li><a><i class="icon-consume"></i><span>消费</span></a></li>
+                                <li><a><i class="icon-recharge"></i><span>充值</span></a></li>
+                                <li><a><i class="icon-return"></i><span>退货</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group billsrctype">
+                        <label class="form-label">来源类型：</label>
+                        <div class="form-control dropdown">
+                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{billSrcTypeName||'全部'}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu bill-src-type-name" aria-labelledby="dropdownMenu3">
+                                <li><a><i class="icon-all"></i><span>全部</span></a></li>
+                                <li><a><i class="icon-HIS"></i><span>HIS</span></a></li>
+                                <li><a><i class="icon-selfSer"></i><span>自助机</span></a></li>
                             </ul>
                         </div>
                     </div>
