@@ -88,7 +88,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         $(document).on('click', this.DROP_ITEM, function () {
             var txt = $(this).text().trim() + ' ';
             var innerHtml = txt + '<span class="caret"></span>';
-            $('.dropdown-toggle').html(innerHtml);
+            $(this).parents('.form-group').find('.dropdown-toggle').html(innerHtml);
         });
         return this;
     };
@@ -526,19 +526,19 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         $(_this.TEMPLATE).html(templateHtml);
                         break;
                     case 'tpl-NAV05-SELECT':
-                        _this.selectMerchantRecord(templateId);
+                        _this.selectMerchantRecord(templateId, true);
                         break;
                     case 'tpl-NAV06-SELECT':
-                        _this.selectBankRecord(templateId);
+                        _this.selectBankRecord(templateId, true);
                         break;
                     case 'tpl-NAV07-SELECT':
-                        _this.selectCheckBase(templateId);
+                        _this.selectCheckBase(templateId, true);
                         break;
                     case 'tpl-NAV08-SELECT':
-                        _this.selectMisTake(templateId);
+                        _this.selectMisTake(templateId, true);
                         break;
                     case 'tpl-NAV09-SELECT':
-                        _this.selectScratchPool(templateId);
+                        _this.selectScratchPool(templateId, true);
                         break;
                     case 'tpl-NAV10-SELECT':
                         _this.selectFileStatus(templateId);
@@ -689,13 +689,22 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectMerchantRecord = function (templateId) {
+    HomePage.prototype.selectMerchantRecord = function (templateId, isNav) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() ||  common.getCalendarDate(-3);
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var tplNum = templateId.substring(4, 9);
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
-        var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';
-        var payMethod = $('.dropdown>button').text().trim();
+        var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';// 交易流水号
+        var payMethod = $('#'+ tplNum+ ' .payment button').text().trim(); // 支付方式
         var payName = '全部' === payMethod ? '' : payMethod;
+        var trxnType = $('#'+ tplNum+ ' .trxntype button').text().trim();
+        var trxnTypeName = '全部' === trxnType ? '' : trxnType;
+        var billSrcType = $('#'+ tplNum+ ' .billsrctype button').text().trim();
+        var billSrcTypeName = '全部' === billSrcType ? '' : billSrcType;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         var pageSize = apiMain.selectMerchantRecord.params.pageSize;
@@ -707,11 +716,12 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 beginDate: beginDate,
                 endDate: endDate,
                 bankTrxNo: bankTrxNo,
+                trxnTypeName: trxnTypeName,
+                billSrcTypeName: billSrcTypeName,
                 payName: payName
             }),
             $renderContainer: $('.table-content'),
             success: function (data) {
-                // debugger;
                 if (data.code !== this.ERR_NO) {
                     // //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
@@ -726,6 +736,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.startTime = startTime;
                     data.stopTime = stopTime;
                     data.bankTrxNo = bankTrxNo;
+                    data.trxnTypeName = trxnTypeName;
+                    data.billSrcTypeName = billSrcTypeName,
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -741,13 +753,22 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectBankRecord = function (templateId) {
+    HomePage.prototype.selectBankRecord = function (templateId, isNav) {
         var _this = this;
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var tplNum = templateId.substring(4, 9);
         var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
         var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';
-        var payMethod = $('.dropdown>button').text().trim();
+        var payMethod = $('#'+ tplNum+ ' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
+        var trxnType = $('#'+ tplNum+ ' .trxntype button').text().trim();
+        var trxnTypeName = '全部' === trxnType ? '' : trxnType;
+        var billSrcType = $('#'+ tplNum+ ' .billsrctype button').text().trim();
+        var billSrcTypeName = '全部' === billSrcType ? '' : billSrcType;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         var pageSize = apiMain.selectBankRecord.params.pageSize;
@@ -759,6 +780,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 beginDate: beginDate,
                 endDate: endDate,
                 bankTrxNo: bankTrxNo,
+                trxnTypeName: trxnTypeName,
+                billSrcTypeName: billSrcTypeName,
                 payName: payName
             }),
             $renderContainer: $('.table-content'),
@@ -777,6 +800,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.startTime = startTime;
                     data.stopTime = stopTime;
                     data.bankTrxNo = bankTrxNo;
+                    data.trxnTypeName = trxnTypeName;
+                    data.billSrcTypeName = billSrcTypeName,
                     data.pageCode = _this.pageCode;
                     data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
@@ -792,11 +817,16 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectCheckBase = function (templateId) {
+    HomePage.prototype.selectCheckBase = function (templateId, isNav) {
         var _this = this;
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var tplNum = templateId.substring(4, 9);
         var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
-        var payMethod = $('.dropdown>button').text().trim();
+        var payMethod = $('#'+ tplNum+ ' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
@@ -840,11 +870,16 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectMisTake = function (templateId) {
+    HomePage.prototype.selectMisTake = function (templateId, isNav) {
         var _this = this;
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var tplNum = templateId.substring(4, 9);
         var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
-        var payMethod = $('.dropdown>button').text().trim();
+        var payMethod = $('#'+ tplNum+ ' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
@@ -888,12 +923,21 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectScratchPool = function (templateId) {
+    HomePage.prototype.selectScratchPool = function (templateId, isNav) {
         var _this = this;
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var tplNum = templateId.substring(4, 9);
         var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
-        var payMethod = $('.dropdown>button').text().trim();
+        var payMethod = $('#'+ tplNum +' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
+        var trxnType = $('#'+ tplNum+ ' .trxntype button').text().trim();
+        var trxnTypeName = '全部' === trxnType ? '' : trxnType;
+        var billSrcType = $('#'+ tplNum+ ' .billsrctype button').text().trim();
+        var billSrcTypeName = '全部' === billSrcType ? '' : billSrcType;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         var pageSize = apiMain.selectScratchPool.params.pageSize;
@@ -904,6 +948,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 pageSize: pageSize,
                 beginDate: beginDate,
                 endDate: endDate,
+                trxnTypeName: trxnTypeName,
+                billSrcTypeName: billSrcTypeName,
                 payName: payName
             }),
             $renderContainer: $('.table-content'),
@@ -919,6 +965,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
                     data.payMethod = payMethod;
+                    data.trxnTypeName = trxnTypeName;
+                    data.billSrcTypeName = billSrcTypeName,
                     data.startTime = startTime;
                     data.stopTime = stopTime;
                     data.pageCode = _this.pageCode;

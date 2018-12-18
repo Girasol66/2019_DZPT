@@ -172,6 +172,7 @@
             margin: 0 10px 0;
             display: inline-block;
             vertical-align: middle;
+            margin-bottom: 4px;
           }
           .form-label {
             margin: 0;
@@ -185,6 +186,11 @@
             min-width: 140px;
             display: inline-block;
             vertical-align: middle;
+            &.dropdown {
+              min-width: 60px;
+              padding: 0;
+              border: none;
+            }
           }
           .dropdown-menu {
             max-height: 400px;
@@ -196,6 +202,8 @@
               line-height: 32px;
               font-size: 0;
               i {
+                width: 16px;
+                height: 16px;
                 margin-right: 15px;
                 display: inline-block;
                 vertical-align: middle;
@@ -253,7 +261,6 @@
         }
       }
     }
-
   }
   #footer {
 
