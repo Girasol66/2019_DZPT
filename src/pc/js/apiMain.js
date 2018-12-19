@@ -160,10 +160,12 @@ define(['jquery'], function ($) {
             }
         },
         selectMerchantBankCom: {
-            url: '/merchantRecord/selectQueryAll',
+            url: '/DetailCom/selectDetailCom',
             params: {
                 beginDate: '20180101',
-                endDate: '20180909'
+                endDate: '20180909',
+                pageIndex: 1,
+                pageSize: 20
             }
         },
         insertPayWay: {

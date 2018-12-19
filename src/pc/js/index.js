@@ -1222,9 +1222,12 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectMerchantBankCom.params.pageSize;
         $.ajax({
             url: apiMain.getUrl('selectMerchantBankCom'),
             data: apiMain.getParams({
+                pageIndex: _this.pageCode,
+                pageSize: pageSize,
                 beginDate: beginDate,
                 endDate: endDate
             }),
@@ -1235,8 +1238,6 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
-                        // tempTime = data.data[i]['complete_time'];
-                        // data.data[i]['complete_time'] = common.parseDate(tempTime);
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
