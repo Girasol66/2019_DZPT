@@ -63,13 +63,13 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 if (data.code !== this.ERR_NO) {
                     //if (!common.ajaxDataIsExist(data)) return;
                     var payment = [];
-                    payment.push('<li><a><i class="icon-all"></i><span>全部</span></a></li>');
+                    payment.push('<li><a><i class="icon-all0"></i><span>全部</span></a></li>');
                     $('.payment-methods').empty();
                     for (var i = 0; i < data.data.length; i++) {
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                         if (!data.data[i]['pay_type']) {
-                            data.data[i]['pay_type'] = 'icon-all';
+                            data.data[i]['pay_type'] = 'icon-other';
                         }
                         payment.push('<li><a><i class="'+data.data[i]["pay_type"]+'"></i><span>'+data.data[i]["pay_way_name"]+'</span></a></li>');
                     }
@@ -541,19 +541,19 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         _this.selectScratchPool(templateId, true);
                         break;
                     case 'tpl-NAV10-SELECT':
-                        _this.selectFileStatus(templateId);
+                        _this.selectFileStatus(templateId, true);
                         break;
                     case 'tpl-NAV11-SELECT':
-                        _this.selectCheckBillLog(templateId);
+                        _this.selectCheckBillLog(templateId, true);
                         break;
                     case 'tpl-NAV12-SELECT':
-                        _this.selectCheckBaseCount(templateId);
+                        _this.selectCheckBaseCount(templateId, true);
                         break;
                     case 'tpl-NAV13-SELECT':
-                        _this.selectBankRecordCount(templateId);
+                        _this.selectBankRecordCount(templateId, true);
                         break;
                     case 'tpl-NAV14-SELECT':
-                        _this.selectMerchantRecordCount(templateId);
+                        _this.selectMerchantRecordCount(templateId, true);
                         break;
                     case 'tpl-NAV15-SELECT':
                         _this.selectPayWay(templateId);
@@ -562,13 +562,16 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         var templateHtml = template(templateId, {});
                         $(_this.TEMPLATE).html(templateHtml);
                         break;
+                    case 'tpl-NAV17-SELECT':
+                        _this.selectMerchantBankCom(templateId, true);
+                        break;
                 }
             }
         });
         return this;
     };
     /**
-     *
+     * 页面多选
      * @returns {HomePage}
      */
     HomePage.prototype.selectCheckBox = function () {
@@ -593,7 +596,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 数据删除
      * @returns {HomePage}
      */
     HomePage.prototype.dataDelete = function () {
@@ -621,7 +624,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 按钮重置
      * @returns {HomePage}
      */
     HomePage.prototype.btnReset = function () {
@@ -631,7 +634,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 分页
      * @returns {HomePage}
      */
     HomePage.prototype.pagination = function () {
@@ -679,6 +682,9 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     case 'tpl-NAV15-SELECT':
                         _this.selectPayWay(templateId);
                         break;
+                    case 'tpl-NAV17-SELECT':
+                        _this.selectMerchantBankCom(templateId);
+                        break;
                 }
             }
         });
@@ -696,8 +702,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $(_this.TEMPLATE).html(templateHtml);
         }
         var tplNum = templateId.substring(4, 9);
-        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
-        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';// 交易流水号
         var payMethod = $('#'+ tplNum+ ' .payment button').text().trim(); // 支付方式
         var payName = '全部' === payMethod ? '' : payMethod;
@@ -760,8 +766,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $(_this.TEMPLATE).html(templateHtml);
         }
         var tplNum = templateId.substring(4, 9);
-        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
-        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';
         var payMethod = $('#'+ tplNum+ ' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
@@ -824,8 +830,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $(_this.TEMPLATE).html(templateHtml);
         }
         var tplNum = templateId.substring(4, 9);
-        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
-        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var payMethod = $('#'+ tplNum+ ' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
@@ -877,8 +883,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $(_this.TEMPLATE).html(templateHtml);
         }
         var tplNum = templateId.substring(4, 9);
-        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
-        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var payMethod = $('#'+ tplNum+ ' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
@@ -930,8 +936,8 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $(_this.TEMPLATE).html(templateHtml);
         }
         var tplNum = templateId.substring(4, 9);
-        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-3);
-        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(0);
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var payMethod = $('#'+ tplNum +' .payment button').text().trim();
         var payName = '全部' === payMethod ? '' : payMethod;
         var trxnType = $('#'+ tplNum+ ' .trxntype button').text().trim();
@@ -980,14 +986,18 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 文件状态查询
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectFileStatus = function (templateId) {
+    HomePage.prototype.selectFileStatus = function (templateId, isNav) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         var pageSize = apiMain.selectFileStatus.params.pageSize;
@@ -1021,14 +1031,18 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 文件处理查询
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectCheckBillLog = function (templateId) {
+    HomePage.prototype.selectCheckBillLog = function (templateId, isNav) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         var pageSize = apiMain.selectCheckBillLog.params.pageSize;
@@ -1062,14 +1076,18 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 对账批次查询
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectCheckBaseCount = function (templateId) {
+    HomePage.prototype.selectCheckBaseCount = function (templateId, isNav) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         $.ajax({
@@ -1102,14 +1120,18 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 渠道明细统计
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectBankRecordCount = function (templateId) {
+    HomePage.prototype.selectBankRecordCount = function (templateId, isNav) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         $.ajax({
@@ -1142,14 +1164,18 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         return this;
     };
     /**
-     *
+     * 商户明细统计
      * @param templateId
      * @returns {HomePage}
      */
-    HomePage.prototype.selectMerchantRecordCount = function (templateId) {
+    HomePage.prototype.selectMerchantRecordCount = function (templateId, isNav) {
         var _this = this;
-        var startTime = $('input[name="startTime"]').val() || '';
-        var stopTime = $('input[name="stopTime"]').val() || '';
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         $.ajax({
@@ -1167,6 +1193,50 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
                         tempTime = data.data[i]['complete_time'];
                         data.data[i]['complete_time'] = common.parseDate(tempTime);
+                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
+                    }
+                    data.startTime = startTime;
+                    data.stopTime = stopTime;
+                    data.pageCode = _this.pageCode;
+                    data.totalPage = Math.ceil(data.data.length / 10);
+                    var templateHtml = template(templateId, data);
+                    $(_this.TEMPLATE).html(templateHtml);
+                }
+            }
+        });
+        return this;
+    };
+    /**
+     * 渠道商户明细对比
+     * @param templateId
+     * @returns {HomePage}
+     */
+    HomePage.prototype.selectMerchantBankCom = function (templateId, isNav) {
+        var _this = this;
+        if (isNav) {
+            var templateHtml = template(templateId, {});
+            $(_this.TEMPLATE).html(templateHtml);
+        }
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
+        var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
+        var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        $.ajax({
+            url: apiMain.getUrl('selectMerchantBankCom'),
+            data: apiMain.getParams({
+                beginDate: beginDate,
+                endDate: endDate
+            }),
+            $renderContainer: $('.table-content'),
+            success: function (data) {
+                if (data.code !== this.ERR_NO) {
+                    //if (!common.ajaxDataIsExist(data)) return;
+                    for (var i = 0; i < data.data.length; i++) {
+                        var tempTime = data.data[i]['bill_date'];
+                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                        // tempTime = data.data[i]['complete_time'];
+                        // data.data[i]['complete_time'] = common.parseDate(tempTime);
                         data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
                     }
@@ -1229,6 +1299,9 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     break;
                 case 'tpl-NAV15-SELECT':
                     _this.selectPayWay(templateId);
+                    break;
+                case 'tpl-NAV17-SELECT':
+                    _this.selectMerchantBankCom(templateId);
                     break;
             }
         });

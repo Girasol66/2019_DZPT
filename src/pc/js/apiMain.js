@@ -159,6 +159,13 @@ define(['jquery'], function ($) {
                 endDate: '20180909'
             }
         },
+        selectMerchantBankCom: {
+            url: '/merchantRecord/selectQueryAll',
+            params: {
+                beginDate: '20180101',
+                endDate: '20180909'
+            }
+        },
         insertPayWay: {
             url: '/payWay/addPayWay',
             params: {

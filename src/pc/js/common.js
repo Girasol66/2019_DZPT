@@ -278,16 +278,8 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         return this;
     };
     /**
-     * 设置默认日期
+     * 获取日期 0：当天 ；-1：昨天；1：明天
      */
-    Common.prototype.setDatePickerTime = function (name, dayNum) {
-        name = name ? name : 'startTime';
-        dayNum = dayNum ? dayNum : 0;
-        var nowDate = new Date();
-        var newDate = new Date(nowDate.getTime() + 24 * 60 * 60 * 1000 * dayNum);
-        $('input[name=' + name + ']').datetimepicker('setDate', newDate);
-    }
-    // 获取日期 0：当天 ；-1：昨天；1：明天
     Common.prototype.getCalendarDate = function (dayNum) {
         dayNum = dayNum ? dayNum : 0;
         var nowDate = new Date();
