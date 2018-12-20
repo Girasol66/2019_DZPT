@@ -142,21 +142,27 @@ define(['jquery'], function ($) {
             url: '/checkBase/queryCheckBatchs',
             params: {
                 beginDate: '20180101',
-                endDate: '20180909'
+                endDate: '20180909',
+                pageSize: 20,
+                pageIndx: 1
             }
         },
         selectBankRecordCount: {
             url: '/bankRecord/selectQueryAll',
             params: {
                 beginDate: '20180101',
-                endDate: '20180909'
+                endDate: '20180909',
+                pageSize: 20,
+                pageIndx: 1
             }
         },
         selectMerchantRecordCount: {
             url: '/merchantRecord/selectQueryAll',
             params: {
                 beginDate: '20180101',
-                endDate: '20180909'
+                endDate: '20180909',
+                pageSize: 20,
+                pageIndx: 1
             }
         },
         selectMerchantBankCom: {

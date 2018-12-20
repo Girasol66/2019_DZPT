@@ -1090,6 +1090,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectCheckBaseCount.params.pageSize;
         $.ajax({
             url: apiMain.getUrl('selectCheckBaseCount'),
             data: apiMain.getParams({
@@ -1111,7 +1112,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.startTime = startTime;
                     data.stopTime = stopTime;
                     data.pageCode = _this.pageCode;
-                    data.totalPage = Math.ceil(data.data.length / 10);
+                    data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
                 }
@@ -1134,6 +1135,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectBankRecordCount.params.pageSize;
         $.ajax({
             url: apiMain.getUrl('selectBankRecordCount'),
             data: apiMain.getParams({
@@ -1155,7 +1157,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.startTime = startTime;
                     data.stopTime = stopTime;
                     data.pageCode = _this.pageCode;
-                    data.totalPage = Math.ceil(data.data.length / 10);
+                    data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
                 }
@@ -1178,6 +1180,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
+        var pageSize = apiMain.selectMerchantRecordCount.params.pageSize;
         $.ajax({
             url: apiMain.getUrl('selectMerchantRecordCount'),
             data: apiMain.getParams({
@@ -1199,7 +1202,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.startTime = startTime;
                     data.stopTime = stopTime;
                     data.pageCode = _this.pageCode;
-                    data.totalPage = Math.ceil(data.data.length / 10);
+                    data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
                 }
@@ -1244,7 +1247,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                     data.startTime = startTime;
                     data.stopTime = stopTime;
                     data.pageCode = _this.pageCode;
-                    data.totalPage = Math.ceil(data.data.length / 10);
+                    data.totalPage = Math.ceil(data.count / pageSize);
                     var templateHtml = template(templateId, data);
                     $(_this.TEMPLATE).html(templateHtml);
                 }
