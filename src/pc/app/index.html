@@ -25,7 +25,9 @@
 <body>
 <div id="main">
     <div id="header">
-        <h1 class="title"><span style="border-right:1px solid #000;margin:0 12px;"></span>对账管理平台</h1>
+        <h1 class="title">
+            <span style="border-right: 1px solid #000; margin: 0 12px;"></span>对账管理平台
+        </h1>
         <div class="user">
             <img src="../images/user.png" class="image" alt="User">
             <span class="name">当前用户：【张三】</span>
@@ -470,25 +472,11 @@
                                 <li><a><i class="icon-all0"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-consume"></i><span>消费</span></a></li>
                                 <li><a><i class="icon-recharge"></i><span>充值</span></a></li>
-                                <li><a><i class="icon-return"></i><span>退货</span></a></li>
+                                <li><a><i class="icon-return"></i><span>退款</span></a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="form-group billsrctype">
-                        <label class="form-label">来源类型：</label>
-                        <div class="form-control dropdown">
-                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                {{billSrcTypeName||'全部'}}
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu bill-src-type-name" aria-labelledby="dropdownMenu3">
-                                <li><a><i class="icon-all0"></i><span>全部</span></a></li>
-                                <li><a><i class="icon-HIS"></i><span>HIS</span></a></li>
-                                <li><a><i class="icon-selfSer"></i><span>自助机</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
@@ -502,11 +490,11 @@
                             <th>支付方式</th>
                             <th>账单日期</th>
                             <th>订单金额</th>
+                            <th>退款金额</th>
                             <th>手续费</th>
                             <th>完成时间</th>
-                            <th>成功金额</th>
                             <th>交易类型</th>
-                            <th>订单类型</th>
+                            <th>来源类型</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -516,16 +504,16 @@
                             <td title="{{$value.bank_trx_no}}">{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.order_amount}}</td>
+                            <td>{{$value.success_refund_amount}}</td>
                             <td>{{$value.fee}}</td>
                             <td>{{$value.complete_time}}</td>
-                            <td>{{$value.success_refund_amount}}</td>
                             <td>{{$value.trx_type}}</td>
-                            <td>{{$value.order_type}}</td>
+                            <td>{{$value.bill_src_type}}</td>
                         </tr>
                         {{/each}}
                         </tbody>
@@ -618,25 +606,11 @@
                                 <li><a><i class="icon-all0"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-consume"></i><span>消费</span></a></li>
                                 <li><a><i class="icon-recharge"></i><span>充值</span></a></li>
-                                <li><a><i class="icon-return"></i><span>退货</span></a></li>
+                                <li><a><i class="icon-return"></i><span>退款</span></a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="form-group billsrctype">
-                        <label class="form-label">来源类型：</label>
-                        <div class="form-control dropdown">
-                            <button class="btn btn-default dropdown-toggle margin-clear" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                {{billSrcTypeName||'全部'}}
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu bill-src-type-name" aria-labelledby="dropdownMenu3">
-                                <li><a><i class="icon-all0"></i><span>全部</span></a></li>
-                                <li><a><i class="icon-HIS"></i><span>HIS</span></a></li>
-                                <li><a><i class="icon-selfSer"></i><span>自助机</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <button type="button" class="btn btn-primary btn-select">查询</button>
                     </div>
@@ -650,11 +624,11 @@
                             <th>支付方式</th>
                             <th>账单日期</th>
                             <th>订单金额</th>
+                            <th>退款金额</th>
                             <th>手续费</th>
                             <th>完成时间</th>
-                            <th>成功金额</th>
                             <th>交易类型</th>
-                            <th>订单类型</th>
+                            <th>来源类型</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -664,16 +638,16 @@
                             <td title="{{$value.bank_trx_no}}">{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.order_amount}}</td>
+                            <td>{{$value.success_refund_amount}}</td>
                             <td>{{$value.fee}}</td>
                             <td>{{$value.complete_time}}</td>
-                            <td>{{$value.success_refund_amount}}</td>
                             <td>{{$value.trx_type}}</td>
-                            <td>{{$value.order_type}}</td>
+                            <td>{{$value.bill_src_type}}</td>
                         </tr>
                         {{/each}}
                         </tbody>
@@ -760,11 +734,19 @@
                             <th>账单批次号</th>
                             <th>日期</th>
                             <th>支付方式</th>
-                            <th>渠道交易笔数</th>
-                            <th>渠道交易金额</th>
                             <th>商户交易笔数</th>
+                            <th>渠道交易笔数</th>
+                            <th>商户退款笔数</th>
+                            <th>渠道退款笔数</th>
                             <th>商户交易金额</th>
-                            <th>备注</th>
+                            <th>商户退款金额</th>
+                            <th>商户手续费</th>
+                            <th>渠道交易金额</th>
+                            <th>渠道退款金额</th>
+                            <th>渠道手续费</th>
+                            <th>应收金额</th>
+                            <th>实收金额</th>
+                            <th>差额</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -774,14 +756,23 @@
                             <td>{{$value.bill_date}}</td>
                             <td><i title="{{$value.bank_type}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.bank_type}}</td>
-                            <td>{{$value.bank_trade_count}}</td>
-                            <td>{{$value.bank_trade_amount}}</td>
                             <td>{{$value.trade_count}}</td>
+                            <td>{{$value.bank_trade_count}}</td>
+                            <td>{{$value.mer_refund_count}}</td>
+                            <td>{{$value.bank_refund_count}}</td>
+
                             <td>{{$value.trade_amount}}</td>
-                            <td>{{$value.remark}}</td>
+                            <td>{{$value.refund_amount}}</td>
+                            <td>{{$value.fee}}</td>
+                            <td>{{$value.bank_trade_amount}}</td>
+                            <td>{{$value.bank_refund_amount}}</td>
+                            <td>{{$value.bank_fee}}</td>
+                            <td>{{$value.trade_amount -$value.fee - $value.refund_amount}}</td>
+                            <td>{{$value.bank_trade_amount -$value.bank_fee - $value.bank_refund_amount}}</td>
+                            <td>{{$value.trade_amount -$value.fee - $value.refund_amount - ( $value.bank_trade_amount -$value.bank_fee - $value.bank_refund_amount)}}</td>
                         </tr>
                         {{/each}}
                         </tbody>
@@ -865,29 +856,40 @@
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr role="row">
-                            <th>账单批次号</th>
+
                             <th>交易流水号</th>
                             <th>日期</th>
                             <th>支付方式</th>
+                            <th>商户交易金额</th>
+                            <th>商户退款金额</th>
+                            <th>商户手续费</th>
+                            <th>渠道交易金额</th>
+                            <th>渠道退款金额</th>
+                            <th>渠道手续费</th>
                             <th>错误类型</th>
                             <th>处理状态</th>
-                            <th>备注</th>
+
                         </tr>
                         </thead>
                         <tbody>
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
-                            <td>{{$value.accountCheckBatchNo}}</td>
+
                             <td>{{$value.bank_trx_no}}</td>
                             <td>{{$value.billDate}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.pay_way_name}}</td>
+                            <td>{{$value.orderAmount}}</td>
+                            <td>{{$value.refundAmount}}</td>
+                            <td>{{$value.fee}}</td>
+                            <td>{{$value.bankAmount}}</td>
+                            <td>{{$value.bankRefundAmount}}</td>
+                            <td>{{$value.bankFee}}</td>
                             <td>{{$value.errType}}</td>
                             <td>{{$value.handleStatus}}</td>
-                            <td>{{$value.remark}}</td>
                         </tr>
                         {{/each}}
                         </tbody>
@@ -976,7 +978,7 @@
                                 <li><a><i class="icon-all0"></i><span>全部</span></a></li>
                                 <li><a><i class="icon-consume"></i><span>消费</span></a></li>
                                 <li><a><i class="icon-recharge"></i><span>充值</span></a></li>
-                                <li><a><i class="icon-return"></i><span>退货</span></a></li>
+                                <li><a><i class="icon-return"></i><span>退款</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -1010,11 +1012,11 @@
                             <th>账单日期</th>
                             <th>账单来源</th>
                             <th>订单金额</th>
+                            <th>退款金额</th>
                             <th>手续费</th>
                             <th>完成时间</th>
-                            <th>成功金额</th>
                             <th>交易类型</th>
-                            <th>订单类型</th>
+                            <th>来源类型</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -1024,18 +1026,18 @@
                             <td>{{$value.bank_trx_no}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.account_check_batch_no}}</td>
                             <td>{{$value.bill_date}}</td>
                             <td>{{$value.bank_src}}</td>
                             <td>{{$value.order_amount}}</td>
+                            <td>{{$value.success_refund_amount}}</td>
                             <td>{{$value.fee}}</td>
                             <td>{{$value.complete_time}}</td>
-                            <td>{{$value.success_refund_amount}}</td>
                             <td>{{$value.trx_type}}</td>
-                            <td>{{$value.order_type}}</td>
+                            <td>{{$value.bill_src_type}}</td>
                         </tr>
                         {{/each}}
                         </tbody>
@@ -1267,16 +1269,22 @@
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr role="row">
+
                             <th>支付方式</th>
-                            <th>商户手续费汇总</th>
-                            <th>错误笔数汇总</th>
                             <th>商户交易笔数汇总</th>
                             <th>渠道交易笔数汇总</th>
+                            <th>商户退款笔数汇总</th>
+                            <th>渠道退款笔数汇总</th>
                             <th>商户交易金额汇总</th>
-                            <th>渠道交易金额汇总</th>
                             <th>商户退款金额汇总</th>
+                            <th>商户手续费汇总</th>
+                            <th>渠道交易金额汇总</th>
                             <th>渠道退款金额汇总</th>
                             <th>渠道手续费汇总</th>
+                            <th>应收金额汇总</th>
+                            <th>实收金额汇总</th>
+                            <th>差额汇总</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -1284,18 +1292,22 @@
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td><i title="{{$value.bank_type}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.bank_type}}</td>
-                            <td>{{$value.fees}}</td>
-                            <td>{{$value.mistake_counts}}</td>
                             <td>{{$value.trade_counts}}</td>
                             <td>{{$value.bank_trade_counts}}</td>
+                            <td>{{$value.mer_refund_counts}}</td>
+                            <td>{{$value.bank_refund_counts}}</td>
                             <td>{{$value.trade_amounts}}</td>
-                            <td>{{$value.bank_trade_amounts}}</td>
                             <td>{{$value.refund_amounts}}</td>
+                            <td>{{$value.fees}}</td>
+                            <td>{{$value.bank_trade_amounts}}</td>
                             <td>{{$value.bank_refund_amounts}}</td>
                             <td>{{$value.bank_fees}}</td>
+                            <td>{{$value.amount_receivable}}</td>
+                            <td>{{$value.amount_received}}</td>
+                            <td>{{$value.clieck_amount}}</td>
                         </tr>
                         {{/each}}
                         </tbody>
@@ -1364,10 +1376,11 @@
                         <thead>
                         <tr role="row">
                             <th>支付方式</th>
-                            <th>手续费</th>
+                            <th>交易笔数</th>
                             <th>订单金额</th>
-                            <th>退款次数</th>
-                            <th>成功退款金额</th>
+                            <th>退款金额</th>
+                            <th>手续费</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -1375,13 +1388,14 @@
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.pay_way_name}}</td>
-                            <td>{{$value.fees}}</td>
+                            <td>{{$value.count}}</td>
                             <td>{{$value.order_amounts}}</td>
-                            <td>{{$value.refund_num}}</td>
                             <td>{{$value.success_refund_amounts}}</td>
+                            <td>{{$value.fees}}</td>
+
                         </tr>
                         {{/each}}
                         </tbody>
@@ -1450,10 +1464,10 @@
                         <thead>
                         <tr role="row">
                             <th>支付方式</th>
-                            <th>手续费</th>
+                            <th>交易笔数</th>
                             <th>订单金额</th>
-                            <th>退款次数</th>
-                            <th>成功退款金额</th>
+                            <th>退款金额</th>
+                            <th>手续费</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -1461,13 +1475,14 @@
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.pay_way_name}}</td>
-                            <td>{{$value.fees}}</td>
+                            <td>{{$value.count}}</td>
                             <td>{{$value.order_amounts}}</td>
-                            <td>{{$value.refund_num}}</td>
                             <td>{{$value.success_refund_amounts}}</td>
+                            <td>{{$value.fees}}</td>
+
                         </tr>
                         {{/each}}
                         </tbody>
@@ -1552,7 +1567,7 @@
                             <td>{{$value.pay_way_code}}</td>
                             <td><i title="{{$value.pay_way_name}}" type="{{$value.pay_type}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash' || $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash' || $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}
                                  "></i>{{$value.pay_way_name}}</td>
@@ -1679,32 +1694,46 @@
                         <thead>
                         <tr role="row">
                             <th>商户编号</th>
+                            <th>账单日期</th>
                             <th>支付方式</th>
                             <th>商户总笔数</th>
                             <th>渠道总笔数</th>
+                            <th>商户退款笔数</th>
+                            <th>渠道退款笔数</th>
                             <th>商户总金额</th>
-                            <th>渠道总金额</th>
                             <th>商户退款金额</th>
+                            <th>商户手续费</th>
+                            <th>渠道总金额</th>
                             <th>渠道退款金额</th>
-                            <th>账单日期</th>
+                            <th>渠道手续费</th>
+                            <th>应收金额</th>
+                            <th>实收金额</th>
+                            <th>差额</th>
                         </tr>
                         </thead>
                         <tbody>
                         {{each data}}
                         <tr role="row" class="{{$index%2==0?'odd':'even'}}">
                             <td>{{$value.merchant_no}}</td>
+                            <td>{{$value.bill_date}}</td>
                             <td><i title="{{$value.pay_way_name}}" class="icon
                                 {{if $value.pay_type == 'icon-aliPay' || $value.pay_type == 'icon-weChat'
-                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay'}}
+                                    || $value.pay_type == 'icon-cash'|| $value.pay_type == 'icon-unionPay' || $value.pay_type == 'icon-all' }}
                                     {{$value.pay_type}}
                                 {{else}} icon-other {{/if}}"></i>{{$value.pay_way_name}}</td>
                             <td>{{$value.mer_trade_count}}</td>
                             <td>{{$value.bank_trade_count}}</td>
+                            <td>{{$value.mer_refund_count}}</td>
+                            <td>{{$value.bank_refund_count}}</td>
                             <td>{{$value.mer_trade_amount}}</td>
-                            <td>{{$value.bank_trade_amount}}</td>
                             <td>{{$value.mer_refund_amount}}</td>
+                            <td>{{$value.mer_fee}}</td>
+                            <td>{{$value.bank_trade_amount}}</td>
                             <td>{{$value.bank_refund_amount}}</td>
-                            <td>{{$value.bill_date}}</td>
+                            <td>{{$value.bank_fee}}</td>
+                            <td>{{$value.mer_trade_amount - $value.mer_refund_amount - $value.mer_fee}}</td>
+                            <td>{{$value.bank_trade_amount - $value.bank_refund_amount - $value.bank_fee}}</td>
+                            <td>{{$value.mer_trade_amount - $value.mer_refund_amount - $value.mer_fee - ($value.bank_trade_amount - $value.bank_refund_amount - $value.bank_fee) }}</td>
                         </tr>
                         {{/each}}
                         </tbody>
