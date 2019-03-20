@@ -1100,6 +1100,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
+                    debugger;
                     //if (!common.ajaxDataIsExist(data)) return;
                     for (var i = 0; i < data.data.length; i++) {
                         var tempTime = data.data[i]['bill_date'];
@@ -1108,6 +1109,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                         data.data[i]['complete_time'] = common.parseDate(tempTime);
                         data.data[i]['bank_type'] = data.data[i]['bank_type'] || '全部';
                         data.data[i]['pay_type'] = common.getIconType(data.data[i]['bank_type']);
+                        debugger;
                     }
                     data.startTime = startTime;
                     data.stopTime = stopTime;
