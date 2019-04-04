@@ -12,6 +12,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         this.NAV_BAR = args['NAV_BAR'] ? args['NAV_BAR'] : '.nav-bar';
         this.NAV_ITEM = args['NAV_ITEM'] ? args['NAV_ITEM'] : '.nav-item';
         this.TEMPLATE = args['TEMPLATE'] ? args['TEMPLATE'] : '.template';
+        this.CONTENT = args['CONTENT'] ? args['CONTENT'] : '.content';
         this.CHECKBOX = args['CHECKBOX'] ? args['CHECKBOX'] : '.checkbox';
         this.BTN_RESET = args['BTN_RESET'] ? args['BTN_RESET'] : '.btn-reset';
         this.DROP_ITEM = args['DROP_ITEM'] ? args['DROP_ITEM'] : '.dropdown li';
@@ -48,9 +49,9 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
      * 导出excel
      * */
     HomePage.prototype.exportExcel = function () {
-        var templateName = '商户交易明细查询';
-        console.log(this.BTN_EXPORT);
+        var _this = this;
         $(document).on('click', this.BTN_EXPORT, function (e) {
+            var templateName = $(_this.TEMPLATE).find(_this.CONTENT).attr('data-template-name');//'商户交易明细查询';
             e.preventDefault();
             if(e.target.nodeName === "BUTTON"){
                 window.tableExport('table2', templateName, e.target.getAttribute('data-type'));

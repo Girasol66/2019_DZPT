@@ -140,7 +140,7 @@
 			var tmpl = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:'+type+'" xmlns="http://www.w3.org/TR/REC-html40">';
 			tmpl += '<head><meta charset="'+charSet+'" /><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>';
 			tmpl += '{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->';
-  			tmpl += '</head><body><table>{table}</table></body></html>';
+  			tmpl += '</head><body><table border="1">{table}</table></body></html>';
 			var office = '',
 				maph = [['<thead><tr>', '</tr></thead>'], ['<tbody><tr>', '</tr></tbody>'], ['<tr>', '</tr>']],
 				mapb = [['<th>', '</th>'],['<td>', '</td>']],
