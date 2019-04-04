@@ -149,7 +149,7 @@ gulp.task('server', function () {
         middleware: function (connect, opt) {
             return [
                 proxy('/CheckBill/', {
-                    target: 'http://192.168.3.118:8082',
+                    target: 'http://192.168.1.92:8080',// 'http://192.168.3.118:8082',
                     changeOrigin: true
                 })
             ];

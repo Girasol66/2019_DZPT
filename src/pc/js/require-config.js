@@ -12,6 +12,9 @@ require.config({
         apiMain: 'js/apiMain',
         MessageBox: 'js/messageBox',
         Toast: 'js/toast',
+        Blob: 'libs/export/Blob',
+        FileSaver: 'libs/export/FileSaver',
+        tableExport: 'libs/export/tableExport'
     },
     shim: {
         bootstrap: {
@@ -22,6 +25,9 @@ require.config({
         },
         bootstrapDateTimePickerLocal_zh_CN: {
             deps: ['jquery', 'bootstrap', 'bootstrapDateTimePicker']
+        },
+        tableExport: {
+            deps:['Blob', 'FileSaver']
         }
     },
     waitSeconds: 10,

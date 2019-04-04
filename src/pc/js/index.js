@@ -1,4 +1,5 @@
-require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMain'], function ($, common, template, MessageBox, Toast, waves, apiMain) {
+require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMain', 'Blob', 'FileSaver', 'tableExport'],
+    function ($, common, template, MessageBox, Toast, waves, apiMain, Blob, FileSaver, tableExport) {
     /**
      *
      * @constructor
@@ -18,6 +19,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         this.BTN_DELETE = args['BTN_DELETE'] ? args['BTN_DELETE'] : '.btn-delete';
         this.BTN_UPDATE = args['BTN_UPDATE'] ? args['BTN_UPDATE'] : '.btn-update';
         this.BTN_SELECT = args['BTN_SELECT'] ? args['BTN_SELECT'] : '.btn-select';
+        this.BTN_EXPORT = args['BTN_EXPORT'] ? args['BTN_EXPORT'] : '#export';
 
         this.init();
     };
@@ -38,9 +40,24 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         this.dataUpdate();
         this.dataSelect();
         this.selectUsers('tpl-NAV01-SELECT');
+        this.exportExcel();
 
         return this;
     };
+    /**
+     * 导出excel
+     * */
+    HomePage.prototype.exportExcel = function () {
+        var templateName = '商户交易明细查询';
+        console.log(this.BTN_EXPORT);
+        $(document).on('click', this.BTN_EXPORT, function (e) {
+            e.preventDefault();
+            if(e.target.nodeName === "BUTTON"){
+                window.tableExport('table2', templateName, e.target.getAttribute('data-type'));
+            }
+        })
+        return this;
+    }
     /**
      *
      * @returns {HomePage}
