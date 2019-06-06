@@ -40,25 +40,12 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         this.dataDelete();
         this.dataUpdate();
         this.dataSelect();
-        this.selectUsers('tpl-NAV01-SELECT');
+        this.selectMerchantRecord('tpl-NAV05-SELECT');//this.selectUsers('tpl-NAV01-SELECT');
         this.exportExcel();
 
         return this;
     };
-    /**
-     * 导出excel
-     * */
-    HomePage.prototype.exportExcel = function () {
-        var _this = this;
-        $(document).on('click', this.BTN_EXPORT, function (e) {
-            var templateName = $(_this.TEMPLATE).find(_this.CONTENT).attr('data-template-name');//'商户交易明细查询';
-            e.preventDefault();
-            if(e.target.nodeName === "BUTTON"){
-                window.tableExport('table2', templateName, e.target.getAttribute('data-type'));
-            }
-        })
-        return this;
-    }
+
     /**
      *
      * @returns {HomePage}
@@ -720,7 +707,7 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $(_this.TEMPLATE).html(templateHtml);
         }
         var tplNum = templateId.substring(4, 9);
-        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-1);
+        var startTime = $('input[name="startTime"]').val() || common.getCalendarDate(-107);
         var stopTime = $('input[name="stopTime"]').val() || common.getCalendarDate(-1);
         var bankTrxNo = $('input[name="bankTrxNo"]').val() || '';// 交易流水号
         var payMethod = $('#'+ tplNum+ ' .payment button').text().trim(); // 支付方式
@@ -732,6 +719,10 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         var beginDate = common.dateFormat(startTime, 'yyyyMMdd');
         var endDate = common.dateFormat(stopTime, 'yyyyMMdd');
         var pageSize = apiMain.selectMerchantRecord.params.pageSize;
+        var isExport = sessionStorage.getItem('isExport');
+        if (isExport) {
+            pageSize = Number(sessionStorage.getItem('pageDataCount'))
+        }
         $.ajax({
             url: apiMain.getUrl('selectMerchantRecord'),
             data: apiMain.getParams({
@@ -747,26 +738,39 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
             $renderContainer: $('.table-content'),
             success: function (data) {
                 if (data.code !== this.ERR_NO) {
-                    // //if (!common.ajaxDataIsExist(data)) return;
-                    for (var i = 0; i < data.data.length; i++) {
-                        var tempTime = data.data[i]['bill_date'];
-                        data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
-                        tempTime = data.data[i]['complete_time'];
-                        data.data[i]['complete_time'] = common.parseDateTime(tempTime);
-                        data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
-                        data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
+                    var isExport = sessionStorage.getItem('isExport');
+                    if (isExport) {
+                        debugger
+                        console.log(data.data);
+                        sessionStorage.setItem('exportSuc', true)
+                        sessionStorage.setItem('pageDataCount', apiMain.selectMerchantRecord.params.pageSize);
+                        sessionStorage.setItem('exportData', JSON.stringify(data.data))
+                        sessionStorage.removeItem('isExport');
+                        // sessionStorage.removeItem('isExport');
+                    } else {
+                        debugger
+                        // //if (!common.ajaxDataIsExist(data)) return;
+                        for (var i = 0; i < data.data.length; i++) {
+                            var tempTime = data.data[i]['bill_date'];
+                            data.data[i]['bill_date'] = common.dateFormat(tempTime, 'yyyy-mm-dd');
+                            tempTime = data.data[i]['complete_time'];
+                            data.data[i]['complete_time'] = common.parseDateTime(tempTime);
+                            data.data[i]['pay_way_name'] = data.data[i]['pay_way_name'] || '全部';
+                            data.data[i]['pay_type'] = common.getIconType(data.data[i]['pay_way_name']);
+                        }
+                        data.payMethod = payMethod;
+                        data.startTime = startTime;
+                        data.stopTime = stopTime;
+                        data.bankTrxNo = bankTrxNo;
+                        data.trxnTypeName = trxnTypeName;
+                        data.billSrcTypeName = billSrcTypeName,
+                            data.pageCode = _this.pageCode;
+                        data.totalPage = Math.ceil(data.count / pageSize);
+                        var templateHtml = template(templateId, data);
+                        $(_this.TEMPLATE).html(templateHtml);
+                        _this.dataPaymentMethod();
+                        sessionStorage.setItem('pageDataCount', data.count);
                     }
-                    data.payMethod = payMethod;
-                    data.startTime = startTime;
-                    data.stopTime = stopTime;
-                    data.bankTrxNo = bankTrxNo;
-                    data.trxnTypeName = trxnTypeName;
-                    data.billSrcTypeName = billSrcTypeName,
-                    data.pageCode = _this.pageCode;
-                    data.totalPage = Math.ceil(data.count / pageSize);
-                    var templateHtml = template(templateId, data);
-                    $(_this.TEMPLATE).html(templateHtml);
-                    _this.dataPaymentMethod();
                 }
             }
         });
@@ -1478,6 +1482,46 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         });
         return this;
     };
+    /**
+     * 导出excel
+     * */
+    HomePage.prototype.exportExcel = function () {
+        var _this = this;
+        $(document).on('click', this.BTN_EXPORT, function (e) {
+            e.preventDefault();
+            var templateId = $(this).parents('.content').attr('data-template');
+            switch (templateId) {
+                case 'tpl-NAV05-SELECT':
+                    _this.selectMerchantRecord(templateId);
+                    break;
+            }
+            sessionStorage.setItem('isExport', true);
+            debugger;
+            //_this.selectMerchantRecord('tpl-NAV05-SELECT', false, pageDataCount)
+            // return;
+            var checkExportData = setInterval(function() {
+                var exportSuc = sessionStorage.getItem('exportSuc');
+                var templateName = $(_this.TEMPLATE).find('.content').attr('data-template-name');
+                if (exportSuc) {
+                    var exportData = JSON.parse(sessionStorage.getItem('exportData'))
+                    var filterData = exportData.map(({merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount, success_refund_amount, fee, complete_time, trx_type, bill_src_type}) => {
+                        complete_time = common.parseDateTime(complete_time)
+                        return {merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount, success_refund_amount, fee, complete_time, trx_type, bill_src_type};
+                    });
+                    debugger
+                    window.tableExport('table2', templateName, e.target.getAttribute('data-type'), filterData);
+                    clearInterval(checkExportData)
+                    sessionStorage.removeItem('isExport');
+                }
+            }, 100);
+            // if(e.target.nodeName === "BUTTON"){
+            //     var exportData = sessionStorage.setItem('exportData', data.data)
+            //     window.tableExport('table2', templateName, e.target.getAttribute('data-type'), exportData);
+            // }
+        });
+        // })
+        return this;
+    }
     /**
      *
      * @type {HomePage}

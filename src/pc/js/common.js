@@ -287,6 +287,8 @@ define(['jquery', 'bootstrap', 'MessageBox', 'Toast', 'bootstrapDateTimePicker',
         var y = newDate.getFullYear();
         var m = newDate.getMonth() + 1;
         var d = newDate.getDate();
+        m  = m > 9 ? m : '0'+ m;
+        d  = d > 9 ? d : '0'+ d;
         return y + '-' + m + '-' + d;
     }
     /**
