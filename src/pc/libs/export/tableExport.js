@@ -96,12 +96,17 @@
             saveAs(new BB([data], {type: uri[type]}), filename + "."+type);
         };
 
-        var toCSV = function(){
+        var toCSV = function(exportData){
             var data = "\ufeff";
-            for (var i = 0, row; row = table.rows[i]; i++) {
-                for (var j = 0, col; col = row.cells[j]; j++) {
-                    data = data + (j ? ',' : '') + fixCSVField(getText(col));
+            for(var j =0, col; col = table.rows[0].cells[j]; j++){
+                data += getText(col) + ',';
+            }
+            data = data.substr(0, data.length - 1) + "\r\n";
+            for (var i = 0, row; row = exportData[i]; i++) {
+                for (var attrs in row) {
+                    data += "\t" + row[attrs] + ',';
                 }
+                data = data.substr(0, data.length - 1);
                 data = data + "\r\n";
             }
             saveData(data);
@@ -165,12 +170,12 @@
             var tmpl = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:'+type+'" xmlns="http://www.w3.org/TR/REC-html40">';
             tmpl += '<head><meta charset="'+charSet+'" /><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>';
             tmpl += '{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->';
-            tmpl += '</head><body><table border="1" cellspacing="0">{table}</table></body></html>';
+            tmpl += '</head><body><table border="1" cellspacing="0" style="vnd.ms-excel.numberformat:@">{table}</table></body></html>';
             var office = '',
                 maph = [['<thead><tr>', '</tr></thead>'], ['<tbody>', '</tbody>'], ['<tr>', '</tr>']],
                 // mapb = [['<th>', '</th>'],['<td style="mso-number-format:\”@\”;><span style="display:none">'</span>', '</td>']],
-                mapb = [['<th>', '</th>'],['<td>', '<span style="display:none">&nbsp;</span></td>']],
-                flag = +!table.tHead;
+                mapb = [['<th>', '</th>'],['<td>', '</td>']];
+                //flag = +!table.tHead;
             // com = 1 - flag;
 
             /* thead start*/
