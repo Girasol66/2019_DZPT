@@ -1581,6 +1581,85 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
         });
         return this;
     };
+    /**数据过滤
+     *
+     */
+    HomePage.prototype.exportDataFilter = function (exportData, templateId) {
+        switch(templateId) {
+            case 'tpl-NAV05-SELECT':
+            case 'tpl-NAV06-SELECT':
+                return exportData.map(({ merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount,
+                                           success_refund_amount, fee, complete_time, trx_type, bill_src_type}) => {
+                    complete_time = common.parseDateTime(complete_time)
+                    return {
+                        merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount, success_refund_amount,
+                        fee, complete_time, trx_type, bill_src_type
+                    };
+                });
+                break;
+            case 'tpl-NAV07-SELECT':
+                return exportData.map(({batch_no, bill_date, bank_type, trade_count, bank_trade_count, mer_refund_count,
+                                           bank_refund_count, trade_amount, refund_amount, fee, bank_trade_amount,bank_refund_amount,bank_fee}) => {
+                    let receiveAmount = trade_amount -fee - refund_amount,
+                        paidAmount = bank_trade_amount -bank_fee -bank_refund_amount,
+                        diff = trade_amount - fee - refund_amount - ( bank_trade_amount -bank_fee - bank_refund_amount);
+                    return {batch_no, bill_date, bank_type, trade_count, bank_trade_count, mer_refund_count,
+                        bank_refund_count, trade_amount, refund_amount, fee,
+                        bank_trade_amount,bank_refund_amount, bank_fee, receiveAmount, paidAmount, diff
+                    };
+                });
+                break;
+            case 'tpl-NAV08-SELECT':
+                return exportData.map(({bank_trx_no, billDate, pay_way_name, orderAmount, refundAmount, fee, bankAmount,
+                                           bankRefundAmount, bankFee, errType, handleStatus}) => {
+                    return {bank_trx_no, billDate, pay_way_name, orderAmount, refundAmount, fee, bankAmount,
+                        bankRefundAmount, bankFee, errType, handleStatus
+                    };
+                });
+                break;
+            case 'tpl-NAV09-SELECT':
+                return exportData.map(({merchant_no, bank_trx_no, pay_way_name, account_check_batch_no, bill_date,
+                                           bank_src, order_amount,success_refund_amount, fee, complete_time, trx_type, bill_src_type}) => {
+                    complete_time = common.parseDateTime(complete_time);
+                    return {merchant_no, bank_trx_no, pay_way_name, account_check_batch_no, bill_date,
+                        bank_src, order_amount,success_refund_amount, fee, complete_time, trx_type, bill_src_type
+                    };
+                });
+                break;
+            case 'tpl-NAV12-SELECT':
+                return exportData.map(({pay_type, trade_counts, bank_trade_counts, mer_refund_counts, bank_refund_counts, trade_amounts, refund_amounts,
+                                           fees, bank_trade_amounts, bank_refund_amounts, bank_fees, amount_receivable, amount_received, clieck_amount}) => {
+                    return {pay_type, trade_counts, bank_trade_counts, mer_refund_counts, bank_refund_counts, trade_amounts, refund_amounts,
+                        fees, bank_trade_amounts, bank_refund_amounts, bank_fees, amount_receivable, amount_received, clieck_amount
+                    };
+                });
+                break;
+            case 'tpl-NAV13-SELECT':
+                return exportData.map(({pay_way_name, count, order_amounts, success_refund_amounts, fees}) => {
+                    return {pay_way_name, count, order_amounts, success_refund_amounts, fee};
+                });
+                break;
+            case 'tpl-NAV14-SELECT':
+                return exportData.map(({pay_way_name, count, order_amounts, success_refund_amounts, fee}) => {
+                    return {pay_way_name, count, order_amounts, success_refund_amounts, fee};
+                });
+                break;
+            case 'tpl-NAV17-SELECT':
+                return exportData.map(({pay_way_name, bill_date, pay_type, mer_trade_count, bank_trade_count,
+                                           mer_refund_count, bank_refund_count, mer_trade_amount, mer_refund_amount,
+                                           mer_fee, bank_trade_amount,bank_refund_amount,bank_fee}) => {
+                    let receiveAmount = mer_trade_amount - mer_refund_amount - mer_fee,
+                        paidAmount = bank_trade_amount - bank_refund_amount - bank_fee,
+                        diff = mer_trade_amount - mer_refund_amount - mer_fee - (bank_trade_amount - bank_refund_amount - bank_fee);
+                    return {
+                        pay_way_name, bill_date, pay_type, mer_trade_count, bank_trade_count,
+                        mer_refund_count, bank_refund_count, mer_trade_amount, mer_refund_amount,
+                        mer_fee, bank_trade_amount,bank_refund_amount,bank_fee,receiveAmount, paidAmount, diff
+                    };
+                });
+                break;
+        }
+    }
     /**
      * 导出excel
      * */
@@ -1629,11 +1708,12 @@ require(['jquery', 'common', 'template', 'MessageBox', 'Toast', 'waves', 'apiMai
                 var exportSuc = sessionStorage.getItem('exportSuc');
                 var templateName = $(_this.TEMPLATE).find('.content').attr('data-template-name');
                 if (exportSuc) {
-                    var exportData = JSON.parse(sessionStorage.getItem('exportData'))
-                    var filterData = exportData.map(({merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount, success_refund_amount, fee, complete_time, trx_type, bill_src_type}) => {
-                        complete_time = common.parseDateTime(complete_time)
-                        return {merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount, success_refund_amount, fee, complete_time, trx_type, bill_src_type};
-                    });
+                    var exportData = JSON.parse(sessionStorage.getItem('exportData'));
+                    var filterData = _this.exportDataFilter(exportData, templateId);
+                    // var filterData = exportData.map(({merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount, success_refund_amount, fee, complete_time, trx_type, bill_src_type}) => {
+                    //     complete_time = common.parseDateTime(complete_time)
+                    //     return {merchant_no, bank_trx_no, pay_way_name, bill_date, order_amount, success_refund_amount, fee, complete_time, trx_type, bill_src_type};
+                    // });
                     // debugger
                     window.tableExport('table_' + templateNum, templateName, e.target.getAttribute('data-type'), filterData);
                     clearInterval(checkExportData)
